@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Nosotros|La Voz de OIENIV</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<link rel="stylesheet" href="css/style-fotos.css"> 
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+</head>
+<body>
+		<div id="fb-root"></div>
+		<script>
+			window.fbAsyncInit = function () {
+
+				FB.init({
+					appId: '126968564676905',
+					cookie: true,
+					xfbml: true,
+					version: 'v2.10'
+				});
+
+				FB.AppEvents.logPageView();
+
+			};
+
+			(function (d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=126968564676905';
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+
+
+			// Aqui empieza el facebook analytics Evento onclick
+			function onButtonClick() {
+				// Add this to a button's onclick handler
+				FB.AppEvents.logEvent("sentFriendRequest");
+			}
+		</script>
+	<header>
+	<!--valor de enlaces para la plantilla del menu-->
+	<script>
+		var data = {}
+	</script>
+	<!---->
+	
+	<!--plantilla del menu-->
+	<div  id="menu">
+	<script src="js/menu-radio.js"></script>
+	<menu-item
+		index="index.html"
+		radio="radio.html"
+		fotos="Galeria/fotos.html"
+		videos="Galeria/videos.html"
+		nosotros="#"
+		logo="images/logo.png"
+
+	></menu-item>
+	</div>
+    </header>
+	<script src="js/menu-template.js"></script>
+</body>
+</html>

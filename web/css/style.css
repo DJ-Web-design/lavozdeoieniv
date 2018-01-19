@@ -1,0 +1,1200 @@
+/*!
+ * Colores del diseño
+ * Pricipal #32559C
+ * Secundarios #90ADE8 #223969 #6B81AC #4B7FE8
+ * Opuesto  #E5931A
+ *Fuentes font-family: 'Dosis', sans-serif;
+ */
+* {
+    font-family: 'Roboto', arial;
+    margin: 0
+
+}
+.mdl-mini-footer {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 32px 16px;
+  color: rgb(158,158,158);
+  background-color: rgb(66,66,66); }
+  .mdl-mini-footer:after {
+    content: '';
+    display: block; }
+  .mdl-mini-footer .mdl-logo {
+    line-height: 36px; }
+
+.mdl-mini-footer--link-list,
+.mdl-mini-footer__link-list {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .mdl-mini-footer--link-list li,
+  .mdl-mini-footer__link-list li {
+    margin-bottom: 10px;
+    margin-right: 16px; }
+    @media screen and (min-width: 760px) {
+      .mdl-mini-footer--link-list li,
+      .mdl-mini-footer__link-list li {
+        line-height: 36px; } }
+  .mdl-mini-footer--link-list a,
+  .mdl-mini-footer__link-list a {
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap; }
+
+.mdl-mini-footer--left-section,
+.mdl-mini-footer__left-section {
+  display: inline-block;
+  -webkit-order: 0;
+      -ms-flex-order: 0;
+          order: 0; }
+
+.mdl-mini-footer--right-section,
+.mdl-mini-footer__right-section {
+  display: inline-block;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1; }
+
+.mdl-mini-footer--social-btn,
+.mdl-mini-footer__social-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(158,158,158);
+  border: none; }
+
+#sub-frame-error{
+    width: 100%;
+}
+.mdl-button {
+    -webkit-appearance: none;
+    border-radius: 2px;
+    position: relative;
+    border: none;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    height: 36px;
+    margin: 0;
+    min-width: 64px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 36px;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    align-items: flex-start;
+    user-select: none;
+    white-space: pre;
+    -webkit-rtl-ordering: logical;
+    text-rendering: auto;
+    text-indent: 0px;
+    text-shadow: none;
+    font: 13.3333px Arial;
+    writing-mode: horizontal-tb;
+    -webkit-writing-mode: horizontal-tb;
+}
+.mdl-button::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+header {
+    height: 50px
+}
+header,
+header a div,
+header .menu-cel,
+.pie {
+    width: 100%
+}
+body {
+    background: #f7f7f7
+}
+header a div {
+    color: black;
+    box-shadow: 0 2px 5px;
+    position: fixed;
+    z-index: 100
+}
+header .menu-cel {
+    left: 0;
+    cursor: pointer;
+    height: 50px;
+    position: fixed;
+    z-index: 1000;
+    background: #90ADE8;
+    box-shadow: 0 0 10px
+}
+header .menu-cel span {
+    margin-top: 5px;
+    font-size: 40px;
+    color: rgb(225, 225, 225);
+    float: right
+}
+header .menu-cel img {
+    height: 50px
+}
+header nav {
+    margin-top: 50px;
+    left: -100%;
+    background: #90ADE8;
+    width: 60%;
+    height: 100%;
+    position: fixed;
+    z-index: 1001
+}
+header .sombra {
+    display: none;
+    position: fixed;
+    margin-top: 50px;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    z-index: 1001;
+    background: rgba(0, 0, 0, .5)
+}
+.menu ul {
+    padding: 0
+}
+.menu ul li {
+    border-bottom: 2px solid rgba(255, 255, 255, .3);
+    list-style: none
+}
+.menu ul li a {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #f7f7f7;
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    width: 100%;
+    text-decoration: none
+}
+.menu img {
+    display: none
+}
+header nav ul li:hover .children {
+    display: none;
+}
+header nav ul li .children {
+    display: none;
+    width: 100%;
+    position: relative;
+}
+header nav ul li .children li a {
+    margin-left: 20px;
+}
+header nav ul li .caret {
+    float: right;
+}
+.pedido-titulo h1,
+.vota h1,
+.articulo .divisor1 h1 {
+    margin-bottom: 10px;
+    text-align: center;
+    color: black;
+    text-shadow: 2px 2px 5px #616161;
+    font-family: 'Lobster', cursive;
+    margin-top: 10px;
+    font-size: 40px
+}
+.vota h1 {
+    margin: 20px 0 30px 0
+}
+.articulo .divisor2 p {
+    margin: 10px 5% 15px 5%
+}
+.articulo .divisor2 h2 {
+    text-align: center;
+    margin: 15px 5px 5px 10px;
+    font-size: 20px
+}
+.articulo .divisor1 div.fb-like,
+.articulo .divisor1 a div.follow-twitter {
+    display: none
+}
+.fb-boton,
+.twitter-boton {
+    border-radius: 3px;
+    width: 100%;
+    height: 100%;
+    background: rgb(29, 161, 242)
+}
+.fb-boton {
+    background: rgb(59, 89, 152)
+}
+.twitter,
+.boton-fb {
+    border-radius: 3px;
+    width: 42.5%;
+    height: 30px;
+    font-size: 20px
+}
+.twitter span,
+.boton-fb span {
+    color: white;
+    display: block;
+    position: absolute;
+    top: 1px;
+    font-size: 28px;
+    left: 5px
+}
+.twitter span span,
+.boton-fb span span {
+    color: white;
+    top: 7px;
+    left: 45px;
+    z-index: 100;
+    font-size: 15px;
+    padding-bottom: 20px
+}
+.twitter {
+    margin-left: 5%;
+    margin-right: 2.5%
+}
+.boton-fb {
+    margin-left: 5%;
+    margin-right: auto
+}
+.social-media {
+    height: 80px
+}
+.fb-page,
+.lineaFace,
+.lineaTwitter,
+.twitter-timeline {
+    display: none
+}
+.social-media div {
+    position: relative;
+    float: left
+}
+.lomaspedido {
+    margin-top: 10px;
+    width: 90%;
+    height: 150px;
+    background: blue;
+    margin-left: auto;
+    margin-right: auto
+}
+.lomaspedido figure img {
+    height: 150px;
+    position: absolute;
+    left: 5%
+}
+.lomaspedido figure img,
+.lomaspedido .pedido-letras {
+    color: wheat;
+    display: inline-block;
+    position: absolute;
+    float: left
+}
+.lomaspedido h1{
+    font-size: 20px;
+}
+.yt-bar {
+    background: rgb(205, 32, 31)
+}
+.it-bar {
+    background: rgb(228, 64, 95)
+}
+.yt-bar,
+.it-bar {
+    display: block;
+    border-radius: 3px;
+    width: 100%;
+    height: 100%
+}
+.yt-bar span,
+.it-bar span {
+    color: white;
+    font-size: 28px;
+    display: block;
+    position: absolute;
+    top: 1px;
+    ;
+    left: 5px
+}
+.yt-bar span span,
+.it-bar span span {
+    color: white;
+    top: 7px;
+    left: 45px;
+    z-index: 100;
+    font-size: 15px;
+    padding-bottom: 20px
+}
+.instagram,
+.youtube {
+    margin-top: 10px;
+    width: 42.5%;
+    height: 30px;
+    margin-left: 5%
+}
+.instagram {
+    margin-right: auto
+}
+.youtube {
+    margin-right: 2.5%
+}
+.lineaRedes a div {
+    display: none
+}
+.mdl-mini-footer{
+    color: #f7f7f7;
+    background-color: #32559C;
+}
+.mdl-mini-footer span{
+    display: block;
+}
+.mdl-logo a .mdl-logo{
+    height: 60px;
+}
+
+@media screen and (min-width:480px) {
+    .articulo .divisor2 p {
+        margin: 10px 10px 20px 10px
+    }
+    .social-media div {
+        float: left
+    }
+    .instagram,
+    .twitter,
+    .boton-fb {
+        width: 42.5%;
+        height: 40px
+    }
+    .it-bar a span,
+    .twitter span,
+    .boton-fb span {
+        top: 2px;
+        font-size: 36px;
+        left: 10px
+    }
+    .it-bar a span span,
+    .twitter span span,
+    .boton-fb span span {
+        top: 9px;
+        left: 60px;
+        font-size: 18px
+    }
+    .lomaspedido {
+        background: red
+    }
+}
+@media screen and (min-width:767px) {
+    * {
+        margin: 0;
+        padding: 0
+    }
+    .social-media {
+        display: none
+    }
+    .vota h1,
+    .articulo .divisor1 h1 {
+        font-size: 50px
+    }
+    .articulo .divisor2 p {
+        margin: 20px 3% 30px 3%
+    }
+    .lomaspedido {
+        margin: 10px auto;
+        width: 90%;
+        height: 300px
+    }
+    .pedido-titulo h1 {
+        margin-bottom: 10px;
+        text-align: center;
+        color: black;
+        text-shadow: 2px 2px 5px #616161;
+        font-family: 'Lobster', cursive;
+        margin-top: 10px;
+        font-size: 60px
+    }
+    .lineaRedes {
+        height: 500px
+    }
+    .lineaRedes div {
+        float: left
+    }
+    .linea {
+        position: absolute;
+        width: 248px;
+        margin-top: 30px;
+        margin-left: 5%;
+        height: 450px
+    }
+    .lineaTwitter {
+        left: 33.5%
+    }
+    .fb-page,
+    .lineaface,
+    .lineaTwitter,
+    .twitter-timeline {
+        display: block
+    }
+    .lineaRedes a div {
+        background: rgb(59, 89, 152);
+        border-radius: 3px;
+        margin-top: 30px;
+        position: absolute;
+        right: 5%;
+        display: block;
+        float: left;
+        width: 23%;
+        height: 40px;
+        transition: .1s ease-in-out
+    }
+    .lineaRedes a div:hover {
+        box-shadow: 2px 2px 3px gray
+    }
+    .lineaRedes a .boton-twitter {
+        background: rgb(29, 161, 242);
+        margin-top: 155px
+    }
+    .lineaRedes a .boton-instagram {
+        background: rgb(228, 64, 95);
+        margin-top: 280px
+    }
+    .lineaRedes a .boton-youtube {
+        background: rgb(205, 32, 31);
+        margin-top: 405px
+    }
+    .lineaRedes a div span {
+        color: white;
+        margin-left: 5px;
+        font-size: 40px
+    }
+    .lineaRedes a div span span {
+        font-weight: 500;
+        margin-left: 5%;
+        vertical-align: .5em;
+        font-size: 20px
+    }
+    .mdl-logo a .mdl-logo{
+    height: 80px;
+}
+}
+@media screen and (min-width:950px) {
+    header {
+        height: 80px
+    }
+    .menu {
+        box-shadow: 0 0 10px;
+        height: 70px;
+        margin: 0;
+        left: 0;
+        width: 100%;
+        position: fixed;
+        z-index: 2000000
+    }
+    .menu ul {
+        float: right
+    }
+    .menu ul li {
+        text-align: right;
+        display: inline-block;
+        border: none
+    }
+    .menu ul li a.borderanim:hover {
+        transition-delay: 1s;
+        -webkit-transition-delay: 1s;
+        -moz-transition-delay: 1s;
+        -o-transition-delay: 1s
+    }
+    a.borderanim:before,
+    a.borderanim:after,
+    a.borderanim span:before,
+    a.borderanim span:after {
+        content: '';
+        position: absolute;
+        background-color: rgba(229, 147, 26, 0.8);
+        transition: .25s all ease-out;
+        -webkit-transition: .25s all ease-out;
+        -moz-transition: .25s all ease-out;
+        -o-transition: .25s all ease-out
+    }
+    a.borderanim:before,
+    a.borderanim:after {
+        height: 3px
+    }
+    a.borderanim:after {
+        bottom: 0;
+        left: 0;
+        right: 100%
+    }
+    a.borderanim:hover:after {
+        right: 0
+    }
+    .menu ul li a {
+        color: #f7f7f7;
+        font-size: 14px;
+        height: auto;
+        width: auto;
+        text-align: left;
+        padding: 27px 20px 25px 20px
+    }
+    .menu ul li a span {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+    }
+    .menu-cel {
+        display: none
+    }
+    .menu img {
+        height: 70px;
+        padding-left: 10px;
+        display: block
+    }
+    .menu figure img,
+    .menu figure {
+        margin: 0;
+        float: left;
+        z-index: 100
+    }
+    .menu ul li .ocultar-escritorio {
+        display: none
+    }
+    header nav ul li:hover .children {
+        display: block;
+    }
+    header nav ul li .children {
+        width: 85.141px;
+        background: #90ADE8;
+        position: absolute;
+        z-index: 1000;
+    }
+    header nav ul li .children li {
+        margin: 0;
+        display: block;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(255, 255, 255, .5);
+    }
+    header nav ul li .children li a {
+        display: block;
+        width: 45.141px;
+        margin: 0;
+    }
+    header nav ul li .children li a span {
+        float: right;
+        position: relative;
+        top: 3px;
+        margin-right: 0;
+        margin-left: 0px;
+    }
+    header nav ul li .caret {
+        position: relative;
+        top: 3px;
+        margin-left: 10px;
+        margin-right: 0px;
+    }
+    .articulo {
+        width: 90%;
+        margin: 10px auto
+    }
+    .articulo .divisor1 h1 {
+        color: black;
+        text-shadow: 2px 2px 5px #616161;
+        font-size: 60px;
+        font-family: 'Lobster', cursive
+    }
+    .articulo h2,
+    .articulo h1 {
+        text-align: center
+    }
+    .articulo .divisor1,
+    .articulo .divisor2 {
+        height: 300px;
+        width: 50%;
+        background: rgba(255, 255, 255, .5)
+    }
+    .articulo div {
+        float: left
+    }
+    .articulo .divisor1 div.fb-like,
+    .articulo .divisor1 a div.follow-twitter {
+        display: block;
+        border-radius: 5px;
+        margin: 20px 5% 0 15%;
+        height: 120px;
+        width: 120px
+    }
+    .articulo .divisor1 div span {
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        color: white;
+        font-size: 40px
+    }
+    .articulo .divisor1 div span span {
+        font-size: 18px;
+        margin: 20px
+    }
+    .articulo .divisor1 div.fb-like {
+        cursor: pointer;
+        background: rgb(59, 89, 152)
+    }
+    .articulo .divisor1 a div.follow-twitter {
+        background: rgb(29, 161, 242)
+    }
+    .vota .vota2,
+    .vota .vota3 {
+        margin-top: 10px
+    }
+    .vota h2 {
+        margin-bottom: 0
+    }
+    .lomaspedido a div {
+        position: absolute;
+        top: 1780px;
+        float: left;
+        text-decoration: none;
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+    }
+    .lomaspedido a .boton-face {
+        background: rgb(59, 89, 152);
+        margin-left: 55%
+    }
+    .lomaspedido a .boton-twitter {
+        background: rgb(29, 161, 242);
+        margin-left: 75%;
+    }
+    .lomaspedido a div span {
+        color: white;
+        font-size: 28px;
+    }
+    .lomaspedido a div span span {
+        font-size: 12px;
+        vertical-align: .5em;
+    }
+    .lomaspedido span h1 {
+        width: 50%;
+        margin-left: 300px;
+        padding-top: 60px;
+        font-size: 20px;
+        color: #4f4f4f;
+        font-weight: 500
+    }
+    .lomaspedido {
+        height: 300px;
+        background: #e7e5e5;
+        border: 2px solid rgba(75, 127, 232, 0.30);
+        border-radius: 3px;
+        box-shadow: 1px 1px 4px grey;
+        z-index: 1000;
+    }
+    .lomaspedido figure img {
+        height: 250px;
+        margin-top: 25px;
+    }
+ }
+
+ /*Ventana css*/
+
+@media screen and (min-width: 950px) {
+    #ventana {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 1000;
+        background: rgba(0, 0, 0, .3);
+        box-shadow: 0 0 10px
+    }
+    #ventana .contenido-error,
+    #ventana .contenido-exito {
+        position: absolute;
+        top: 40%;
+        left: 20%;
+        border-radius: 5px;
+        text-align: center;
+        width: 60%;
+        height: 20%;
+        z-index: 1001;
+    }
+    #ventana .contenido-error {
+        background: rgb(255, 91, 91);
+        border: 1px solid red;
+    }
+    #ventana .contenido-exito {
+        background: rgb(46, 199, 46);
+        border: 1px solid green;
+    }
+    #ventana .contenido-exito .cross2,
+    #ventana .contenido-error .cross2 {
+        color: white;
+        cursor: pointer;
+        position: absolute;
+        right: 3%;
+        top: 12%;
+    }
+    #ventana .contenido-error div .icon-cross,
+    #ventana .contenido-exito div .icon-checkmark {
+        position: absolute;
+        left: 10%;
+        top: 25%;
+        font-size: 60px;
+    }
+    #ventana .contenido-error div .icon-cross {
+        color: rgb(255, 0, 0);
+    }
+    #ventana .contenido-exito div .icon-checkmark {
+        color: rgb(4, 102, 4)
+    }
+    #ventana .contenido-error div span,
+    #ventana .contenido-exito div span {
+        position: absolute;
+        top: 40%;
+        left: 25%;
+        color: white;
+        font-size: 24px;
+    }
+}
+
+/*Fonts css*/
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?ndzgob');
+    src: url('fonts/icomoon.eot?ndzgob#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?ndzgob') format('truetype'), url('fonts/icomoon.woff?ndzgob') format('woff'), url('fonts/icomoon.svg?ndzgob#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-headphones:before {
+    content: "\e910";
+}
+
+.icon-music:before {
+    content: "\e911";
+}
+
+.icon-podcast:before {
+    content: "\e91c";
+}
+
+.icon-feed:before {
+    content: "\e91d";
+}
+
+.icon-envelop:before {
+    content: "\e945";
+}
+
+.icon-users:before {
+    content: "\e972";
+}
+
+.icon-spinner9:before {
+    content: "\e982";
+}
+
+.icon-menu:before {
+    content: "\e9bd";
+}
+
+.icon-cross:before {
+    content: "\ea0f";
+}
+
+.icon-checkmark:before {
+    content: "\ea10";
+}
+
+.icon-play:before {
+    content: "\ea1c";
+}
+
+.icon-pause:before {
+    content: "\ea1d";
+}
+
+.icon-volume-high:before {
+    content: "\ea26";
+}
+
+.icon-volume-medium:before {
+    content: "\ea27";
+}
+
+.icon-volume-low:before {
+    content: "\ea28";
+}
+
+.icon-volume-mute:before {
+    content: "\ea2a";
+}
+
+.icon-circle-right:before {
+    content: "\ea42";
+}
+
+.icon-circle-left:before {
+    content: "\ea44";
+}
+
+.icon-facebook:before {
+    content: "\ea90";
+}
+
+.icon-instagram:before {
+    content: "\ea92";
+}
+
+.icon-whatsapp:before {
+    content: "\ea93";
+}
+
+.icon-twitter:before {
+    content: "\ea96";
+}
+
+.icon-youtube:before {
+    content: "\ea9d";
+}
+
+/* Vota Css */
+
+.vota article {
+    background: #e0e0e0;
+    border: 2px solid rgba(75, 127, 232, 0.30);
+    box-shadow: 1px 1px 4px gray;
+    border-radius: 3px;
+    text-align: left;
+    margin: 10px 0 0 10px;
+    width: 95%;
+    height: 90px;
+    transition: .2s ease;
+    -moz-transition: .2s ease;
+    -webkit-transition: .2s ease;
+}
+
+.vota input[type="radio"] {
+    display: none;
+}
+
+.vota article img {
+    position: relative;
+    margin: 5px 0 0 0;
+    height: 80px;
+    float: left;
+}
+
+.vota article p {
+    color: #4F4F4F;
+    display: block;
+    font-size: 15px;
+    padding-top: 10px;
+    margin: 0;
+}
+
+.vota {
+    text-align: center;
+    height: 430px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.vota h2 {
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    color: #484848
+}
+
+.vota label {
+    height: 140%;
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+
+.vota input[type="submit"] {
+    margin-top: 20px;
+    width: 60%;
+    background: #4B7FE8;
+    color: #f7f7f7;
+}
+
+.vota input[type="submit"]:hover {
+    box-shadow: 2px 2px 3px gray;
+}
+
+.vota label::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    right: 8%;
+    top: 32px;
+    z-index: 100;
+    border: 3px solid #4A7EE8;
+    transition: ease 0.3s;
+    -moz-transition: ease 0.3s;
+    -webkit-transition: ease 0.3s;
+}
+
+.vota label:hover>article {
+    box-shadow: 3px 3px 4px gray;
+    background: #c7c7c7;
+}
+
+.vota input[type="radio"]:checked+label::before {
+    background: rgb(235, 159, 47);
+}
+
+@media screen and (min-width:480px) {
+    .vota article img {
+        float: none;
+        margin: 5px auto 0 auto;
+        display: block;
+        height: 120px;
+        width: 120px;
+    }
+    .vota h2 {
+        font-size: 25px;
+        margin-top: -10px;
+    }
+    .vota article {
+        text-align: center;
+        height: 260px;
+        position: relative;
+        float: left;
+        width: 30%;
+        margin-top: 0px;
+        margin-left: 2%;
+    }
+    .vota article p {
+        padding-top: 0;
+    }
+    .vota {
+        width: 98%;
+        height: 405px;
+    }
+    .vota button {
+        margin-top: 10px;
+    }
+    .vota label::before {
+        top: 210px;
+        left: 15%;
+    }
+    .vota label.label2::before {
+        left: 47.5%;
+    }
+    .vota label.label3::before {
+        left: 80%
+    }
+}
+
+@media screen and (min-width:767px) {
+    .vota {
+        height: 430px;
+        width: 100%;
+        margin-left: 0;
+    }
+    .vota article {
+        float: left;
+        width: 30%;
+    }
+    .vota article img {
+        margin: 5px auto 0 auto;
+    }
+    .vota h1 {
+        font-size: 50px;
+        margin-bottom: 30px;
+    }
+    .vota label::before {
+        width: 25px;
+        height: 25px;
+        border: 5px solid #4B7FE8;
+    }
+}
+
+@media screen and (min-width:950px) {
+    .vota {
+        width: 100%;
+        height: 625px;
+    }
+    .vota article p {
+        top: 70px;
+        position: absolute;
+        left: 140px;
+        width: 50%;
+        color: #4F4F4F;
+        display: block;
+        font-size: 18px;
+    }
+    .vota article p.padding-top {
+        top: 20px
+    }
+    .vota article img {
+        margin: 10px 0 0 0;
+    }
+    .vota article {
+        text-align: left;
+        float: left;
+        height: 140px;
+        margin-left: 5%;
+        margin-right: 5%;
+        display: block;
+        width: 90%;
+    }
+    .vota h1 {
+        margin: 15px 0 20px 0;
+        font-size: 60px;
+    }
+    .vota input[type="submit"] {
+        margin-top: 15px;
+    }
+    .vota label::before {
+        border: 5px solid #4B7FE8;
+        top: 57px;
+        left: 88%;
+    }
+    .vota label.label2::before {
+        top: 211px;
+        left: 88%;
+    }
+    .vota label.label3::before {
+        top: 365px;
+        left: 88%;
+    }
+}
+
+/* Parallax css*/
+
+@media screen and (min-width:950px) {
+    .vota {
+        background: url(../images/Black-earphone-wallpaper-music.jpg)top 500px right no-repeat;
+        background-color: rgba(255, 255, 255, .5);
+    }
+    .image-3 {
+        background: url(../images/luces.jpg) center no-repeat;
+    }
+    .imagen5 {
+        background: url(../images/music2.jpg) center no-repeat;
+    }
+    .vota,
+    .image-3,
+    .imagen5 {
+        background-size: cover;
+        background-attachment: fixed;
+        width: 100%;
+        height: 300px;
+    }
+    .imagen-4 {
+        background: url(../images/music.jpg) center no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        width: 100%;
+        height: 400px;
+    }
+    .vota {
+        height: 625px;
+    }
+    .separador {
+        width: 100%;
+        height: 10px;
+        background: black;
+    }
+    .vota article {
+        background: #e7e5e5;
+    }
+}
+
+/* Slides css */
+
+.main {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.slides {
+    width: 100%;
+}
+
+.slides img {
+    width: 100%;
+}
+
+.slidesjs-pagination {
+    background: #32559C;
+    list-style: none;
+    overflow: hidden;
+    height: 44px;
+}
+
+.slidesjs-pagination li {
+    float: left;
+}
+
+.slidesjs-pagination li a {
+    height: 44px;
+    display: block;
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.slidesjs-pagination li a:hover {
+    background: rgb(120, 161, 236);
+}
+
+.slides .active {
+    background: rgb(120, 161, 236);
+}
+
+.slidesjs-navigation {
+    background: #223969;
+    color: rgb(230, 166, 78);
+    text-decoration: none;
+    font-size: 24px;
+    padding: 10px 20px;
+    float: right;
+    transition: .3s ease;
+}
+
+.slidesjs-navigation:hover {
+    background: rgb(230, 166, 78);
+    color: #223969;
+}
