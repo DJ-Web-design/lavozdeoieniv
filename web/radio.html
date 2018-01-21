@@ -42,6 +42,7 @@
             $('.chat #plantilla .Mensaje').html(objeto.Mensaje);
             $('.chat #plantilla .Tiempo').html(objeto.Fecha);
             $('.chat #plantilla').attr("id","");
+            $('.chat #plantilla .userpic').attr("src", objeto.userpic);
           }    
         });
       });
@@ -96,7 +97,9 @@
           document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
 
-          localStorage.setItem("Nombre", response.name)
+          localStorage.setItem("Nombre", response.name);
+          var userpic = response.user.picture;
+          return userpic
         });
       } 
     </script>
@@ -200,7 +203,7 @@
     <!-- template del item del chat (Oculto: para agarrar un clon y llenarlo e insertar en el chat)-->
     <li style="display:none" id="plantilla" class="left clearfix">
       <span class="chat-img pull-left">
-        <img src=""class="img-circle" />
+        <img src=""class="img-circle userpic" />
       </span>
       <div class="chat-body clearfix">
         <div class="header">
@@ -343,7 +346,8 @@
         TablaDeBaseDatos.push({
           Nombre:Nombre,
           Mensaje:$("#Mensaje").val(),
-          Fecha:Fecha
+          Fecha:Fecha,
+          userpic:userpic
         });
       });
       $(document).ready(function() {
