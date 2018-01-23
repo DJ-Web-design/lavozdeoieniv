@@ -372,6 +372,9 @@ header nav ul li .caret {
 .mdl-logo a .mdl-logo{
     height: 60px;
 }
+#icon-face:hover, #icon-twit:hover, #icon-inst:hover, #icon-yt:hover{
+    cursor: pointer
+}
 
 @media screen and (min-width:480px) {
     .articulo .divisor2 p {

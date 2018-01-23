@@ -171,6 +171,19 @@ header nav ul li .children li a {
 header nav ul li .caret {
     float: right;
 }
+.mdl-mini-footer{
+    color: #f7f7f7;
+    background-color: #32559C;
+}
+.mdl-mini-footer span{
+    display: block;
+}
+.mdl-logo a .mdl-logo{
+    height: 60px;
+}
+#icon-face:hover, #icon-twit:hover, #icon-inst:hover, #icon-yt:hover{
+    cursor: pointer
+}
 @media screen and (min-width:480px){
 
 }
