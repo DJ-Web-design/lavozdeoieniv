@@ -6,13 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Radio Online|La Voz de OIENIV</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!---<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+
+    <!--<script src="frameworks/jquery-3.2.1.min.js"></script>-->
+    <script src="frameworks/material.min.js"></script>
+    <script src="frameworks/vue.min.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>-->
 
     <link rel="stylesheet" href="css/style-radio.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">-->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
     <script>
@@ -56,7 +60,9 @@
           appId      : '126968564676905',
           cookie     : true,
           xfbml      : true,
-          version    : 'v2.10'
+          version    : 'v2.10',
+          oauth 	 : true,
+          status     : true
         });
         FB.AppEvents.logPageView();
       };
@@ -97,21 +103,27 @@
           document.getElementById('status').innerHTML =
             'Thanks for logging in, ' + response.name + '!';
 
-          localStorage.setItem("Nombre", response.name);
-          var userpic = response.user.picture;
-          return userpic
+
         });
+        document.getElementById("fblogin").addEventListener("click",function(){
+            FB.login(function(response){
+            localStorage.setItem("Nombre", response.name);
+            var userpic = response.user.picture;
+            return userpic;
+            },{scope:'email,'})
+        
+        })
       } 
     </script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <!--<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
 	  <header>
 	  <!--valor de enlaces para la plantilla del menu-->
 	    <script>
-        var data = {show:true, showModal:false }
+        var data = {show:true, showModal:false}
         if(!localStorage.getItem("Nombre")){
-        var Nombre = ""
+            var Nombre = ""
         } else {
-          var Nombre = localStorage.getItem("Nombre")
+            var Nombre = localStorage.getItem("Nombre");
         }
 	    </script>
 	  <!---->
@@ -127,6 +139,7 @@
           </menu-item>
 	    </div>
     </header>
+    <script src="js/plantilla-menu.js"></script>
 	<!---->
 	
     <div class="online"></div>
@@ -145,7 +158,7 @@
                   <button type="button" class="mdl-button mdl-color--amber-800" onclick="ingresaNombre()" id="btnNombre">Enviar</button>
                 </div>
                   <h1 class="mdl-dialog__title o">Ó</h1> 
-                  <div class="fb-login-button" 
+                  <div id="fblogin" class="fb-login-button" 
                     data-max-rows="1" 
                     data-size="large" 
                     data-button-type="continue_with" 
@@ -200,6 +213,7 @@
         </template>
       </div>
     </div>
+    <script src="js/modal.js"></script>
     <!-- template del item del chat (Oculto: para agarrar un clon y llenarlo e insertar en el chat)-->
     <li style="display:none" id="plantilla" class="left clearfix">
       <span class="chat-img pull-left">
@@ -259,7 +273,7 @@
         
       </div>
     </div>
-
+    <script src="js/bloque-programas.js"></script>
     <aside class="lateral"></aside>
     <div class="publicidad pull-left"></div>
 
@@ -268,7 +282,7 @@
   <item-footer index="index.html" logo="images/logo.png"></item-footer>
 </div>
 
-<script src="js/menu-template.js"></script>
+<script src="js/plantilla-footer.js"></script>
     <script src="js/listen.js"></script>
     <script>
       function face() {
@@ -349,6 +363,7 @@
           Fecha:Fecha,
           userpic:userpic
         });
+        return false;
       });
       $(document).ready(function() {
         $("#msjform").click(function(e) {

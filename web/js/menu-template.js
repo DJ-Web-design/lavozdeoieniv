@@ -1,8 +1,3 @@
-var app = new Vue({
-  el: "#panel",
-  data:data
-})
-
 var images = new Vue({
   el: ".row",
   data:{

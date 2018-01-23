@@ -7,5 +7,9 @@ Vue.component('modal-template', {
 })
 var modal = new Vue({
     el: "#modal",
+    data:data
+})
+var panel = new Vue({
+    el: "#panel",
     data: data
 })

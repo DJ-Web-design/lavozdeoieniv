@@ -19,8 +19,9 @@
 	<meta name="twitter:creator" content="">
 	<meta name="twitter:title" content="La Voz de OIENIV">
 	<meta name="twitter:description" content="La Radio Donde La Protagonista Es La Palabra De Dios">
-	<meta name="twitter:image" content="https://lavozdeoieniv.herokuapp.com/images/image.jpg">-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="twitter:image" content="https://lavozdeoieniv.herokuapp.com/images/image.jpg">-->
+    <script src="frameworks/jquery-3.2.1.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
     <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">    
@@ -291,17 +292,17 @@
             </ul>
         </div>
         <div class="mdl-mini-footer__right-section">
-            <button class="mdl-mini-footer__social-btn">
+            <button class="mdl-mini-footer__social-btn" id="icon-face">
                 <span class="icon-facebook" style="color: rgb(59, 89, 152)"></span>
             </button>
-            <button class="mdl-mini-footer__social-btn">
+            <button class="mdl-mini-footer__social-btn" id="icon-twit">
                 <span class="icon-twitter" style="color: rgb(29, 161, 242)"></span>
             </button>
-            <button class="mdl-mini-footer__social-btn">
-                <span class="icon-instagram" style="color: rgb(205, 32, 31)"></span>
+            <button class="mdl-mini-footer__social-btn" id="icon-yt">
+                <span class="icon-youtube" style="color: rgb(205, 32, 31)"></span>
             </button>
-            <button class="mdl-mini-footer__social-btn">
-                <span class="icon-youtube" style="color: rgb(228, 64, 95)"></span>
+            <button class="mdl-mini-footer__social-btn" id="icon-inst">
+                <span class="icon-instagram" style="color: rgb(228, 64, 95)"></span>
             </button>
 
         </div>
@@ -527,6 +528,30 @@
     function cerrarModal(e) {
         $("#successModal div").fadeOut(2000)
     }
+          function face() {
+                window.open("https://www.facebook.com/lavozdeoieniv", "_blank")
+            }
+            function twit() {
+                window.open("https://www.twitter.com/lavozdeoieniv", "_blank")
+            }
+            function inst() {
+                window.open("https://www.instagram.com/lavozdeoieniv", "_blank")
+            }
+            function yt() {
+                window.open("https://www.youtube.com/", "_blank")
+            }
+
+            var openFace = document.querySelector("#icon-face");
+            openFace.addEventListener("click", face, false)
+
+            var openTwit = document.querySelector("#icon-twit");
+            openTwit.addEventListener("click", twit, false)
+
+            var openInst = document.querySelector("#icon-inst");
+            openInst.addEventListener("click", inst, false)
+
+            var openYt = document.querySelector("#icon-yt");
+            openYt.addEventListener("click", yt, false)
     </script>
 </body>
 </html>

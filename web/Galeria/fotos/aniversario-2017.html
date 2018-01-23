@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aniversario 2017|Fotos</title>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    
+    <!--<script src="../../frameworks/jquery-3.2.1.min.js"></script>-->
+    <script src="../../frameworks/vue.min.js"></script>
+    <link rel="stylesheet" href="../../frameworks/bootstrap.css">
     <link rel="stylesheet" href="../../css/style-galerias.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
@@ -15,7 +19,7 @@
 </head>
 <body>
 
-<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>-->
 <script>
   // Initialize Firebase
   var config = {
@@ -28,7 +32,7 @@
   };
   firebase.initializeApp(config);
   // Get a non-default Storage bucket
-    var tablaBaseDatos = firebase.database().ref("Imagenes");
+    var tablaBaseDatos = firebase.database().ref("#images-container");
     $("#upload-file-selector").change(function(){
         if(this.files && this.files[0]){
     
@@ -73,11 +77,12 @@ var imagesRef = storageRef.child('Prueba');
         </menu-item>
         <script src="../../js/menu.js"></script>
     </header>
+    <script src="../../js/plantilla-menu.js"></script>
     <style>
 
     </style>
     <div class="container">
-        <div class="row">
+        <div class="row" id="images-container">
             <modal-template v-if="showModal"></modal-template>
             <div class="col-md-12" style="height: 300px" id="header"></div>
             <div class="col-md-12">
@@ -253,10 +258,8 @@ var imagesRef = storageRef.child('Prueba');
         }
     }
     </style>
-    <img src="" alt="" id="myimg">
-<div id="box">
-
-</div>
+    <div id="box">
+    </div>
 
     <script src="../../js/menu-template.js"></script>
     <script>
@@ -302,6 +305,5 @@ var imagesRef = storageRef.child('Prueba');
 
 
     </script>
-    <img src="gs://chat-lavozdeoieniv.appspot.com/Prueba/1nx6xBx.jpg" alt="">
 </body>
 </html>
