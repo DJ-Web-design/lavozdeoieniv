@@ -1,11 +1,126 @@
-@font-face{
-	font-family: "Roboto";
-	src: url("../css/Roboto-Regular.ttf");
-}
 *{
     font-family: 'Roboto', arial;
     margin: 0;
     padding: 0;
+}
+.mdl-mini-footer {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 32px 16px;
+  color: rgb(158,158,158);
+  background-color: rgb(66,66,66); }
+  .mdl-mini-footer:after {
+    content: '';
+    display: block; }
+  .mdl-mini-footer .mdl-logo {
+    line-height: 36px; }
+
+.mdl-mini-footer--link-list,
+.mdl-mini-footer__link-list {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .mdl-mini-footer--link-list li,
+  .mdl-mini-footer__link-list li {
+    margin-bottom: 10px;
+    margin-right: 16px; }
+    @media screen and (min-width: 760px) {
+      .mdl-mini-footer--link-list li,
+      .mdl-mini-footer__link-list li {
+        line-height: 36px; } }
+  .mdl-mini-footer--link-list a,
+  .mdl-mini-footer__link-list a {
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap; }
+
+.mdl-mini-footer--left-section,
+.mdl-mini-footer__left-section {
+  display: inline-block;
+  -webkit-order: 0;
+      -ms-flex-order: 0;
+          order: 0; }
+
+.mdl-mini-footer--right-section,
+.mdl-mini-footer__right-section {
+  display: inline-block;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1; }
+
+.mdl-mini-footer--social-btn,
+.mdl-mini-footer__social-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  background-color: rgb(158,158,158);
+  border: none; }
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts-radio/icomoon.eot?36818r');
+  src:  url('fonts-radio/icomoon.eot?36818r#iefix') format('embedded-opentype'),
+    url('fonts-radio/icomoon.ttf?36818r') format('truetype'),
+    url('fonts-radio/icomoon.woff?36818r') format('woff'),
+    url('fonts-radio/icomoon.svg?36818r#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+  content: "\e9bd";
+}
+.icon-radio-checked:before {
+  content: "\ea54";
+}
+.icon-radio-checked2:before {
+  content: "\ea55";
+}
+.icon-radio-unchecked:before {
+  content: "\ea56";
+}
+.icon-facebook:before {
+  content: "\ea90";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
+.icon-twitter:before {
+  content: "\ea96";
+}
+.icon-youtube:before {
+  content: "\ea9d";
+}
+.icon-android:before {
+  content: "\eac0";
 }
 
 header, section, footer, aside, nav, article, figure, figcaption,
@@ -109,11 +224,131 @@ header nav ul li .children li a {
 header nav ul li .caret {
     float: right;
 }
+#vista{
+    background: url("../images/Black-earphone-wallpaper-music.jpg");
+    background-size: cover;
+    margin-top: 10px;
+	position: relative;
+    width: 100%;
+    height: 300px;
+}
+#vista div{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+}
+#vista img{
+    width: 100%;
+}
+#vista div div{
+    position: absolute;
+    top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(80, 80, 80, .5);
+	z-index: 2;
+	text-align: center;
+}
+#vista div div h1{
+	width:100%;
+	position: absolute;
+	top: 15%;
+    font-size: 25px;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+	color: #fff;
+	text-shadow: black 5px 5px 5px;
+	
+}
+#social-gal span{
+    font-size: 25px;
+    display: inline-block;
+    margin: 40% 15px 0 15px;
+    cursor: pointer;
+    
+}
+.fb{
+    background: rgb(59, 89, 152);
+    padding: 2px;
+    border-radius: 2px;
+}
+#gal{
+	box-shadow: black 3px 3px 8px;
+	border-radius: 5px;
+	position: relative;
+	float: left;
+	width:90%;
+    margin: 20px 2.5%;
+    padding: 5%;
+    border: 2px solid rgba(75, 127, 232, 0.30);
+    border-radius: 3px;
+    background: #e7e5e5;
+}
+#gal img{
+	border-radius: 5px;
+	width:100%;
+	height: 100%;
+}
+#gal div{
+	border-radius: 5px;
+	background: rgba(255, 255, 255, .2);
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+#gal div > #t{
+    display: block;
+	width: 100%;
+	height: 100%;
+    text-align: center;
+	font-size: 30px;
+	color: #f7f7f7;
+	text-shadow: black 3px 3px 3px;
+	z-index:2;
+}
+#gal div span > #txt{
+    position: absolute;
+    width: 100%;
+    top: 45%;
+    left: 0;
+}
+#galerias{
+    width: 92%;
+}
+#galerias, #lateral{
+    float: left;
+}
+#lateral{
+    display: none
+}
+#pie{
+    float: left;
+    width: 100%;
+}
+.mdl-mini-footer{
+    color: #f7f7f7;
+    background-color: #32559C;
+}
+.mdl-mini-footer span{
+    display: block;
+}
+.mdl-logo a .mdl-logo{
+    height: 60px;
+}
+#icon-face:hover, #icon-twit:hover, #icon-inst:hover, #icon-yt:hover{
+    cursor: pointer
+}
 @media screen and (min-width:480px){
 
 }
 @media screen and (min-width:767px){
-    
+    .mdl-logo a .mdl-logo{
+    height: 80px;
+}
 }
 @media screen and (min-width:950px){
     header {
@@ -249,5 +484,68 @@ header nav ul li .caret {
         margin-left: 10px;
         margin-right: 0px;
     }
-    
+    #vista{
+        margin-top: 10px;
+    	position: relative;
+    	height: 400px;
+    	background: url("../images/Black-earphone-wallpaper-music.jpg");
+    	background-size: cover;
+        background-attachment: fixed;
+        width: 100%;
+    }   
+    #vista > div{
+        height: 100%;
+        width: 100%;
+
+    }
+	#vista div > #sb{
+		position: relative;
+		margin:0 auto;
+		width: 100%;
+		height: 100%;
+		z-index: 2;
+		text-align: center;
+    }
+    #social-gal span{
+        margin: 250px 40px 0 40px;
+
+    }
+	#vista div > div > div > h1{
+		width:100%;
+		position: absolute;
+		top: 30%;
+        font-size: 40px;
+        font-weight: 500;
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+		color: #fff;
+		text-shadow: black 5px 5px 5px;
+		
+	}
+	#gal{
+        width: 40.4%;
+        padding: 2%;
+    }
+    #gal:hover{
+        background: #c7c7c7;
+        transition: .2s ease;
+    }
+    #galerias{
+        width: 70%;
+    }
+    #galerias, #lateral{
+        float: left;
+    }
+    #lateral{
+        display: block;
+        margin: 25px 0 0 0;
+        width: 30%;
+        height: 800px;
+        background: red;
+
+    }
+        .mdl-mini-footer__link-list li{
+        display: inline-block
+    }   
 }
