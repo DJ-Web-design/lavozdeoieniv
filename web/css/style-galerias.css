@@ -249,16 +249,14 @@ header nav ul li .caret {
      a.borderanim:hover:after {
          right: 0
      }
-
      .menu ul li a {
          color: #f7f7f7;
          font-size: 14px;
          height: 16px;
-         width: auto;
+         width: 100%;
          text-align: left;
-         padding: 30px 20px 32px 20px
+         padding: 28px 20px 42px 20px
      }
-
      .menu ul li a span {
          margin-top:-2px;
          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
@@ -306,7 +304,7 @@ header nav ul li .caret {
 
     header nav ul li .children li a {
         display: block;
-        width: 45.141px;
+        width: auto;
         margin: 0;
     }
 
