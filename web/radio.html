@@ -49,67 +49,72 @@
     </script>
   </head>
   <body id="app">
-  <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '126968564676905',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v2.10',
-          oauth 	 : true,
-          status     : true
-        });
-        FB.AppEvents.logPageView();
-      };
+<div id="fb-root"></div>
+<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    }
+  }
 
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=126968564676905';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
+  // This function is called when someone finishes with the Login
+  // Button. See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    });
+  }
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: '126968564676905',
+      cookie: true,
+      xfbml: true,
+      version: 'v2.8'
+    });
 
-      // Aqui empieza el facebook analytics Evento onclick
-      function onButtonClick() {
-        FB.AppEvents.logEvent("sentFriendRequest");
-      }
+    FB.AppEvents.logPageView();
 
-      function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        if (response.status === 'connected') {
-          testAPI();
-        } else {
-          document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
-        }
-      }
-
-      function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-          statusChangeCallback(response);
-        });
-      }
-      function testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-          console.log('Successful login for: ' + response.name);
-          document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
+  };
 
 
-        });
-        document.getElementById("fblogin").addEventListener("click",function(){
-            FB.login(function(response){
-            localStorage.setItem("Nombre", response.name);
-            var userpic = response.user.picture;
-            return userpic;
-            },{scope:'email,'})
-        
-        })
-      } 
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=484795955226627';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+  function testAPI() {
+    console.log('Welcome! Fetching your information.... ');
+    FB.api('/me', function (response) {
+
+
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+
+      Nombre = response.name;
+      userpic = response.user.picture;
+      return userpic, Nombre;
+
+
+    });
+  }
     </script>
     <!--<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
 	  <header>
@@ -196,7 +201,6 @@
         <!---->
         <template v-else>
         <div class="input-group">
-          <form action="" id="msjform">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="msj">
               <input class="mdl-textfield__input" type="text" id="Mensaje" value="" name="Mensaje">
               <label class="mdl-textfield__label" for="Mensaje">Ingresa tu mensaje</label>
@@ -204,7 +208,6 @@
             <button class="mdl-button mdl-js-button mdl-color--amber-800" id="btnEnviar" >
               Enviar
             </button>
-          </form>
         </div>
         </template>
       </div>
@@ -333,39 +336,35 @@
       function ingresaNombre() {
         Nombre = document.getElementById("ingresaNombre").value;
         localStorage.setItem("Nombre", Nombre);
+        userpic = "http://placehold.it/50/55C1E7/fff&text=U";
         if (Nombre != undefined && Nombre != "" && Nombre != null) {
           data.show = false;
           data.showModal = false;
         }
-        return Nombre, data.showModal, data.show;
+        return Nombre, data.showModal, data.show, userpic;
       } 
       //Variables
 
         //Panel descripcion
 
       //Captura de mensaje para enviarlo
-      $('#btnEnviar').click(function(){
-        var formatofecha= new Date(); 
-        var d= formatofecha.getUTCDate();
-        var m= formatofecha.getMonth()+1;
-        var y= formatofecha.getFullYear();
-        var h=formatofecha.getHours();
-        var min= formatofecha.getMinutes();
-        Fecha= d+"/"+m+"/"+y+" "+h+":"+min;
+       $('#btnEnviar').click(function () {
+          var formatofecha = new Date();
+          var d = formatofecha.getUTCDate();
+          var m = formatofecha.getMonth() + 1;
+          var y = formatofecha.getFullYear();
+          var h = formatofecha.getHours();
+          var min = formatofecha.getMinutes();
 
-        TablaDeBaseDatos.push({
-          Nombre:Nombre,
-          Mensaje:$("#Mensaje").val(),
-          Fecha:Fecha,
-          userpic:userpic
+          Fecha = d + "/" + m + "/" + y + " " + h + ":" + min;
+
+          TablaDeBaseDatos.push({
+            Nombre: Nombre,
+            Mensaje: $("#Mensaje").val(),
+            Fecha: Fecha,
+            userpic:userpic,
+          });
         });
-        return false;
-      });
-      $(document).ready(function() {
-        $("#msjform").click(function(e) {
-          e.preventDefault();
-        })
-      })
     </script>
     <script src="js/mas.js"></script>
   </body>
