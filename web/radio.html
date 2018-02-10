@@ -28,12 +28,12 @@
       firebase.initializeApp(config);      
       var TablaDeBaseDatos= firebase.database().ref('chat');
     
-      TablaDeBaseDatos.on('value',function(snapshot){
+      TablaDeBaseDatos.on('value', snapshot => {
         $(".chat").html(""); // Limpiamos todo el contenido del chat
-        
-        snapshot.forEach(function(e){
+
+        snapshot.forEach(e => {
           var objeto=e.val(); // Asignar todos los valores a un objeto
-            
+          
           if((objeto.Mensaje!=null)&&(objeto.Nombre!=null)){
                  
             $( "#plantilla" ).clone().appendTo( ".chat" );
@@ -73,11 +73,11 @@
   // Button. See the onlogin handler attached to it in the sample
   // code below.
   function checkLoginState() {
-    FB.getLoginStatus(function (response) {
+    FB.getLoginStatus(response => {
       statusChangeCallback(response);
     });
   }
-  window.fbAsyncInit = function () {
+  window.fbAsyncInit = function() {
     FB.init({
       appId: '126968564676905',
       cookie: true,
@@ -101,8 +101,7 @@
 
   function testAPI() {
     console.log('Welcome! Fetching your information.... ');
-    FB.api('/me', function (response) {
-
+    FB.api('/me', response => {
 
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
@@ -111,8 +110,6 @@
       Nombre = response.name;
       userpic = response.user.picture;
       return userpic, Nombre;
-
-
     });
   }
     </script>

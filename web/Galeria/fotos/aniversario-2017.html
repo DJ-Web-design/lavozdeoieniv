@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aniversario 2017|Fotos</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <script src="../../frameworks/vue.min.js"></script>
+    <link rel="stylesheet" href="../../frameworks/bootstrap.css">
     <link rel="stylesheet" href="../../css/style-galerias.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -27,7 +29,7 @@
   };
   firebase.initializeApp(config);
   // Get a non-default Storage bucket
-    var tablaBaseDatos = firebase.database().ref("#images-container");
+    /*var tablaBaseDatos = firebase.database().ref();
     $("#upload-file-selector").change(function(){
         if(this.files && this.files[0]){
     
@@ -45,17 +47,14 @@
         }
     
     
-});
+});*/
 
-
-// Get a reference to the storage service, which is used to create references in your storage bucket
 var storage = firebase.storage();
 
-// Create a storage reference from our storage service
 var storageRef = storage.ref();
+var database = firebase.database().ref("imagenes")
 
-// Create a child reference
-var imagesRef = storageRef.child('Prueba');
+
 
 </script>
     <script>
@@ -87,7 +86,7 @@ var imagesRef = storageRef.child('Prueba');
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:id="images.id" v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <h2>{{ images.id }}</h2>
                         </div>
                     </div>
                 </template>
@@ -99,7 +98,7 @@ var imagesRef = storageRef.child('Prueba');
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <h2>{{ images.id }}</h2>
                         </div>
                     </div>
                 </template>
@@ -111,7 +110,7 @@ var imagesRef = storageRef.child('Prueba');
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <h2>{{ images.id }}</h2>
                         </div>
                     </div>
                 </template>
@@ -123,7 +122,7 @@ var imagesRef = storageRef.child('Prueba');
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <h2>{{ images.id }}</h2>
                         </div>
                     </div>
                 </template>
@@ -255,6 +254,8 @@ var imagesRef = storageRef.child('Prueba');
     </style>
     <div id="box">
     </div>
+        <button id="send">Enviar</button>
+
 
     <script src="../../js/menu-template.js"></script>
     <script>
@@ -298,6 +299,22 @@ var imagesRef = storageRef.child('Prueba');
             var clase = document.querySelector(".col-md-3")
         }
 
+        var objeto = []
+        database.child("prueba").on('value', snapshot => {
+
+            snapshot.forEach(e => {
+                
+                app.images.push(e.val()) // Asignar todos los valores a un objeto
+                return
+            });
+            return
+        });
+        var btn = document.getElementById("send")
+        btn.addEventListener("click",()=>{
+            database.push({
+                url:"JUw3Qck.jpg"
+            })
+        }, false)
 
     </script>
 </body>

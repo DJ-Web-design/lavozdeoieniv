@@ -4,12 +4,16 @@ var images = new Vue({
     showModal: false,
     indexImg: 0,
     images:[
-      { id:"1", title: "Titulo 1", url:"https://i.imgur.com/BOBnmUH.jpg" },
-      { id:"2", title: "Titulo 2", url:"https://i.imgur.com/dFoTZEg.jpg"},
-      { id: "3", title: "Titulo 3", url: "https://i.imgur.com/VjDVz4L.jpg" },
-      { id: "4", title: "Titulo 4", url: "https://i.imgur.com/voIIzxw.jpg" },
-      { id: "5", title: "Titulo 5", url:"gs://chat-lavozdeoieniv.appspot.com/Prueba/1nx6xBx.jpg"}
-
+      { id:"1", title: "Titulo 1", url:"1.jpg" },
+      { id:"2", title: "Titulo 2", url:"2.jpg"},
+      { id: "3", title: "Titulo 3", url: "3.jpg" },
+      { id: "4", title: "Titulo 4", url: "4.jpg" },
+      { id: "5", title: "Titulo 5", url:"5.jpg"}
+    ],
+    imagesName: [
+      { url: "JUw3Qck.jpg" },
+      { url: "eYr0PZ2.jpg" },
+      { url: "qguPQif.jpg" }
     ]
   },
   methods: {
