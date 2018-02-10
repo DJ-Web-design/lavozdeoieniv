@@ -3,13 +3,7 @@ var images = new Vue({
   data:{
     showModal: false,
     indexImg: 0,
-    images:[
-      { id:"1", title: "Titulo 1", url:"1.jpg" },
-      { id:"2", title: "Titulo 2", url:"2.jpg"},
-      { id: "3", title: "Titulo 3", url: "3.jpg" },
-      { id: "4", title: "Titulo 4", url: "4.jpg" },
-      { id: "5", title: "Titulo 5", url:"5.jpg"}
-    ],
+    images:[],
     imagesName: [
       { url: "JUw3Qck.jpg" },
       { url: "eYr0PZ2.jpg" },

@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<!--<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>-->
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -52,7 +52,7 @@
 var storage = firebase.storage();
 
 var storageRef = storage.ref();
-var database = firebase.database().ref("imagenes")
+var database = firebase.database().ref("imagenes/pruebas")
 
 
 
@@ -269,53 +269,43 @@ var database = firebase.database().ref("imagenes")
             var g = n +1; 
             var op = document.getElementById("box")
             if (g == i) {
-                op.innerHTML = '<div class="lightbox" id="image">\
+                op.innerHTML = `<div class="lightbox" id="image">\
                 <a class="close" onclick="cerrar()">X</a>\
-                <span onclick="prev('+ g + ')"><</span><img src=' + images.images[g].url + ' alt="">\
-                </div>'
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt="">\
+                </div>`
             } else {
-                op.innerHTML = '<div class="lightbox" id="image">\
+                op.innerHTML = `<div class="lightbox" id="image">\
                 <a class="close" onclick="cerrar()">X</a>\
-                <span onclick="prev('+ g + ')"><</span><img src=' + images.images[g].url + ' alt=""><span onclick="next(' + g + ')">></span>\
-                </div>'
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>\
+                </div>`
             }
         }
         function prev(n) {
             var g = n - 1; 
             var op = document.getElementById("box")
             if (n==1) {
-                op.innerHTML = '<div class="lightbox" id="image">\
+                op.innerHTML = `<div class="lightbox" id="image">\
                 <a class="close" onclick="cerrar()">X</a>\
-                <img src=' + images.images[g].url + ' alt=""><span onclick="next(' + g + ')">></span>\
-                </div>'
+                <img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>\
+                </div>`
             }else{
-                op.innerHTML = '<div class="lightbox" id="image">\
+                op.innerHTML = `<div class="lightbox" id="image">\
                 <a class="close" onclick="cerrar()">X</a>\
-                <span onclick="prev('+ g + ')"><</span><img src=' + images.images[g].url + ' alt=""><span onclick="next(' + g + ')">></span>\
-                </div>'
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>\
+                </div>`
             }
         }
         if (window.screen.width >= 480 && window.screen.width <= 767) {
             var clase = document.querySelector(".col-md-3")
         }
-
         var objeto = []
         database.child("prueba").on('value', snapshot => {
-
-            snapshot.forEach(e => {
-                
-                app.images.push(e.val()) // Asignar todos los valores a un objeto
+            snapshot.forEach(e => {                
+                images.images.push(e.val()) // Asignar todos los valores a un objeto
                 return
             });
             return
         });
-        var btn = document.getElementById("send")
-        btn.addEventListener("click",()=>{
-            database.push({
-                url:"JUw3Qck.jpg"
-            })
-        }, false)
-
     </script>
 </body>
 </html>
