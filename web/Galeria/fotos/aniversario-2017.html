@@ -15,51 +15,24 @@
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-
 <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
 <script>
-  // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyC2RvmGHYtaqUa5lEXb3MLl_Mv4ECiLoBE",
-    authDomain: "chat-lavozdeoieniv.firebaseapp.com",
-    databaseURL: "https://chat-lavozdeoieniv.firebaseio.com",
-    projectId: "chat-lavozdeoieniv",
-    storageBucket: "chat-lavozdeoieniv.appspot.com",
-    messagingSenderId: "24315564955"
+  apiKey: "AIzaSyC2RvmGHYtaqUa5lEXb3MLl_Mv4ECiLoBE",
+  authDomain: "chat-lavozdeoieniv.firebaseapp.com",
+  databaseURL: "https://chat-lavozdeoieniv.firebaseio.com",
+  projectId: "chat-lavozdeoieniv",
+  storageBucket: "chat-lavozdeoieniv.appspot.com",
+  messagingSenderId: "24315564955"
   };
   firebase.initializeApp(config);
-  // Get a non-default Storage bucket
-    /*var tablaBaseDatos = firebase.database().ref();
-    $("#upload-file-selector").change(function(){
-        if(this.files && this.files[0]){
-    
-            var Archivo = newFileReader();
-            Archivo.onload=function(e){
-                var SmallImg = Redimencionar(e.target.result,165,165);
-                    tablaBaseDeDatos.push({
-                        urlLarge:e.target.result,
-                        url:SmallImg
-                    });
-                
-                    $("#img").attr('src', SmallImg);
-            }
-            Archivo.readAsDataUrl(this.files[0]);
-        }
-    
-    
-});*/
-
-var storage = firebase.storage();
-
-var storageRef = storage.ref();
-var database = firebase.database().ref("imagenes/pruebas")
-
-
-
+  var storage = firebase.storage();
+  var storageRef = storage.ref();
+  var database = firebase.database().ref("imagenes/pruebas");
 </script>
     <script>
-        var data = {}
-        var n
+        var data = {};
+        var n;
     </script>
     <header id="menu">
         <menu-item index="../../index.html" 
@@ -73,14 +46,12 @@ var database = firebase.database().ref("imagenes/pruebas")
     </header>
     <script src="../../js/plantilla-menu.js"></script>
     <style>
-
     </style>
     <div class="container">
         <div class="row" id="images-container">
             <modal-template v-if="showModal"></modal-template>
             <div class="col-md-12" style="height: 300px" id="header"></div>
             <div class="col-md-12">
-            <!--columna 1-->
             <div class="col-md-3">
                 <template v-for="images in uno(images)">
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
@@ -91,8 +62,6 @@ var database = firebase.database().ref("imagenes/pruebas")
                     </div>
                 </template>
             </div>
-        <!---->
-        <!--Columna 2-->
             <div class="col-md-3">            
                 <template v-for="images in dos(images)">
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
@@ -103,8 +72,6 @@ var database = firebase.database().ref("imagenes/pruebas")
                     </div>
                 </template>
             </div>
-        <!---->
-        <!--Columna 3-->
             <div class="col-md-3">            
                 <template v-for="images in tres(images)">
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
@@ -115,8 +82,6 @@ var database = firebase.database().ref("imagenes/pruebas")
                     </div>
                 </template>
             </div>
-        <!---->
-        <!--Columna 4-->
             <div class="col-md-3">            
                 <template v-for="images in cuatro(images)">
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
@@ -127,171 +92,46 @@ var database = firebase.database().ref("imagenes/pruebas")
                     </div>
                 </template>
             </div>
-        <!---->
         </div>
      </div>
     </div>
-    <style>
-        .container .row .col-md-3{
-            padding: 0;
-        }
-        .container .row .col-md-3 .col-md-12 div{
-            border-radius: 3px;
-            border: 2px solid rgba(75, 127, 232, 0.30);            
-            background: #c7c7c7;
-            box-shadow: 3px 3px 4px gray;
-        }
-        .container .row .col-md-3 .col-md-12 div img{
-            cursor: pointer;
-            padding: 10px 5px;
-            width: 100%
-        }
-        .container .row .col-md-3 .col-md-12 div h2{
-            color: #4f4f4f;
-            font-size: 25px;
-            text-align: center;
-            padding: 0 5px 5px 5px;
-        }
-        #header{
-            background: url("luces.jpg");
-            background-attachment: fixed;
-            background-size: cover;
-        }
-
-
-                #box { text-align:center;}
-        .img {margin: 2%;border: 5px solid #444444;width:300px;}
-        .lightbox { 
-    	display: block;
-        	outline: none;
-        	position: fixed;
-        	top: 0;
-        	text-align:center;
-        	background: #00000086;
-        	height: 100%;	
-        	width: 100%;	
-        	box-sizing: content-box;
-            z-index: 10000000
-        }
-        .lightbox img { 
-            margin-top: 20%;
-            max-width: 100%;
-            max-height: 80%;
-        }
-        .close {
-        	display: block;
-        	top: 50px;
-        	right:100px;
-        	padding: 30px 0px;
-        	color: rgb(255, 255, 255);
-        	text-decoration:none;
-        	font-size: 20px;
-
-        }
-        #box span{
-            cursor: pointer;
-            margin: 5px;
-            color: #f7f7f7;
-            font-size: 30px;
-        }
-            
-        
-        @media screen and (min-width:480px){
-        .container .row .col-md-3{
-            padding: 0;
-        }
-            
-        }
-        @media screen and (min-width:767px){
-            
-        }
-        @media screen and (min-width:950px){
-        .container .row .col-md-3{
-            padding: 0;
-        }
-        .container .row .col-md-3 .col-md-12 div{
-            border-radius: 3px;
-            border: 2px solid rgba(75, 127, 232, 0.30);            
-            background: #c7c7c7;
-            box-shadow: 3px 3px 4px gray;
-        }
-        .container .row .col-md-3 .col-md-12 div img{
-            cursor: pointer;
-            padding: 10px 5px;
-            width: 100%
-        }
-        .container .row .col-md-3 .col-md-12 div h2{
-            color: #4f4f4f;
-            font-size: 25px;
-            text-align: center;
-            padding: 0 5px 5px 5px;
-        }
-        #header{
-            background: url("luces.jpg");
-            background-attachment: fixed;
-            background-size: cover;
-        }
-        .lightbox img { 
-            margin-top: 6%;
-        }
-        .close {
-        	display: block;
-        	top: 50px;
-        	right:100px;
-        	padding: 30px 0px;
-        	color: #f7f7f7;
-        	text-decoration:none;
-        	font-size: 20px;
-
-        }
-        #box span{
-            cursor: pointer;
-            margin: 20px;
-            color: #f7f7f7;
-            font-size: 40px;
-        }
-    }
-    </style>
     <div id="box">
     </div>
         <button id="send">Enviar</button>
-
-
     <script src="../../js/menu-template.js"></script>
     <script>
         function cerrar() {
-            var op = document.getElementById("box")
-            op.innerHTML=""
+            var op = document.getElementById("box");
+            op.innerHTML="";
         }
         function next(n) {
-
-            for (i in images.images)
+            for (i in images.images);
             var g = n +1; 
             var op = document.getElementById("box")
             if (g == i) {
-                op.innerHTML = `<div class="lightbox" id="image">\
-                <a class="close" onclick="cerrar()">X</a>\
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt="">\
+                op.innerHTML = `<div class="lightbox" id="image">
+                <a class="close" onclick="cerrar()">X</a>
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt="">
                 </div>`
             } else {
-                op.innerHTML = `<div class="lightbox" id="image">\
-                <a class="close" onclick="cerrar()">X</a>\
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>\
-                </div>`
+                op.innerHTML = `<div class="lightbox" id="image">
+                <a class="close" onclick="cerrar()">X</a>
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>
+                 </div>`
             }
         }
         function prev(n) {
             var g = n - 1; 
-            var op = document.getElementById("box")
+            var op = document.getElementById("box");
             if (n==1) {
-                op.innerHTML = `<div class="lightbox" id="image">\
-                <a class="close" onclick="cerrar()">X</a>\
-                <img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>\
+                op.innerHTML = `<div class="lightbox" id="image">
+                <a class="close" onclick="cerrar()">X</a>
+                <img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>
                 </div>`
             }else{
-                op.innerHTML = `<div class="lightbox" id="image">\
-                <a class="close" onclick="cerrar()">X</a>\
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>\
+                op.innerHTML = `<div class="lightbox" id="image">
+                <a class="close" onclick="cerrar()">X</a>
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>
                 </div>`
             }
         }
@@ -301,7 +141,7 @@ var database = firebase.database().ref("imagenes/pruebas")
         var objeto = []
         database.child("prueba").on('value', snapshot => {
             snapshot.forEach(e => {                
-                images.images.push(e.val()) // Asignar todos los valores a un objeto
+                images.images.push(e.val())
                 return
             });
             return

@@ -240,7 +240,6 @@ nav#menu ul li{
     font-family: helvetica;
     box-shadow: 2px 2px 3px gray;
     color: rgb(49, 49, 49);
-
     transition: .2s ease;
 }
 #spinner{
@@ -253,13 +252,11 @@ nav#menu ul li{
     background: rgb(255, 162, 23);
 
 }
-
 .icon-spinner9::before{
-  animation: rotate ease-in-out 2s infinite;
+  animation: rotar ease-in-out 2s infinite;
   
 }
-
-@keyframes rotate{
+@keyframes rotar{
   from{
     transform: rotate(0)
   }
