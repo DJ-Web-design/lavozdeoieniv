@@ -2,11 +2,9 @@ var app = new Vue({
     el:"#app",
     data:{
         bloqueo:true,
-        usuario:"david",
-        contra:"1234",
         inputUser:"",
         inputPass:"",
-        noUser:false,
+        noUser:"",
         remember:"",
         page:1,
         page1:true,
@@ -17,23 +15,17 @@ var app = new Vue({
         inputTitle:null,
         inputDescrip:null,
         salida:"",
+        spin:false,
+        voto1: 0,
+        voto2: 0,
+        voto3: 0,
     },
     methods:{
-        autenticate: function() {
-            if (this.inputUser == this.usuario && this.inputPass == this.contra) {
-                if (this.remember) {
-                    localStorage.setItem("remember", true)
-                }
-                this.bloqueo = false
-            } else {
-                this.noUser = true
-            }
-        },
-        imagen:file=>{
+        imagen:function(file){
             this.file = file
 
         },
-        recogerDatos:()=>{
+        recogerDatos:function(){
             let inputTitle = document.getElementById("titulo")
             let inputDescrip = document.getElementById("des")
             let inputGal = document.getElementById("gal")
@@ -72,7 +64,53 @@ var app = new Vue({
                     alert("Archivo subido exitosamente")
                 })
             }
+        },
+        spinToggle:e=>{
+            e.preventDefault()
+            this.spin = true;
+            this.voto1 = "";
+            this.voto2 = "";
+            this.voto3 = "";
+
+            let votos = {
+                voto1: "Habla Sobre Mi de Daniel calveti",
+                voto2: "Luz y Sal de Funky",
+                voto3: "Amor Real de Manny Montes"
+            }
+            $.get("votos.php", votos, res => {
+                this.spin = false
+                this.voto1 = res.res1
+                this.voto2 = res.res2
+                this.voto3 = res.res3
+            }).fail(err => {
+                alert("Error en el servidor")
+                console.log(err);
+            })
+        },
+        pedirVotos:datos =>{
+            
+            
+        },
+        submit:function(e){
+            e.preventDefault();
+            let datos = {
+                user:this.inputUser,
+                pass:this.inputPass
+            }
+            $.get("login-admin.php", datos, res =>{
+                if (res == "noUser") {
+                    this.noUser = "Usuario o contraseña incorrectos"
+                } else if (res == "accede") {
+                    this.bloqueo = false;
+                    if (this.remember) {
+                        localStorage.setItem("remember", true)
+                    } else {
+                        sessionStorage.setItem("remember", true)
+                    }
+                } else {}
+            }).fail(() => {
+                alert("Error al conectar con el servidor.\nIntentelo de nuevo")
+            })
         }
     }
-
 })

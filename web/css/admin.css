@@ -4,6 +4,106 @@
     font-family: helvetica
 }
 
+body{
+    background: #f7f7f7
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?ndzgob');
+  src:  url('fonts/icomoon.eot?ndzgob#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?ndzgob') format('truetype'),
+    url('fonts/icomoon.woff?ndzgob') format('woff'),
+    url('fonts/icomoon.svg?ndzgob#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-headphones:before {
+  content: "\e910";
+}
+.icon-music:before {
+  content: "\e911";
+}
+.icon-podcast:before {
+  content: "\e91c";
+}
+.icon-feed:before {
+  content: "\e91d";
+}
+.icon-envelop:before {
+  content: "\e945";
+}
+.icon-users:before {
+  content: "\e972";
+}
+.icon-spinner9:before {
+  content: "\e982";
+}
+.icon-menu:before {
+  content: "\e9bd";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}
+.icon-play:before {
+  content: "\ea1c";
+}
+.icon-pause:before {
+  content: "\ea1d";
+}
+.icon-volume-high:before {
+  content: "\ea26";
+}
+.icon-volume-medium:before {
+  content: "\ea27";
+}
+.icon-volume-low:before {
+  content: "\ea28";
+}
+.icon-volume-mute:before {
+  content: "\ea2a";
+}
+.icon-circle-right:before {
+  content: "\ea42";
+}
+.icon-circle-left:before {
+  content: "\ea44";
+}
+.icon-facebook:before {
+  content: "\ea90";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
+.icon-whatsapp:before {
+  content: "\ea93";
+}
+.icon-twitter:before {
+  content: "\ea96";
+}
+.icon-youtube:before {
+  content: "\ea9d";
+}
+
 /*Menu*/
 nav#menu{
    width: 100%;
@@ -82,3 +182,88 @@ nav#menu ul li{
 }
 
 /*Pagina 1*/
+#title-count{
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 30px;
+    font-weight: 600;
+    color: gray;
+    margin: 25px 0 50px 0;
+
+}
+.nombre-voto{
+    margin: 0 6.5%;
+    float: left;
+    border: 2px solid rgba(75,127,232,.3);
+    box-shadow: 1px 1px 4px gray;
+    border-radius: 3px;
+    text-align: center;
+    width: 20%;
+    height: 50px;
+    background: #e7e5e5
+    
+}
+.nombre-voto > span{
+    display: block;
+    margin-top:  14px;
+}
+.cuenta-voto{
+    text-align: center;
+    margin: 0 11.5%;
+    font-size: 25px;
+    float: left;
+    border: 2px solid rgba(75,127,232,.3);
+    box-shadow: 1px 1px 4px gray;
+    border-radius: 3px;    
+    width: 10%;
+    height: 80px;
+}
+.cuenta-voto > span{
+    display: block;
+    margin-top: 20px;
+}
+#btn-container{
+    text-align: center
+}
+.btn-lavoz{
+    margin: 40px;
+    vertical-align: middle;
+    cursor: pointer;
+    width: auto;
+    height: 40px;
+    padding: 10px 25px;
+    background: #E5931A;
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 15px;
+    font-family: helvetica;
+    box-shadow: 2px 2px 3px gray;
+    color: rgb(49, 49, 49);
+
+    transition: .2s ease;
+}
+#spinner{
+    color: red;
+}
+#spinner img{
+    width: 150px;
+}
+.btn-lavoz:hover{
+    background: rgb(255, 162, 23);
+
+}
+
+.icon-spinner9::before{
+  animation: rotate ease-in-out 2s infinite;
+  
+}
+
+@keyframes rotate{
+  from{
+    transform: rotate(0)
+  }
+  to{
+    transform: rotate(360)
+  }
+}

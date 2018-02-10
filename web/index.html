@@ -301,106 +301,15 @@
             <button class="mdl-mini-footer__social-btn" id="icon-inst">
                 <span class="icon-instagram" style="color: rgb(228, 64, 95)"></span>
             </button>
-
         </div>
-
     </footer>
-        <style>
-            #successModal{
-                transition: ease .5s;
-            }
-            #successModal > div >.sombraModal {
-                position: fixed;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                background: rgba(0, 0, 0, .6);
-                z-index: 2000001;
-            }
-        
-            #successModal > div > #content-modal {
-                border-radius: 5px;
-                top:20%;
-                left:20%;
-                position: fixed;
-                width: 60%;
-                height: 60%;
-                background: #f7f7f7;
-                z-index: 2000002;
-                text-align: center;
-                box-shadow: 5px 5px 10px black;
-            }
-            #successModal > div > #content-modal div #bloque-texto{
-                display: block;
-                margin-top: 12%;
-            }
-            #successModal > div > #content-modal div span .texto {
-                display: block;
-                margin-top: 5%;
-                font-size: 25px;
-            }
-            #successModal > div > #content-modal > #compartir a div{
-                color: #f7f7f7;
-                display: inline-block;
-                position: absolute;
-                bottom: 15%;
-                width: 20%;
-                background: blue;
-                border-radius: 3px;
-            }
-            #successModal > div > #content-modal #cerrarModal{
-                font-weight: 400;
-                font-size: 30px;
-                position: absolute;
-                top:5%;
-                right: 32%;
-            }
-            #successModal > div > #content-modal > #compartir a div span span{
-                margin: 0 0 0 10px;
-                font-size: 15px;
-                vertical-align: .3em;
-            }
-            #successModal > div > #content-modal > #compartir a #iconFacebook{
-                font-size: 25px;
-                left: 7.5%;
-                text-align: left;
-                background: rgb(59, 89, 152);
-                margin: 10% 12.5% 0 15%;
-            }
-            #successModal > div > #content-modal > #compartir a #iconTwitter{
-                font-size: 25px;
-                right: 7.5%;
-                text-align: left;
-                margin: 10% 10% 0 12.5%;
-                background: rgb(29, 161, 242);
-            }
-            #successModal .headModal{
-                border-radius: 3px 3px 0 0;
-                width: 100%;
-                height: 50px;
-                background: #32559C; 
-            }
-            #successModal .headModal div{
-                position: relative;
-                background: orange;
-                width: 45px;
-                height: 45px;
-                margin: 2.5px 10px;
-                border-radius: 50%;
-                float: right;
-                cursor: pointer;
-
-            }
-
-        </style>
-            <div id="successModal">
-            </div>
+    <div id="successModal">
+    </div>
     <script src="js/js.js"></script>
     <script>$(document).ready(main, sombra);
         var contador=1;
     function main(){
-        $('.menu-cel').click(function(){
+        $('.menu-cel').click(()=>{
             if(contador==1){
                 $('nav').animate({
                     left:'0'
@@ -415,14 +324,14 @@
         });
     };
     function sombra(){
-    $(".menu-cel").click(function (event) {
+    $(".menu-cel").click((event) => {
         if (contador == 1) {
             $(".sombra").fadeIn(100)
         } else {
             $(".sombra").fadeOut(100)
         }
     });
-    $(".sombra").click(function (event) {
+    $(".sombra").click((event) => {
         if (contador == 0) {
             contador = 1;
             $(".sombra").fadeOut(100);
@@ -434,8 +343,8 @@
     function cerrarVentana(event){
         $('#ventana').fadeOut(200)
     }
-    $(document).ready( function() {
-        $("#form").submit(function() {
+    $(document).ready(()=> {
+        $("#form").submit(()=> {
             //if(localStorage.getItem("voto 2"))
             if (localStorage.getItem("voto 1")) {
                     $("#successModal").html('<div>\
@@ -461,7 +370,7 @@
 
                 var datos = $(".radio").serialize()
 
-                $.get("form.php", datos, respuesta).fail(function() {
+                $.get("form.php", datos, respuesta).fail(() => {
                     $("#successModal").html('<div>\
                 <div class= "sombraModal">\
                     </div>\
