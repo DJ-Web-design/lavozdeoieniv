@@ -55,7 +55,7 @@ var database = firebase.database().ref("imagenes/pruebas");
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:id="images.id" v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
@@ -67,7 +67,7 @@ var database = firebase.database().ref("imagenes/pruebas");
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
@@ -79,7 +79,7 @@ var database = firebase.database().ref("imagenes/pruebas");
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
@@ -91,7 +91,7 @@ var database = firebase.database().ref("imagenes/pruebas");
                     <div class="col-md-12" v-on:click="openGal(images.id -1)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
