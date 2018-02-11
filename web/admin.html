@@ -101,7 +101,7 @@
                         <input type="text" name="des" id="des"></div>
 
                         <div><label for="file">Imagen:</label>
-                        <input type="file" name="archi" id="archi" @change="imagen($event.file)"></div>
+                        <input type="file" name="archi" id="archi" @change="imagen($event.target.files)"></div>
 
                         <select v-model="galeria" id="gal">
                             <option disabled value="">Seleciona una galeria</option>
