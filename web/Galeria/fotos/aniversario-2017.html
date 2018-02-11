@@ -52,7 +52,7 @@ var database = firebase.database().ref("imagenes/pruebas");
             <!--columna 1-->
             <div class="col-md-3">
                 <template v-for="images in uno(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:id="images.id" v-bind:src="images.url" alt="">
                             <h2>{{ images.title }}</h2>
@@ -64,7 +64,7 @@ var database = firebase.database().ref("imagenes/pruebas");
         <!--Columna 2-->
             <div class="col-md-3">            
                 <template v-for="images in dos(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:src="images.url" alt="">
                             <h2>{{ images.title }}</h2>
@@ -76,7 +76,7 @@ var database = firebase.database().ref("imagenes/pruebas");
         <!--Columna 3-->
             <div class="col-md-3">            
                 <template v-for="images in tres(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:src="images.url" alt="">
                             <h2>{{ images.title }}</h2>
@@ -88,7 +88,7 @@ var database = firebase.database().ref("imagenes/pruebas");
         <!--Columna 4-->
             <div class="col-md-3">            
                 <template v-for="images in cuatro(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:src="images.url" alt="">
                             <h2>{{ images.title }}</h2>
