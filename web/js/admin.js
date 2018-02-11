@@ -57,7 +57,7 @@ var app = new Vue({
                     console.log(error.code);
                 }, () => {
                     database.child("prueba").push({
-                        name: fileTitle,
+                        title: fileTitle,
                         description: fileDes,
                         url: upload.snapshot.downloadURL
                     })
