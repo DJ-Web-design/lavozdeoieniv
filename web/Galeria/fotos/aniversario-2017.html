@@ -28,7 +28,7 @@
   firebase.initializeApp(config);
 var storage = firebase.storage();
 var storageRef = storage.ref();
-var database = firebase.database().ref("imagenes/pruebas");
+var database = firebase.database().ref("imagenes/prueba");
 </script>
     <script>
         var data = {}
@@ -269,7 +269,7 @@ var database = firebase.database().ref("imagenes/pruebas");
             var clase = document.querySelector(".col-md-3")
         }
         var objeto = []
-        database.child("prueba").on('value', snapshot => {
+        database.on('value', snapshot => {
             snapshot.forEach(e => {                
                 images.images.push(e.val()) // Asignar todos los valores a un objeto
                 return
