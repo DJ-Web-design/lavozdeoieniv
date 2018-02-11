@@ -268,13 +268,11 @@ var database = firebase.database().ref("imagenes/prueba");
         if (window.screen.width >= 480 && window.screen.width <= 767) {
             var clase = document.querySelector(".col-md-3")
         }
-        document.addEventListener("load", ()=>{
+        $(document).ready(()=>{
          database.on('value', snapshot => {
             snapshot.forEach(e => {                
                 images.images.push(e.val()) // Asignar todos los valores a un objeto
-                return
             });
-            return
         });
         })
     </script>
