@@ -56,7 +56,7 @@ var app = new Vue({
                     alert("Error al subir archivo");
                     console.log(error.code);
                 }, () => {
-                    database.child("prueba").push({
+                    database.push({
                         title: fileTitle,
                         description: fileDes,
                         url: upload.snapshot.downloadURL
