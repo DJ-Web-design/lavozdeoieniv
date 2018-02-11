@@ -39,7 +39,7 @@ var app = new Vue({
             if (fileTitle && fileDes && fileGal && this.file){
                 let sendFile = this.file[0];
 
-                var upload = storageChild.child("prueba").put(sendFile)
+                var upload = storageChild.child(this.sendFile.name).put(sendFile)
 
                 upload.on("state_changed", snapshot => {
                     let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
