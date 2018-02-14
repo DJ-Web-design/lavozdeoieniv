@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aniversario 2017|Fotos</title>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
-    <script src="../../frameworks/vue.min.js"></script>
-    <link rel="stylesheet" href="../../frameworks/bootstrap.css">
-    <link rel="stylesheet" href="../../css/style-galerias.css">
-    <!--<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style-galerias.css" />
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -26,9 +24,9 @@
   messagingSenderId: "24315564955"
   };
   firebase.initializeApp(config);
-  var storage = firebase.storage();
-  var storageRef = storage.ref();
-  var database = firebase.database().ref("imagenes/pruebas");
+var storage = firebase.storage();
+var storageRef = storage.ref();
+var database = firebase.database().ref("imagenes/prueba");
 </script>
     <script>
         var data = {};
@@ -45,8 +43,6 @@
         <script src="../../js/menu.js"></script>
     </header>
     <script src="../../js/plantilla-menu.js"></script>
-    <style>
-    </style>
     <div class="container">
         <div class="row" id="images-container">
             <modal-template v-if="showModal"></modal-template>
@@ -54,40 +50,40 @@
             <div class="col-md-12">
             <div class="col-md-3">
                 <template v-for="images in uno(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:id="images.id" v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
             <div class="col-md-3">            
                 <template v-for="images in dos(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
             <div class="col-md-3">            
                 <template v-for="images in tres(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
             <div class="col-md-3">            
                 <template v-for="images in cuatro(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.id -1)">
+                    <div class="col-md-12" v-on:click="openGal(images.index)">
                         <div>
                             <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.id }}</h2>
+                            <h2>{{ images.title }}</h2>
                         </div>
                     </div>
                 </template>
@@ -138,14 +134,13 @@
         if (window.screen.width >= 480 && window.screen.width <= 767) {
             var clase = document.querySelector(".col-md-3")
         }
-        var objeto = []
-        database.child("prueba").on('value', snapshot => {
+        $(document).ready(()=>{
+         database.on('value', snapshot => {
             snapshot.forEach(e => {                
-                images.images.push(e.val())
-                return
+                images.images.push(e.val()) // Asignar todos los valores a un objeto
             });
-            return
         });
+        })
     </script>
 </body>
 </html>
