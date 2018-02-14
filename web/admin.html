@@ -22,12 +22,9 @@
             messagingSenderId: "24315564955"
         };
         firebase.initializeApp(config);
-
         const database = firebase.database().ref("imagenes/prueba")
-
         const storage = firebase.storage().ref()
         const storageChild = storage.child("Pruebas")
-
     </script>
     <div id="app">
         <template v-if="bloqueo">
