@@ -19,6 +19,9 @@ var app = new Vue({
         voto1: 0,
         voto2: 0,
         voto3: 0,
+        showLoad:false,
+        imageLoad:"",
+        progress: 0
     },
     methods:{
         imagen:function(file){
@@ -38,10 +41,12 @@ var app = new Vue({
 
             if (fileTitle && fileDes && fileGal && this.file){
                 let sendFile = this.file[0];
-                var upload = storageChild.child(fileTitle).put(sendFile);
+                var upload = storageChild.child(sendFile.name).put(sendFile);
 
+                this.imageLoad = sendFile.name
+                this.showLoad=true
                 upload.on("state_changed", snapshot => {
-                    let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                     this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                     console.log('Upload is ' + progress + '% done');
                     switch (snapshot.state) {
                         case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -54,6 +59,7 @@ var app = new Vue({
                 }, error => {
                     alert("Error al subir archivo");
                     console.log(error.code);
+                    this.showLoad = false
                 }, () => {
                     database.push({
                         title: fileTitle,
@@ -61,6 +67,7 @@ var app = new Vue({
                         url: upload.snapshot.downloadURL
                     })
                     alert("Archivo subido exitosamente")
+                    this.showLoad=false
                 })
             }
         },
@@ -110,6 +117,10 @@ var app = new Vue({
             }).fail(() => {
                 alert("Error al conectar con el servidor.\nIntentelo de nuevo")
             })
+        },
+        cerrarModar: function(e) {
+            e.preventDefault();
+            this.showLoad = false
         }
     }
 })
