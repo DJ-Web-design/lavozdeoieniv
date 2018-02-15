@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aniversario 2017|Fotos</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
+    
+    <script src="../../frameworks/jquery-3.2.1.min.js"></script>
+    <script src="../../frameworks/vue.min.js"></script>
+    <link rel="stylesheet" href="../../frameworks/bootstrap.css">
+    
     <link rel="stylesheet" href="../../css/style-galerias.css" />
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 </head>
@@ -47,53 +52,63 @@ var database = firebase.database().ref("imagenes/prueba");
         <div class="row" id="images-container">
             <modal-template v-if="showModal"></modal-template>
             <div class="col-md-12" style="height: 300px" id="header"></div>
+            <template v-if="imagesItem">
             <div class="col-md-12">
             <div class="col-md-3">
-                <template v-for="images in uno(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.index)">
+                <template v-for="iten in uno(images)">
+                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
                         <div>
-                            <img v-bind:id="images.id" v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
             <div class="col-md-3">            
-                <template v-for="images in dos(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.index)">
+                <template v-for="iten in dos(images)">
+                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
                         <div>
-                            <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
             <div class="col-md-3">            
-                <template v-for="images in tres(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.index)">
+                <template v-for="iten in tres(images)">
+                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
                         <div>
-                            <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
             <div class="col-md-3">            
-                <template v-for="images in cuatro(images)">
-                    <div class="col-md-12" v-on:click="openGal(images.index)">
+                <template v-for="iten in cuatro(images)">
+                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
                         <div>
-                            <img v-bind:src="images.url" alt="">
-                            <h2>{{ images.title }}</h2>
+                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
         </div>
+        </template>
+        <template v-else>
+            <div id="preloader_4">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </template>
      </div>
     </div>
     <div id="box">
     </div>
-        <button id="send">Enviar</button>
     <script src="../../js/menu-template.js"></script>
     <script>
         function cerrar() {
@@ -107,12 +122,12 @@ var database = firebase.database().ref("imagenes/prueba");
             if (g == i) {
                 op.innerHTML = `<div class="lightbox" id="image">
                 <a class="close" onclick="cerrar()">X</a>
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt="">
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].value.url} alt="">
                 </div>`
             } else {
                 op.innerHTML = `<div class="lightbox" id="image">
                 <a class="close" onclick="cerrar()">X</a>
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].value.url} alt=""><span onclick="next(${g})">></span>
                  </div>`
             }
         }
@@ -122,12 +137,12 @@ var database = firebase.database().ref("imagenes/prueba");
             if (n==1) {
                 op.innerHTML = `<div class="lightbox" id="image">
                 <a class="close" onclick="cerrar()">X</a>
-                <img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>
+                <img src=${images.images[g].value.url} alt=""><span onclick="next(${g})">></span>
                 </div>`
             }else{
                 op.innerHTML = `<div class="lightbox" id="image">
                 <a class="close" onclick="cerrar()">X</a>
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].url} alt=""><span onclick="next(${g})">></span>
+                <span onclick="prev(${g})"><</span><img src=${images.images[g].value.url} alt=""><span onclick="next(${g})">></span>
                 </div>`
             }
         }
@@ -136,8 +151,10 @@ var database = firebase.database().ref("imagenes/prueba");
         }
         $(document).ready(()=>{
          database.on('value', snapshot => {
-            snapshot.forEach(e => {                
-                images.images.push(e.val()) // Asignar todos los valores a un objeto
+            let id = 1;
+            snapshot.forEach(e => { 
+                images.images.unshift({id:id, value:e.val()}) // Asignar todos los valores a un objeto
+                id++
             });
         });
         })
