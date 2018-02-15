@@ -264,10 +264,9 @@ nav#menu ul li{
     transform: rotate(360)
   }
 }
-.cajaexterna {
+        .cajaexterna {
     background-color: rgba(0, 0, 0, 0.5);
     bottom: 0;
-    display: none;
     left: 0;
     overflow: auto;
     position: fixed;
@@ -276,15 +275,19 @@ nav#menu ul li{
     z-index: 1000;
 }
 .cajainterna {
+
     background: #fff;
     margin: 6em auto 0;
     position: relative;
-    width: 90%;
+        width: 60%;
+    height: 50%;
+
 }
 .cajacentrada {
-    margin: 0 auto;
+    margin:0 auto;
+    display: block;
     text-align: center;
-    padding: 1em;
+    padding:80px 0;
 }
 .cajacentrada h2 {
     background: none repeat scroll 0 0 black;
