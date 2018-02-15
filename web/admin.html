@@ -111,6 +111,19 @@
                         <output id="output"></output>
                     </div>
                 </div>
+                <template v-if="showLoad">
+                    <div class="cajaexterna">
+                        <div class="cajainterna animated">
+                            <div class="cajacentrada">
+                                <h2>Subiendo {{ imageLoad }}</h2>
+                                <progress id="load" max="100" v-bind:value="progress"></progress>
+                                <div class="cierramodal">
+                                    <a @click="cerrarModal" class="cerrarmodal">cerrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
 
             </template>
             <!---->

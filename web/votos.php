@@ -2,58 +2,38 @@
 	require("../config.php"); 
 	
 
-    $pedido1 = isset($_GET["user"]) ? $_GET["user"]:$_POST["user"];
-    $pedido2 = isset($_GET["user"]) ? $_GET["user"]:$_POST["user"];
-    $pedido3 = isset($_GET["user"]) ? $_GET["user"]:$_POST["user"];
-	/*$pedido = isset($_GET["pedido"]) ? $_GET["pedido"]:$_POST["pedido"];
+    $pedido1 = isset($_GET["voto1"]) ? $_GET["voto1"]:$_POST["voto1"];
+    $pedido2 = isset($_GET["voto2"]) ? $_GET["voto2"]:$_POST["voto2"];
+    $pedido3 = isset($_GET["voto3"]) ? $_GET["voto3"]:$_POST["voto3"];
 
     $dbconn = pg_connect("host=".$host." port=".$port." dbname=".$db." user=".$user." password=".$pass) or die('NO HAY CONEXION: ' . pg_last_error());
-
-	$mensaje = "";
 	
     if (isset($pedido)) {
-		$query = "SELECT * FROM vota WHERE vota LIKE '$pedido'";
+
+		$query = "SELECT * FROM vota WHERE vota LIKE '$pedido1'";
     	$result = pg_query($dbconn, $query) or die('ERROR AL INSERTAR DATOS: ' . pg_last_error());
+		$voto1 = pg_num_row($result);
 
-		$filas = pg_num_rows($result);
+		$query = "SELECT * FROM vota WHERE vota LIKE '$pedido2'";
+    	$result = pg_query($dbconn, $query) or die('ERROR AL INSERTAR DATOS: ' . pg_last_error());
+		$voto2 = pg_num_row($result);
 
-		if ($filas === 0) {
-			$mensaje = "<p>No hay ningun voto para esa canción</p>";
-		} else {
-			echo 'Resultados para <strong>'.$pedido.'</strong>';
-
-			$count = 1;
-			while($result = pg_fetch_array($consulta)) {
-				$voto = $result['vota'];
-				
-				//Output
-				$mensaje .= '
-				<p>
-				<strong>Nombre:</strong> ' . $nombre . '<br>
-				<strong>Apellido:</strong> ' . $apellido . '<br>
-				<strong>Edad:</strong> ' . $edad . '<br>
-				</p>';
-
-				$count = $count + 1;
-
-			};
-		};
+		$query = "SELECT * FROM vota WHERE vota LIKE '$pedido3'";
+    	$result = pg_query($dbconn, $query) or die('ERROR AL INSERTAR DATOS: ' . pg_last_error());
+		$voto3 = pg_num_row($result);
 
 	};
-
-	echo $mensaje;
-
     // Free resultset liberar los datos
     pg_free_result($result);
 
     // Closing connection cerrar la conexión
-    pg_close($dbconn);*/
+    pg_close($dbconn);
 
 
     $mensaje = new stdClass();
-	$mensaje -> res1 = 10;
-	$mensaje -> res2 = 5;
-	$mensaje -> res3 = 24;
+	$mensaje -> res1 = $voto1;
+	$mensaje -> res2 = $voto2;
+	$mensaje -> res3 = $voto3;
     $json = json_encode($mensaje);
 
     echo $json;

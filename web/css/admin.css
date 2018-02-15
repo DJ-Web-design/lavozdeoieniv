@@ -264,3 +264,46 @@ nav#menu ul li{
     transform: rotate(360)
   }
 }
+.cajaexterna {
+    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    display: none;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+.cajainterna {
+    background: #fff;
+    margin: 6em auto 0;
+    position: relative;
+    width: 90%;
+}
+.cajacentrada {
+    margin: 0 auto;
+    text-align: center;
+    padding: 1em;
+}
+.cajacentrada h2 {
+    background: none repeat scroll 0 0 black;
+    box-sizing: border-box;
+    color: white;
+    font-size: 15px;
+    left: 0;
+    margin: 0;
+    padding: 5px;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    width: 100%;
+}
+.cajacentrada p {
+    margin-top: 30px;
+}
+.cerrar {
+    position: absolute;
+    right: 16px;
+    top: 13px;
+}
