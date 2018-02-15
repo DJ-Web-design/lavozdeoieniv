@@ -47,7 +47,7 @@ var app = new Vue({
                 this.showLoad=true
                 upload.on("state_changed", snapshot => {
                      this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + progress + '% done');
+                    console.log('Upload is ' + this.progress + '% done');
                     switch (snapshot.state) {
                         case firebase.storage.TaskState.PAUSED: // or 'paused'
                             console.log('Upload is paused');
@@ -118,7 +118,7 @@ var app = new Vue({
                 alert("Error al conectar con el servidor.\nIntentelo de nuevo")
             })
         },
-        cerrarModar: function(e) {
+        cerrarModal: function(e) {
             e.preventDefault();
             this.showLoad = false
         }
