@@ -153,6 +153,9 @@ var database = firebase.database().ref("imagenes/prueba");
                 });
             });
         });
+        if (!database) {
+            alert("Error al cargar la base de datos de imagenes. Por favor recargue la pagina")
+        }
     </script>
 </body>
 </html>
