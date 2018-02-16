@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aniversario 2017|Fotos</title>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
-    
-    <script src="../../frameworks/jquery-3.2.1.min.js"></script>
-    <script src="../../frameworks/vue.min.js"></script>
-    <link rel="stylesheet" href="../../frameworks/bootstrap.css">
-    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">    
     <link rel="stylesheet" href="../../css/style-galerias.css" />
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 </head>
@@ -55,8 +50,8 @@ var database = firebase.database().ref("imagenes/prueba");
             <template v-if="imagesItem">
             <div class="col-md-12">
             <div class="col-md-3">
-                <template v-for="iten in uno(images)">
-                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
+                <template v-for="(iten, index) in uno(images)">
+                    <div class="col-md-12" v-on:click="openGal(index)">
                         <div>
                             <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
@@ -65,8 +60,8 @@ var database = firebase.database().ref("imagenes/prueba");
                 </template>
             </div>
             <div class="col-md-3">            
-                <template v-for="iten in dos(images)">
-                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
+                <template v-for="(iten, index) in dos(images)">
+                    <div class="col-md-12" v-on:click="openGal(index)">
                         <div>
                             <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
@@ -75,8 +70,8 @@ var database = firebase.database().ref("imagenes/prueba");
                 </template>
             </div>
             <div class="col-md-3">            
-                <template v-for="iten in tres(images)">
-                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
+                <template v-for="(iten, index) in tres(images)">
+                    <div class="col-md-12" v-on:click="openGal(index)">
                         <div>
                             <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
@@ -85,8 +80,8 @@ var database = firebase.database().ref("imagenes/prueba");
                 </template>
             </div>
             <div class="col-md-3">            
-                <template v-for="iten in cuatro(images)">
-                    <div class="col-md-12" v-on:click="openGal(iten.id-1)">
+                <template v-for="(iten, index) in cuatro(images)">
+                    <div class="col-md-12" v-on:click="openGal(index)">
                         <div>
                             <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
@@ -118,7 +113,7 @@ var database = firebase.database().ref("imagenes/prueba");
         function next(n) {
             for (i in images.images);
             var g = n +1; 
-            var op = document.getElementById("box")
+            var op = document.getElementById("box");
             if (g == i) {
                 op.innerHTML = `<div class="lightbox" id="image">
                 <a class="close" onclick="cerrar()">X</a>
@@ -147,17 +142,17 @@ var database = firebase.database().ref("imagenes/prueba");
             }
         }
         if (window.screen.width >= 480 && window.screen.width <= 767) {
-            var clase = document.querySelector(".col-md-3")
+            var clase = document.querySelector(".col-md-3");
         }
         $(document).ready(()=>{
-         database.on('value', snapshot => {
-            let id = 1;
-            snapshot.forEach(e => { 
-                images.images.unshift({id:id, value:e.val()}) // Asignar todos los valores a un objeto
-                id++
+            database.on('value', snapshot => {
+                let id = 1;
+                snapshot.forEach(e => { 
+                    images.images.unshift({id:id, value:e.val()}) // Asignar todos los valores a un objeto
+                    id++
+                });
             });
         });
-        })
     </script>
 </body>
 </html>

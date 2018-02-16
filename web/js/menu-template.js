@@ -5,27 +5,26 @@ var images = new Vue({
         indexImg: 0,
         images: [],
         imagesItem:false,
-
     },
     methods: {
-        uno: function(images){
-            return images.filter(images => {
-                return images.id % 4 === 1;
-            })
-        },
         dos: function(images){
-            return images.filter(images => {
-                return images.id % 4 === 2;
+            return images.filter((image, index) => {
+                return index % 4 === 1;
             })
         },
         tres: function(images){
-            return images.filter(images => {
-                return images.id % 4 === 3;
+            return images.filter((image, index) => {
+                return index % 4 === 2;
             })
         },
         cuatro: function(images){
-            return images.filter(images => {
-                return images.id % 4 === 0;
+            return images.filter((image, index) => {
+                return index % 4 === 3;
+            })
+        },
+        uno: function(images){
+            return images.filter((image, index) => {
+                return index % 4 === 0;
             })
         },
         openGal: function (n) {
