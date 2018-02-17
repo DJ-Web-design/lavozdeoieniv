@@ -7,8 +7,9 @@
     <title>Aniversario 2017|Fotos</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/v-img@latest/dist/v-img.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style-galerias.css" />
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 </head>
@@ -31,6 +32,7 @@ var database = firebase.database().ref("imagenes/prueba");
     <script>
         var data = {};
         var n;
+        
     </script>
     <header id="menu">
         <menu-item index="../../index.html" 
@@ -49,11 +51,12 @@ var database = firebase.database().ref("imagenes/prueba");
             <div class="col-md-12" style="height: 300px" id="header"></div>
             <template v-if="imagesItem">
             <div class="col-md-12">
+                <p class="imgList">
             <div class="col-md-3">
                 <template v-for="(iten, index) in uno(images)">
-                    <div class="col-md-12" v-on:click="openGal(index)">
+                    <div class="col-md-12">
                         <div>
-                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <img v-img="{title: iten.value.title, group:1}" v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
@@ -61,9 +64,9 @@ var database = firebase.database().ref("imagenes/prueba");
             </div>
             <div class="col-md-3">            
                 <template v-for="(iten, index) in dos(images)">
-                    <div class="col-md-12" v-on:click="openGal(index)">
+                    <div class="col-md-12">
                         <div>
-                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <img v-img="{title: iten.value.title, group:1}" v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
@@ -71,9 +74,9 @@ var database = firebase.database().ref("imagenes/prueba");
             </div>
             <div class="col-md-3">            
                 <template v-for="(iten, index) in tres(images)">
-                    <div class="col-md-12" v-on:click="openGal(index)">
+                    <div class="col-md-12">
                         <div>
-                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <img v-img="{title: iten.value.title, group:1}" v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
@@ -81,14 +84,15 @@ var database = firebase.database().ref("imagenes/prueba");
             </div>
             <div class="col-md-3">            
                 <template v-for="(iten, index) in cuatro(images)">
-                    <div class="col-md-12" v-on:click="openGal(index)">
+                    <div class="col-md-12">
                         <div>
-                            <img v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
+                            <img v-img="{title: iten.value.title, group:1}" v-bind:id="iten.id" v-bind:src="iten.value.url" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
                 </template>
             </div>
+        </p>
         </div>
         </template>
         <template v-else>
@@ -106,41 +110,6 @@ var database = firebase.database().ref("imagenes/prueba");
     </div>
     <script src="../../js/menu-template.js"></script>
     <script>
-        function cerrar() {
-            var op = document.getElementById("box");
-            op.innerHTML="";
-        }
-        function next(n) {
-            for (i in images.images);
-            var g = n +1; 
-            var op = document.getElementById("box");
-            if (g == i) {
-                op.innerHTML = `<div class="lightbox" id="image">
-                <a class="close" onclick="cerrar()">X</a>
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].value.url} alt="">
-                </div>`
-            } else {
-                op.innerHTML = `<div class="lightbox" id="image">
-                <a class="close" onclick="cerrar()">X</a>
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].value.url} alt=""><span onclick="next(${g})">></span>
-                 </div>`
-            }
-        }
-        function prev(n) {
-            var g = n - 1; 
-            var op = document.getElementById("box");
-            if (n==1) {
-                op.innerHTML = `<div class="lightbox" id="image">
-                <a class="close" onclick="cerrar()">X</a>
-                <img src=${images.images[g].value.url} alt=""><span onclick="next(${g})">></span>
-                </div>`
-            }else{
-                op.innerHTML = `<div class="lightbox" id="image">
-                <a class="close" onclick="cerrar()">X</a>
-                <span onclick="prev(${g})"><</span><img src=${images.images[g].value.url} alt=""><span onclick="next(${g})">></span>
-                </div>`
-            }
-        }
         if (window.screen.width >= 480 && window.screen.width <= 767) {
             var clase = document.querySelector(".col-md-3");
         }
@@ -148,12 +117,12 @@ var database = firebase.database().ref("imagenes/prueba");
             database.on('value', snapshot => {
                 let id = 1;
                 snapshot.forEach(e => { 
-                    images.images.unshift({id:id, value:e.val()}) // Asignar todos los valores a un objeto
+                    images.images.unshift({id:id, value:e.val()})
                     id++
                 });
             });
         });
-        if (!database) {
+        if (database == undefined) {
             alert("Error al cargar la base de datos de imagenes. Por favor recargue la pagina")
         }
     </script>
