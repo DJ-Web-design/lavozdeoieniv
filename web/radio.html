@@ -36,9 +36,7 @@
     <div id="fb-root"></div>
         <script>
 
-    FB.getLoginStatus(function (response) {
-        statusChangeCallback(response);
-    });
+
             window.fbAsyncInit = function() {
                 FB.init({
                     appId: '484795955226627',
@@ -49,6 +47,9 @@
 
             FB.AppEvents.logPageView();
         };
+            FB.getLoginStatus(function (response) {
+                    statusChangeCallback(response);
+                });
 
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
