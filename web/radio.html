@@ -129,6 +129,8 @@
     <script src="js/plantilla-menu.js"></script>
     <div id="status">
     </div>
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button>
     <div class="online"></div>
     <div id="modal">
         <template v-if="showModal">
