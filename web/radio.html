@@ -6,18 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Radio Online|La Voz de OIENIV</title>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="frameworks/vue.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
     <link rel="stylesheet" href="css/style-radio.css">
-    <!--<link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <script>var config = {
             apiKey: "AIzaSyC2RvmGHYtaqUa5lEXb3MLl_Mv4ECiLoBE", authDomain: "chat-lavozdeoieniv.firebaseapp.com", databaseURL: "https://chat-lavozdeoieniv.firebaseio.com", projectId: "chat-lavozdeoieniv", storageBucket: "chat-lavozdeoieniv.appspot.com", messagingSenderId: "24315564955"
-        }
-
-            ;
+        };
         firebase.initializeApp(config);
         var TablaDeBaseDatos = firebase.database().ref('chat');
         TablaDeBaseDatos.on('value', snapshot => {
@@ -35,7 +33,7 @@
 </head>
 
 <body id="app">
-    <!--<div id="fb-root"></div>
+    <div id="fb-root"></div>
     <script>(function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -45,7 +43,7 @@
         }(document, 'script', 'facebook-jssdk'));
 
     </script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <header>
         <script>var data = {
                 show: true, showModal: false, chat:{
