@@ -46,10 +46,14 @@
                 });
 
             FB.AppEvents.logPageView();
-        };
-            FB.getLoginStatus(function (response) {
+             FB.getLoginStatus(response => {
                     statusChangeCallback(response);
+                    console.log(response);
+                    
                 });
+
+        };
+           
 
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
