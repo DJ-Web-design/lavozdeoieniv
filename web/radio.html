@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Radio Online|La Voz de OIENIV</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>-->
+
+    <script src="frameworks/vue.min.js"></script>
 
     <link rel="stylesheet" href="css/style-radio.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">-->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <script>  var config = {
     apiKey: "AIzaSyC2RvmGHYtaqUa5lEXb3MLl_Mv4ECiLoBE",
@@ -40,7 +42,7 @@
 </head>
 
 <body id="app">
-    <div id="fb-root"></div>
+    <!--<div id="fb-root"></div>
         <script>
             // This is called with the results from from FB.getLoginStatus().
                 function statusChangeCallback(response) {
@@ -104,10 +106,15 @@
 
 
     </script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
     <header>
         <script>var data = {
-                show: true, showModal: false, chat:{
+                show: true, 
+                showModal: false,
+                isVisible:false,
+                display:"none",
+                opa:0,
+                chat:{
                     message:"",
                     user:"",
                     pic:"",
@@ -134,15 +141,13 @@
         </div>
     </header>
     <script src="js/plantilla-menu.js"></script>
-    <div id="status">
-    </div>
     <div class="online"></div>
     <div id="modal">
-        <template v-if="showModal">
-            <div id="modal-shadow"></div>
-            <div class="modal mdl-dialog">
+
+        <div id="modal-shadow" v-bind:style="{ display:display, opacity:opa }"></div>
+            <div class="modal mdl-dialog" v-bind:style=" { display:display, opacity:opa }">
                 <div class="dialog-header">
-                    <button type="button" class="mdl-button mdl-color--amber-800 close" @click="showModal = false">Cerrar</button>
+                    <button type="button" class="mdl-button mdl-color--amber-800 close" @click="display = 'none', opa = 0">Cerrar</button>
                 </div>
                 <h4 class="mdl-dialog__title">Ingresa tu nombre</h4>
                 <div class="mdl-dialog__content">
@@ -159,8 +164,8 @@
                 </div>
                 <div class="mdl-dialog__actions"></div>
             </div>
-        </template>
-    </div>
+
+        </div>
     <div class="cuerpo">
         <div class="panel-cabecera">
             <button id="demo-menu-lower-right" class="mdl-color--amber-800 pull-right mdl-button mdl-js-button mdl-button--icon">

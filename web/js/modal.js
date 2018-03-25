@@ -39,7 +39,8 @@ var panel = new Vue({
                 }
         },
         verModal: function () {
-            this.showModal = true;
+            this.display = "block";
+            this.opa = 1
         }
     },
 });
