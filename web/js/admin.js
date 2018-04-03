@@ -102,7 +102,6 @@ var app = new Vue({
         },
         submit:function(e){
             e.preventDefault();
-            this.noUser = '<div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>'
             let datos = {
                 user:this.inputUser,
                 pass:this.inputPass

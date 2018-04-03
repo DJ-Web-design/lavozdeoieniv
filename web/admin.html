@@ -54,7 +54,10 @@
                         
                         <div id="enviar"><input type="submit" id="btn-enviar" value="Enviar"></div>
                         <br>
-                    <div style="text-align:center;">{{ noUser }}</div>
+                    <div style="text-align:center;">
+                        <div v-if="spin" class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+                        <span v-else>{{ noUser }}</span>
+                    </div>
                 </div>
                     </form>
             </div>
