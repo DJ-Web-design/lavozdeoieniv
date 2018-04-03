@@ -102,6 +102,7 @@ var app = new Vue({
         },
         submit:function(e){
             e.preventDefault();
+            this.spin = true
             let datos = {
                 user:this.inputUser,
                 pass:this.inputPass
@@ -109,8 +110,10 @@ var app = new Vue({
             $.get("login-admin.php", datos, res =>{
                 if (res == "noUser") {
                     this.noUser = "Usuario o contraseña incorrectos"
+                    this.spin = false
                 } else if (res == "accede") {
                     this.bloqueo = false;
+                    this.spin = false
                     if (this.remember) {
                         localStorage.setItem("remember", true)
                     } else {
@@ -119,7 +122,7 @@ var app = new Vue({
                 } else {}
             }).fail(() => {
                 alert("Error al conectar con el servidor.\nIntentelo de nuevo")
-                this.noUser = ""
+                this.spin = false
             })
         },
         cerrarModal: function(e) {
