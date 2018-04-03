@@ -1,12 +1,14 @@
 var app = new Vue({
     el:"#app",
     data:{
-        bloqueo:true,
+        bloqueo:false,
         inputUser:"",
         inputPass:"",
         noUser:"",
         remember:"",
         page:1,
+
+        chatMessages:[],
         page1:true,
         page2:false,
         page3:false,
@@ -21,7 +23,8 @@ var app = new Vue({
         voto3: 0,
         showLoad:false,
         imageLoad:"",
-        progress: 0
+        progress: 0,
+        registrosSeleccionados:[],
     },
     methods:{
         imagen:function(file){
@@ -99,6 +102,7 @@ var app = new Vue({
         },
         submit:function(e){
             e.preventDefault();
+            this.noUser = '<div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>'
             let datos = {
                 user:this.inputUser,
                 pass:this.inputPass
@@ -116,11 +120,17 @@ var app = new Vue({
                 } else {}
             }).fail(() => {
                 alert("Error al conectar con el servidor.\nIntentelo de nuevo")
+                this.noUser = ""
             })
         },
         cerrarModal: function(e) {
             e.preventDefault();
             this.showLoad = false
+        },
+        borrarRegistros:function(key){
+            if(confirm("¿Seguro que deseas borrar esos registros?")){
+                database.child(key).remove()
+            }
         }
     }
 })
