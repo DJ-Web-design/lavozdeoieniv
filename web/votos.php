@@ -8,7 +8,7 @@
 
     $dbconn = pg_connect("host=".$host." port=".$port." dbname=".$db." user=".$user." password=".$pass) or die('NO HAY CONEXION: ' . pg_last_error());
 	
-    if (isset($pedido)) {
+    if (isset($pedido1) && isset($pedido2) && isset($pedido3)) {
 
 		$query = "SELECT * FROM vota WHERE vota LIKE '$pedido1'";
     	$result = pg_query($dbconn, $query) or die('ERROR AL INSERTAR DATOS: ' . pg_last_error());
