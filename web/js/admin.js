@@ -101,28 +101,23 @@ var app = new Vue({
                 console.log(err);
             })
         },
-        pedirVotos: datos => {
-
-
-        },
         submit: function (e) {
             e.preventDefault();
             this.noUser = ""
-            this.spin = true
+            this.spin = true;
+            var that = this; 
             let datos = {
                 user: this.inputUser,
                 pass: this.inputPass
             }
             axios.get(`login-admin.php?user=${datos.user}&pass=${datos.pass}`)
             .then(res => {
-                console.log(res);
-                
                 if (res.data == "noUser") {
-                    this.noUser = "Usuario o contraseña incorrectos"
-                    this.spin = false
+                    that.noUser = "Usuario o contraseña incorrectos"
+                    that.spin = false
                 } else if (res.data == "accede") {
-                    this.bloqueo = false;
-                    this.spin = false
+                    that.bloqueo = false;
+                    that.spin = false
                     if (this.remember) {
                         localStorage.setItem("remember", true)
                     } else {
@@ -131,10 +126,8 @@ var app = new Vue({
                 } else { }
             }).catch( error => {
                 alert("Error al conectar con el servidor.\nIntentelo de nuevo");
-                this.spin = false;
-                this.noUser = "";
-                console.log(error);
-                
+                that.spin = false;
+                that.noUser = "";                
             })
         },
         cerrarModal: function (e) {

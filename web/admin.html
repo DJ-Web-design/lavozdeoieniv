@@ -45,15 +45,15 @@
                     <form id="bloqueo" @submit="submit" method="get" action="login-admin.php">
                 <div id="autenticacion">
                         <div><label for="user">Usuario:</label>
-                        <input style="margin-left:27px" type="text" name="user" id="user" placeholder="Usuario" v-model="inputUser"></div>
+                        <input style="margin-left:27px" type="text" name="user" id="user" placeholder="Usuario" v-model="inputUser" :disabled="spin === true"></div>
                         
                         <div><label for="pass">Contraseña:</label>
-                        <input type="password" name="pass" id="pass" v-model="inputPass"></div>
+                        <input type="password" name="pass" id="pass" v-model="inputPass" :disabled="spin === true"></div>
                         
                         <div><label for="remember">Recordar:</label>
-                        <input type="checkbox" id="" name="remember" v-model="remember"></div>
+                        <input type="checkbox" id="" name="remember" v-model="remember" :disabled="spin === true"></div>
                         
-                        <div id="enviar"><input type="submit" id="btn-enviar" value="Enviar"></div>
+                        <div id="enviar"><input type="submit" id="btn-enviar" value="Enviar" :disabled="spin === true"></div>
                         <br>
                     <div style="text-align:center;">
                         <template v-if="spin"><img src="images/double-tail-spin.svg" alt="" class="spinner"></template>
@@ -188,9 +188,6 @@
         if (localStorage.getItem("remember") || sessionStorage.getItem("remember")) {
             app.bloqueo = false
         }
-        function handleFile(file) {
-            console.log(file[0].name)
-        }
         database.on('value', snapshot => {
             app.chatMessages = []
             snapshot.forEach(e => {
@@ -199,36 +196,6 @@
             });
             return
         });
-        var objeto = []
-        
-        database.on('value', snapshot => {
-            objeto = []
-            snapshot.forEach(e => {
-                objeto.push(e.key)
-                return
-            });
-            return
-        });
-        function handleFileSelect(evt) {
-            var files = evt.target.files;
-            for (var i = 0, f; f = files[i]; i++) {
-                if (!f.type.match('image.*')) {
-                    continue;
-                }
-                var reader = new FileReader();
-                reader.onload = (theFile => {
-                    return e => {
-                        var span = document.createElement('span');
-                        span.innerHTML = [`<img class="thumb" src=${e.target.result}
-                                    title=${escape(theFile.name)} />`].join('');
-                        document.getElementById('output').insertBefore(span, null);
-                    };
-                })(f);
-                reader.readAsDataURL(f);
-            }
-        }
-        document.getElementById('archi').addEventListener('change', handleFileSelect, false);
-
     </script>
 </body>
 </html>

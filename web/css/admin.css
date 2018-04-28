@@ -367,8 +367,8 @@ text-align:center;
 }
 
 .spinner{
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     animation: rotate 1s infinite linear;
 }
 @keyframes rotate {
