@@ -79,8 +79,9 @@ var app = new Vue({
                 })
             }
         },
-        spinToggle: e => {
+        spinToggle: function(e){
             e.preventDefault()
+            var that = this;
             this.spin = true;
             let votos = {
                 voto1: "Habla Sobre Mi de Daniel calveti",
@@ -90,13 +91,13 @@ var app = new Vue({
             axios.get(`votos.php?voto1=${votos.voto1}&voto2=${votos.voto2}&voto3=${votos.voto3}`)
             .then( res => {
                 console.log(res.data.res3);
-                this.voto1 = res.data.res1
-                this.voto2 = res.data.res2
-                this.voto3 = res.data.res3
-                this.spin = false
+                that.voto1 = res.data.res1
+                that.voto2 = res.data.res2
+                that.voto3 = res.data.res3
+                that.spin = false
             }).catch(err => {
                 alert("Error en el servidor")
-                this.spin = false
+                that.spin = false
                 console.log(err);
             })
         },
