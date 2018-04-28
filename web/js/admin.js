@@ -93,6 +93,7 @@ var app = new Vue({
             }
             axios.get(`votos.php?voto1=${votos.voto1}&voto2=${votos.voto2}&voto3=${votos.voto3}`)
             .then( res => {
+                console.log(res);
                 this.spin = false
                 this.voto1 = res.data.res1
                 this.voto2 = res.data.res2
