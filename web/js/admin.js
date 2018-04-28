@@ -1,37 +1,42 @@
 var app = new Vue({
-    el:"#app",
-    data:{
-        bloqueo:true,
-        inputUser:"",
-        inputPass:"",
-        noUser:"",
-        remember:"",
-        page:1,
+    el: "#app",
+    data: {
+        bloqueo: false,
+        inputUser: "",
+        inputPass: "",
+        noUser: "",
+        remember: "",
+        page: 2,
 
-        chatMessages:[],
-        page1:true,
-        page2:false,
-        page3:false,
-        galeria:null,
-        file:"",
-        inputTitle:null,
-        inputDescrip:null,
-        salida:"",
-        spin:false,
+        chatMessages: [],
+        page1: true,
+        page2: false,
+        page3: false,
+        galeria: null,
+        file: "",
+        inputTitle: null,
+        inputDescrip: null,
+        salida: "",
+        spin: true,
         voto1: 0,
         voto2: 0,
         voto3: 0,
-        showLoad:false,
-        imageLoad:"",
-        progress: 0,
-        registrosSeleccionados:[],
+        showLoad: true,
+        imageLoad: "",
+        progress: 50,
+        registrosSeleccionados: [],
     },
-    methods:{
-        imagen:function(file){
-            this.file = file
+    methods: {
+        imagen: function (file) {
+            if (this.file[0].type != "image/png" && this.file[0].type != "image/jpeg" && this.file[0].type != "image/gif") {
+                alert("Por favor seleccione una imagen");
+                document.getElementById("archi").value = ""
+            } else {
+                this.file = file
+            }
 
         },
-        recogerDatos:function(){
+        recogerDatos: function () {
             let inputTitle = document.getElementById("titulo")
             let inputDescrip = document.getElementById("des")
             let inputGal = document.getElementById("gal")
@@ -42,15 +47,15 @@ var app = new Vue({
 
             console.log(fileDes, fileTitle, this.file[0].name, inputGal.value);
 
-            if (fileTitle && fileDes && fileGal && this.file){
+            if (fileTitle && fileDes && fileGal && this.file) {
                 let sendFile = this.file[0];
                 var upload = storageChild.child(sendFile.name).put(sendFile);
 
                 this.imageLoad = sendFile.name
-                this.showLoad=true
+                this.showLoad = true
                 upload.on("state_changed", snapshot => {
-                     this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log('Upload is ' + this.progress + '% done');
+                    this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
                     switch (snapshot.state) {
                         case firebase.storage.TaskState.PAUSED: // or 'paused'
                             console.log('Upload is paused');
@@ -70,11 +75,11 @@ var app = new Vue({
                         url: upload.snapshot.downloadURL
                     })
                     alert("Archivo subido exitosamente")
-                    this.showLoad=false
+                    this.showLoad = false
                 })
             }
         },
-        spinToggle:e=>{
+        spinToggle: e => {
             e.preventDefault()
             this.spin = true;
             this.voto1 = "";
@@ -86,28 +91,31 @@ var app = new Vue({
                 voto2: "Luz y Sal de Funky",
                 voto3: "Amor Real de Manny Montes"
             }
-            $.get("votos.php", votos, res => {
+            axios.get("votos.php", votos,)
+            .then( res => {
                 this.spin = false
                 this.voto1 = res.res1
                 this.voto2 = res.res2
                 this.voto3 = res.res3
-            }).fail(err => {
+            }).catch(err => {
                 alert("Error en el servidor")
+                this.spin = false
                 console.log(err);
             })
         },
-        pedirVotos:datos =>{
-            
-            
+        pedirVotos: datos => {
+
+
         },
-        submit:function(e){
+        submit: function (e) {
             e.preventDefault();
+            this.noUser = ""
             this.spin = true
             let datos = {
-                user:this.inputUser,
-                pass:this.inputPass
+                user: this.inputUser,
+                pass: this.inputPass
             }
-            $.get("login-admin.php", datos, res =>{
+            axios.get("login-admin.php", datos).then(res => {
                 if (res == "noUser") {
                     this.noUser = "Usuario o contraseña incorrectos"
                     this.spin = false
@@ -119,20 +127,36 @@ var app = new Vue({
                     } else {
                         sessionStorage.setItem("remember", true)
                     }
-                } else {}
-            }).fail(() => {
-                alert("Error al conectar con el servidor.\nIntentelo de nuevo")
-                this.spin = false
+                } else { }
+            }).catch( error => {
+                alert("Error al conectar con el servidor.\nIntentelo de nuevo");
+                this.spin = false;
+                this.noUser = "";
+                console.log(error);
+                
             })
         },
-        cerrarModal: function(e) {
+        cerrarModal: function (e) {
             e.preventDefault();
             this.showLoad = false
         },
-        borrarRegistros:function(key){
-            if(confirm("¿Seguro que deseas borrar esos registros?")){
+        borrarRegistros: function (key) {
+            if (confirm("¿Seguro que deseas borrar esos registros?")) {
                 database.child(key).remove()
             }
+        },
+        video: function (archivo) {
+            if (archivo[0].type != "video/3gpp" && archivo[0].type != "video/x-ms-wmv" && archivo[0].type != "video/mp4" && archivo[0].type != "video/x-msvideo") {
+                alert("Por favor seleccione una imagen");
+                document.getElementById("archi").value = ""
+            } else {
+                this.video = archivo[0]
+            }
+        },
+        enviarVideo: function () {
+            var params = new URLSearchParams()
+            params.append("url", this.video)
+            axios.post("video.php", params)
         }
     }
 })
