@@ -13,7 +13,7 @@
 		$query = "SELECT * FROM vota WHERE vota LIKE '$pedido1'";
 		$result = pg_query($dbconn, $query) or die('ERROR AL PEDIR DATOS: ' . pg_last_error());
 		$voto1 = pg_affected_rows($result);
-		echo $voto1
+		echo $voto1;
 	
     /*if (isset($pedido1) && isset($pedido2) && isset($pedido3)) {
 
