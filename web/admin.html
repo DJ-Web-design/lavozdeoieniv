@@ -126,7 +126,7 @@
                             <div class="cajacentrada">
                                 <h2>Subiendo {{ imageLoad }}</h2>
                                 <div>{{ progress }}%/100%</div>
-                               <progress id="progreso" max="100"></progress>
+                               <progress id="progreso" max="100" :value="progress"></progress>
                                 <div class="cierramodal">
                                     <button @click="cerrarModal"class="btn-lavoz cerrarmodal" style="margin-top: 30px; position:absolute; bottom:50px; left:40%">cerrar</button>
                                 </div>
@@ -188,9 +188,6 @@
         if (localStorage.getItem("remember") || sessionStorage.getItem("remember")) {
             app.bloqueo = false
         }
-        let prog = document.querySelector('#progreso')
-        prog.value = 50
-
         function handleFile(file) {
             console.log(file[0].name)
         }

@@ -23,7 +23,7 @@ var app = new Vue({
         voto3: 0,
         showLoad: false,
         imageLoad: "",
-        progress: null,
+        progress: 0,
         registrosSeleccionados: [],
     },
     methods: {
@@ -91,12 +91,12 @@ var app = new Vue({
                 voto2: "Luz y Sal de Funky",
                 voto3: "Amor Real de Manny Montes"
             }
-            axios.get("votos.php", votos,)
+            axios.get(`votos.php?voto1=${votos.voto1}&voto2=${votos.voto2}&voto3=${votos.voto3}`)
             .then( res => {
                 this.spin = false
-                this.voto1 = res.res1
-                this.voto2 = res.res2
-                this.voto3 = res.res3
+                this.voto1 = res.data.res1
+                this.voto2 = res.data.res2
+                this.voto3 = res.data.res3
             }).catch(err => {
                 alert("Error en el servidor")
                 this.spin = false
@@ -115,11 +115,14 @@ var app = new Vue({
                 user: this.inputUser,
                 pass: this.inputPass
             }
-            axios.get(`login-admin.php?user=${datos.user}&pass=${datos.pass}`).then(res => {
-                if (res == "noUser") {
+            axios.get(`login-admin.php?user=${datos.user}&pass=${datos.pass}`)
+            .then(res => {
+                console.log(res);
+                
+                if (res.data == "noUser") {
                     this.noUser = "Usuario o contraseña incorrectos"
                     this.spin = false
-                } else if (res == "accede") {
+                } else if (res.data == "accede") {
                     this.bloqueo = false;
                     this.spin = false
                     if (this.remember) {
