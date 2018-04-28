@@ -135,15 +135,14 @@
                     </div>
                 </template>
                 <div id="title-count" style="margin:30px 0 10px 0">Subir Video</div>
-                <form action="video.php" method="post" id="formulario" @submit="enviarVideo">
                     <div>
                         <label for="title">Titulo:</label>
-                        <input type="text" name="title" id="titulo">
+                        <input type="text" name="title" id="titulo" v-model="video.tite">
                     </div>
                     
                     <div>
                         <label for="des">Descripción:</label>
-                        <input type="text" name="des" id="des">
+                        <input type="text" name="des" id="des" v-model="video.des">
                     </div>
                     
                     <div>
@@ -151,10 +150,8 @@
                         <input type="file" name="archi" id="video" @change="video($event.target.files)">
                     </div>
                     <div id="boton">
-                        <input type="submit" id="btn-enviar" class="btn-lavoz" value="Subir Video"></input>
+                        <input type="submit" id="btn-enviar" class="btn-lavoz" value="Subir Video" @click="enviarVideo"></input>
                     </div>
-                </form>
-
             </template>
             <!---->
 

@@ -25,6 +25,10 @@ var app = new Vue({
         imageLoad: "",
         progress: 0,
         registrosSeleccionados: [],
+        video:{
+            title:null,
+            des:null
+        }
     },
     methods: {
         imagen: function (file) {
@@ -141,16 +145,23 @@ var app = new Vue({
         },
         video: function (archivo) {
             if (archivo[0].type != "video/3gpp" && archivo[0].type != "video/x-ms-wmv" && archivo[0].type != "video/mp4" && archivo[0].type != "video/x-msvideo") {
-                alert("Por favor seleccione una imagen");
-                document.getElementById("archi").value = ""
+                alert("Por favor seleccione un video");
+                document.getElementById("video").value = ""
             } else {
                 this.video = archivo[0]
             }
         },
         enviarVideo: function () {
-            var params = new URLSearchParams()
-            params.append("url", this.video)
-            axios.post("video.php", params)
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            var params = new FormData()
+            params.append("video", this.video);
+            params.append("description", this.video.des);
+            params.append("title", this.video.title);
+            axios.post("video.php", params, config)
         }
     }
 })
