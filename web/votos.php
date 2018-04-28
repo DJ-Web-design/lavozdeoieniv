@@ -4,9 +4,11 @@
 
     $pedido1 = isset($_GET["voto1"]) ? $_GET["voto1"]:$_POST["voto1"];
     $pedido2 = isset($_GET["voto2"]) ? $_GET["voto2"]:$_POST["voto2"];
-    $pedido3 = isset($_GET["voto3"]) ? $_GET["voto3"]:$_POST["voto3"];
+	$pedido3 = isset($_GET["voto3"]) ? $_GET["voto3"]:$_POST["voto3"];
+	echo "host=".host." port=".port." dbname=".db." user=".user." password=".pass;
 
-	$dbconn = pg_connect("host=$host port=$port dbname=$db user=$user password=$pass") 
+	/*
+	$dbconn = pg_connect("host=".host." port=".port." dbname=".db." user=".user." password=".pass) 
 		or die('NO HAY CONEXION: ' . pg_last_error());
 	
     if (isset($pedido1) && isset($pedido2) && isset($pedido3)) {
@@ -37,4 +39,4 @@
 	$mensaje -> res3 = $voto3;
     $json = json_encode($mensaje);
 
-    echo $json;
+    echo $json;*/
