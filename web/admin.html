@@ -81,9 +81,9 @@
                 <div class="nombre-voto"><span>Luz y Sal de Funky</span></div>
                 <div class="nombre-voto"><span>Amor Real de Manny Montes</span></div>
 
-                <div class="cuenta-voto"><img v-if="spin" src="images/double-tail-spin.svg" alt="" class="spinner"></img><span v-else>{{ voto1 }}</span></div>
-                <div class="cuenta-voto"><img v-if="spin" src="images/double-tail-spin.svg" alt="" class="spinner"></img><span v-else>{{ voto2 }}</span></div>
-                <div class="cuenta-voto"><img v-if="spin" src="images/double-tail-spin.svg" alt="" class="spinner"></img><span v-else>{{ voto3 }}</span></div>
+                <div class="cuenta-voto"><template v-if="spin"><img src="images/double-tail-spin.svg" alt="" class="spinner"></template></img><span v-else>{{ voto1 }}</span></div>
+                <div class="cuenta-voto"><template v-if="spin"><img src="images/double-tail-spin.svg" alt="" class="spinner"></template></img><span v-else>{{ voto2 }}</span></div>
+                <div class="cuenta-voto"><template v-if="spin"><img src="images/double-tail-spin.svg" alt="" class="spinner"></template></img><span v-else>{{ voto3 }}</span></div>
                 <div id="btn-container">
 
                 <form action="votos.php" method="get" @submit="spinToggle">

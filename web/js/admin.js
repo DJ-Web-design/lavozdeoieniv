@@ -1,12 +1,12 @@
 var app = new Vue({
     el: "#app",
     data: {
-        bloqueo: false,
+        bloqueo: true,
         inputUser: "",
         inputPass: "",
         noUser: "",
         remember: "",
-        page: 2,
+        page: 1,
 
         chatMessages: [],
         page1: true,
@@ -17,13 +17,13 @@ var app = new Vue({
         inputTitle: null,
         inputDescrip: null,
         salida: "",
-        spin: true,
+        spin: false,
         voto1: 0,
         voto2: 0,
         voto3: 0,
-        showLoad: true,
+        showLoad: false,
         imageLoad: "",
-        progress: 50,
+        progress: null,
         registrosSeleccionados: [],
     },
     methods: {
