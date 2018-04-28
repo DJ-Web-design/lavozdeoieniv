@@ -2,6 +2,12 @@
  font-family:'Roboto', Helvetica;
  margin:0
 }
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0
+}
 .mdl-mini-footer {
  display:-webkit-flex;
  display:-ms-flexbox;
@@ -152,17 +158,18 @@ header nav {
  width:60%;
  height:100%;
  position:fixed;
- z-index:1001
+ z-index:1001;
+ transition: .6s ease
 }
 header .sombra {
- display:none;
  position:fixed;
  margin-top:50px;
  right:0;
  width:40%;
  height:100%;
  z-index:1001;
- background:rgba(0,0,0,.5)
+ background:rgba(0,0,0,.5);
+    transition: .6s;
 }
 .menu ul {
  padding:0
@@ -1255,4 +1262,164 @@ overflow: hidden;
  border-radius: 50%;
  float: right;
  cursor: pointer;
+}
+
+       .main{
+            width:100%;
+            height: 400px;
+            background:#4682b4;
+            position: relative;
+        }
+        .main h1, .main div{
+            font-family: Helvetica;
+            color: #fff;
+        }
+        .main .bg {
+            overflow: hidden;   
+            padding: 50px 30px 50px 70px;
+            height:100%;
+        }
+        .main .bg .content-left {
+            float: left;
+            width: 60%;
+            overflow: hidden;
+
+        }
+        .main .bg .content-left h1{
+            font-stretch: condensed;
+            font-size: 45px
+        }
+        .main .bg .content-left p{
+            margin: 20px 0;
+            padding: 0 50px 0 0;
+            font-size: 20px;
+        }
+        .main .bg .content-left span{
+            display: block;
+            margin: 40px 0 0 0;
+        }
+        .main .bg .content-right{
+            float: right;
+            width: 40%;
+            text-align: center;
+        }
+        .main .bg .content-right img{
+            margin: 20px 0 0 0;
+        }
+        .main .bg .content-right button{
+            background: #fff;
+            color: #4682b4;
+            border: none;
+            width: 200px;
+            height: 50px;border-radius: 100px;
+            font-size: 15px; 
+            display: block;
+            margin: 100px auto 0 auto;
+            cursor: pointer;
+            transition: .2s
+        }
+        .main .bg .content-right button:hover{
+            box-shadow: rgb(50, 50, 50) 1px 1px 5px
+        }
+        .main .bg .arrow{
+            width: 35px;
+            height: 35px;
+            background: #fff;
+            text-align: center;
+            border-radius: 50%;
+            top:45%;
+            position: absolute;
+            cursor: pointer;
+        }
+        .main .bg .arrow span {
+            position: relative;
+            color: #4682b4;
+            font-size: 20px;
+            display: block;
+            margin-top: 2px;
+
+        }
+        .main .bg .left-arrow{
+            left: 10px;
+        }
+        .main .bg .right-arrow{
+            right: 10px;
+        }
+ul.contenedorinputs {
+    width: 60%;
+    height: 20px;
+    display: grid;
+    justify-items: center;
+    margin: 300px auto 0 auto;
+}
+ul.contenedorinputs li{
+        display: inline-block;
+}
+ul.contenedorinputs li div.bullet{
+    border-radius: 50%;
+    height: 15px;
+    background: #fff;
+    width: 15px;
+    z-index: 20;
+    transition: .6s
+}
+ul.contenedorinputs li div.bulletActive{
+    border: 2px solid #fff;
+    border-radius: 50%;
+    height: 11px;
+    background: #4682b4;
+    width: 11px;
+    z-index: 20;
+    transition: .6s
+
+}
+.fade-left-leave{
+    animation: fade-to-left ease-in-out 1.5s
+
+}
+.fade-left-enter{
+    animation: fade-from-left ease-in-out 1.5s
+}
+.fade-right-leave{
+    animation: fade-to-right ease-in-out 1.5s
+}
+.fade-right-enter{
+    animation: fade-from-right ease-in-out 1.5s
+}
+@keyframes fade-to-left{
+    0%{
+        transform: translateX(0);
+        opacity:1
+    }
+    100%{
+        transform: translateX(-710px);
+        opacity: 0
+    }
+}@keyframes fade-from-left{
+    0%{
+        transform: translateX(-710px);
+        opacity: 0
+    }
+    100%{
+        transform: translateX(0);
+        opacity:1
+    }
+}@keyframes fade-to-right{
+    0%{
+        transform: translateX(0);
+        opacity:1
+    }
+    100%{
+        transform: translateX(360px);
+        opacity: 0
+    }
+}@keyframes fade-from-right{
+    0%{
+        transform: translateX(360px);
+        opacity: 0
+    }
+    100%{
+        transform: translateX(0);
+        opacity:1
+    }
 }

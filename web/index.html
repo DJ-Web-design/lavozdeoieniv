@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>La Voz de OIENIV Radio</title>
+    <title>La Voz de OIENIV Radio|Emisora Cristiana En Venezuela</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,7 +12,8 @@
     <meta property="og:url" content="https://lavozdeoieniv.herokuapp.com/index.html" />
     <meta property="og:description" content="La Radio Donde La Protagonista Es La Palabra De Dios">
     <meta property="fb:app_id" content="126968564676905">
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="frameworks/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> </head>
@@ -21,13 +22,14 @@
     <!--<div id="fb-root"></div>
     <script>window.fbAsyncInit = function () { FB.init({ appId: '126968564676905', cookie: true, xfbml: true, version: 'v2.10' }); FB.AppEvents.logPageView(); }; (function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=126968564676905'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); function onButtonClick() { FB.AppEvents.logEvent("sentFriendRequest"); }</script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+    <div id="app">
     <header>
-        <div class="menu-cel">
+        <div class="menu-cel" @click="openMenu()">
             <img src="images/logo.png" alt="">
             <span class="icon-menu"></span>
         </div>
-        <div class="sombra"></div>
-        <nav class="menu">
+        <div class="sombra" :style="styleSombra" @click="openMenu()"></div>
+        <nav class="menu" :style="document.body.clientWidth < 950 ? styleMenu: ''">
             <figure>
                 <img src="images/logo.png" alt="">
             </figure>
@@ -65,20 +67,97 @@
             </ul>
         </nav>
     </header>
-        <script src="js/menu.js"></script>
     <div class="main">
-        <div class="slides">
-            <img src="images/001.jpg" alt="">
-            <img src="images/002.jpg" alt="">
-            <img src="images/003.jpg" alt="">
+        <div class="bg">
+            <div class="left-arrow arrow">
+                <span @click="changeSlider('-')">
+                    <</span>
+            </div>
+            <template v-if="sliderNo === 1">
+                <div>
+                    <div class="content-left" :class="fadeNo === 1? 'fade-left-enter': 'fade-left-leave'">
+                        <h1>Imagen n° 1</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quia quasi quo ducimus nam dolorem
+                            doloribus qui illum commodi incidunt. Minima eum quos exercitationem rerum? Nemo doloribus reprehenderit
+                            hic quo!</p>
+                        <span>Entra y disfruta de todo lo que te ofrecemos.</span>
+                    </div>
+                    <div class="content-right" :class="fadeNo === 1? 'fade-right-enter': 'fade-right-leave'">
+                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <button id="continue">Continua a la pagina</button>
+                    </div>
+                </div>
+            </template>
+            <template v-else-if="sliderNo === 2">
+                <div>
+                    <div class="content-left" :class="fadeNo === 2? 'fade-left-enter': 'fade-left-leave'">
+                        <h1>La Voz de oieniv</h1>
+                        <p>La Radio Donde la protagonista es La Palabra de Dios.
+                            <br> Nuestro objetivo es llevar la palabra de Dios a travez de los medios de comunicaciones.</p>
+                        <span>Entra y disfruta de todo lo que te ofrecemos.</span>
+                    </div>
+                    <div class="content-right" :class="fadeNo === 2? 'fade-right-enter': 'fade-right-leave'">
+                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <button id="continue">Continua a la pagina</button>
+                    </div>
+                </div>
+            </template>
+            <template v-else-if="sliderNo === 3">
+                <div>
+                    <div class="content-left" :class="fadeNo === 3? 'fade-left-enter': 'fade-left-leave'">
+                        <h1>Imagen N° 3</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ratione facere sed, id, quae veniam quod
+                            vitae necessitatibus consequatur nam minus sequi ipsum. Nam perspiciatis inventore, obcaecati aut
+                            eaque dolor.</p>
+                        <span>Entra y disfruta de todo lo que te ofrecemos.</span>
+                    </div>
+                    <div class="content-right" :class="fadeNo === 3? 'fade-right-enter': 'fade-right-leave'">
+                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <button id="continue">Continua a la pagina</button>
+                    </div>
+                </div>
+            </template>
+            <template v-else-if="sliderNo === 4">
+                <div>
+                    <div class="content-left" :class="fadeNo === 4? 'fade-left-enter': 'fade-left-leave'">
+                        <h1>La Voz de oieniv</h1>
+                        <p>La Radio Donde la protagonista es La Palabra de Dios.
+                            <br> Nuestro objetivo es llevar la palabra de Dios a travez de los medios de comunicaciones.</p>
+                        <span>Entra y disfruta de todo lo que te ofrecemos.</span>
+                    </div>
+                    <div class="content-right" :class="fadeNo === 4? 'fade-right-enter': 'fade-right-leave'">
+                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <button id="continue">Continua a la pagina</button>
+                    </div>
+                </div>
+            </template>
+            <div class="right-arrow arrow">
+                <span @click="changeSlider('+')">></span>
+            </div>
+            <ul class="contenedorinputs" :style="maxSlide">
+                <li :style="fraction" @click="sliderNo = 1">
+                    <div :class="sliderNo === 1 ? 'bulletActive' : 'bullet'"></div>
+                </li>
+                <li :style="fraction" @click="sliderNo = 2">
+                    <div :class="sliderNo === 2 ? 'bulletActive' : 'bullet'"></div>
+                </li>
+                <li :style="fraction" @click="sliderNo = 3">
+                    <div :class="sliderNo === 3 ? 'bulletActive' : 'bullet'"></div>
+                </li>
+                <li :style="fraction" @click="sliderNo = 4">
+                    <div :class="sliderNo === 4 ? 'bulletActive' : 'bullet'"></div>
+                </li>
+            </ul>
         </div>
+        <!-- para hacerlo con un radiobutton <input class="inputradio" type="radio"> -->
     </div>
+
     <div class="articulo">
         <div class="divisor1">
             <h1>La Voz de OIENIV</h1>
             <div class="fb-like" data-href="http://lavozdeoieniv.com" data-layout="box_count" data-action="like"
                 data-size="large" data-show-faces="true" data-share="true"></div>
-            <a href="https://twitter.com/intent/user?screen_name=@lavozdeoieniv" target "_blank">
+            <a href="https://twitter.com/intent/user?screen_name=@lavozdeoieniv" target="_blank">
                 <div class="follow-twitter">
                     <span class="icon-twitter">
                         <span>Seguir</span>
@@ -119,8 +198,7 @@
     </div>
     <div class="vota">
         <h1>Vota por tu Favorita</h1>
-        <form id="form" action="form.php" method="get">
-            <input class="radio" type="radio" name="vota" id="1" value="Habla Sobre Mi de Daniel calveti" checked>
+            <input v-model="checked" class="radio" type="radio" name="vota" id="1" value="Habla Sobre Mi de Daniel calveti" checked>
             <label class="label1" for="1">
                 <article class="vota1">
                     <img src="images/Vota1.jpg" alt="">
@@ -128,7 +206,7 @@
                     <p>Habla Sobre Mi</p>
                 </article>
             </label>
-            <input class="radio" type="radio" name="vota" id="2" value="Luz y Sal de Funky">
+            <input v-model="checked" class="radio" type="radio" name="vota" id="2" value="Luz y Sal de Funky">
             <label class="label2" for="2">
                 <article class="vota2">
                     <img src="images/Vota2.jpg" alt="">
@@ -136,7 +214,7 @@
                     <p>Luz y Sal</p>
                 </article>
             </label>
-            <input class="radio" type="radio" name="vota" id="3" value="Amor Real de Manny Montes">
+            <input v-model="checked" class="radio" type="radio" name="vota" id="3" value="Amor Real de Manny Montes">
             <label class="label3" for="3">
                 <article class="vota3">
                     <img src="images/Vota3.jpg" alt="">
@@ -144,8 +222,7 @@
                     <p>Amor Real</p>
                 </article>
             </label>
-            <input type="submit" value="Enviar" name="btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-        </form>
+            <input @click="votar" type="submit" value="Enviar" name="btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
     </div>
     <div class="separador"></div>
     <div class="imagen-4">
@@ -177,7 +254,6 @@
                 </div>
             </a>
         </div>
-    </div>
     </div>
     <div class="imagen5"></div>
     <div class="lineaRedes">
@@ -299,34 +375,95 @@
             </button>
         </div>
     </footer>
-    <div id="successModal"></div>
+    <div id="successModal">
+        <transition name="fade">
+        <template v-if="errorVote">
+            <div>
+                <div class="sombraModal"></div>
+                <div id="content-modal">
+                    <div class="headModal">
+                        <div @click="errorVote = false">
+                            <span id="cerrarModal">x</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="bloque-texto">
+                            <span class="texto">
+                                <h2>Hubo un error inesperado!!!</h2>
+                            </span>
+                            <br>
+                            <span class="texto" style="color: gray">Por favor intentalo de nuevo</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template v-else-if="againVote">
+            <div>
+                <div class="sombraModal"></div>
+                <div id="content-modal">
+                    <div class="headModal">
+                        <div @click="againVote = false">
+                            <span id="cerrarModal">x</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="bloque-texto">
+                            <span class="texto">
+                                <h2>Ya emitiste tu voto</h2>
+                            </span>
+                            <br>
+                            <span class="texto" style="color: gray">Por favor intentalo la semana que viene</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template v-else-if="successVote">
+            <div>
+                <div class="sombraModal"></div>
+                <div id="content-modal">
+                    <div class="headModal">
+                        <div @click="successVote = false">
+                            <span id="cerrarModal">x</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="bloque-texto">
+                            <span class="texto">
+                                <h2>Enviado Correctamente!!!</h2>
+                            </span>
+                            <br>
+                            <span class="texto" style="color: gray">¿Quieres Compartir tu voto?</span>
+                        </span>
+                    </div>
+                    <div id="compartir">
+                        <a :href="urlShareFace"
+                            target=_blank>
+                            <div id="iconFacebook">
+                                <span class="icon-facebook">
+                                    <span>Compartir</span>
+                                </span>
+                            </div>
+                        </a>
+                        <a :href="urlShareTwit"
+                            target="_blank">
+                            <div id="iconTwitter">
+                                <span class="icon-twitter">
+                                    <span>Twittear</span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </transition>
+    </div>
+    </div>
+    <script src="js/index.js"></script>
     <script src="js/js.js"></script>
     <script>
-    function cerrarVentana(event) {
-            $('#ventana').fadeOut(200)
-        }
-        $(document).ready(() => {
-            $('#form').submit(() => { /*if(localStorage.getItem("voto 2"))*/
-                if (localStorage.getItem('voto 1')) {
-                    $('#successModal').html('<div><div class= "sombraModal"></div><div id="content-modal"><div class="headModal"><div onclick="cerrarModal()"><span id="cerrarModal">x</span></div></div><div><span id="bloque-texto"><span class="texto"><h2>Ya emitiste tu voto</h2></span><br><span class="texto" style="color: gray">Por favor intentalo la semana que viene</span></span></div></div></div>');
-                    return false;
-                } else {
-                    var datos = $('.radio').serialize();
-                    $.get('form.php', datos, respuesta).fail(() => {
-                        $('#successModal').html('<div><div class= "sombraModal"></div><div id="content-modal"><div class="headModal"><div onclick="cerrarModal()"><span id="cerrarModal">x</span></div></div><div><span id="bloque-texto"><span class="texto"><h2>Hubo un error inesperado!!!</h2></span><br><span class="texto" style="color: gray">Por favor intentalo de nuevo</span></span></div></div></div>')
-                    });
-                    return false;
-                }
-            });
-            function respuesta(res) {
-                $('#successModal').html('<div><div class= "sombraModal"></div><div id="content-modal"><div class="headModal"><div onclick="cerrarModal()"><span id="cerrarModal">x</span></div></div><div><span id="bloque-texto"><span class="texto"><h2>Enviado Correctamente!!!</h2></span><br><span class="texto" style="color: gray">¿Quieres Compartir tu voto?</span></span></div><div id="compartir"><a href="https://www.facebook.com/sharer.php?text=Yo vote por: ' + res + '. Entra a www.lavozdeoieniv.com y tu tambien vota por tu canción favorita." target=_blank><div id="iconFacebook"><span class="icon-facebook"><span>Compartir</span></span></div></a><a href=""><div id="iconTwitter"><span class="icon-twitter"><span>Twittear</span></span></div></a></div></div></div>') /*Cambiar para cambiar el votolocalStorage.removeItem("voto 1")localStorage.setItem("voto 2", true)*/
-                    ;
-                localStorage.setItem('voto 1', true)
-            }
-        });
-        function cerrarModal(e) {
-            $('#successModal div').fadeOut(2000)
-        }
         function face() {
             window.open('https://www.facebook.com/lavozdeoieniv', '_blank')
         }
