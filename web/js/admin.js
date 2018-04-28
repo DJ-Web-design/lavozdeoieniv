@@ -115,7 +115,7 @@ var app = new Vue({
                 user: this.inputUser,
                 pass: this.inputPass
             }
-            axios.get("login-admin.php", datos).then(res => {
+            axios.get(`login-admin.php?user=${datos.user}&pass=${datos.pass}`).then(res => {
                 if (res == "noUser") {
                     this.noUser = "Usuario o contraseña incorrectos"
                     this.spin = false
