@@ -82,10 +82,6 @@ var app = new Vue({
         spinToggle: e => {
             e.preventDefault()
             this.spin = true;
-            this.voto1 = "";
-            this.voto2 = "";
-            this.voto3 = "";
-
             let votos = {
                 voto1: "Habla Sobre Mi de Daniel calveti",
                 voto2: "Luz y Sal de Funky",
@@ -93,11 +89,11 @@ var app = new Vue({
             }
             axios.get(`votos.php?voto1=${votos.voto1}&voto2=${votos.voto2}&voto3=${votos.voto3}`)
             .then( res => {
-                console.log(res);
-                this.spin = false
+                console.log(res.data.res3);
                 this.voto1 = res.data.res1
                 this.voto2 = res.data.res2
                 this.voto3 = res.data.res3
+                this.spin = false
             }).catch(err => {
                 alert("Error en el servidor")
                 this.spin = false
