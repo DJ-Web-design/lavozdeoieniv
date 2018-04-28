@@ -6,7 +6,8 @@
     $pedido2 = isset($_GET["voto2"]) ? $_GET["voto2"]:$_POST["voto2"];
     $pedido3 = isset($_GET["voto3"]) ? $_GET["voto3"]:$_POST["voto3"];
 
-    $dbconn = pg_connect("host=".$host." port=".$port." dbname=".$db." user=".$user." password=".$pass) or die('NO HAY CONEXION: ' . pg_last_error());
+	$dbconn = pg_connect("host=$host port=$port dbname=$db user=$user password=$pass") 
+		or die('NO HAY CONEXION: ' . pg_last_error());
 	
     if (isset($pedido1) && isset($pedido2) && isset($pedido3)) {
 
