@@ -6,7 +6,7 @@
     $dbconn = pg_connect("host=".$host." port=".$port." dbname=".$db." user=".$user." password=".$pass) or die('NO HAY CONEXION: ' . pg_last_error());
 
     //consulta sencilla
-    $query = "INSERT INTO vota(vota) VALUES ($datos);";
+    $query = "INSERT INTO vota (vota) VALUES ($datos);";
 
     $result = pg_query($dbconn, $query) or die('ERROR AL INSERTAR DATOS: ' . pg_last_error());
 
