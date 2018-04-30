@@ -47,9 +47,12 @@
     };
     function testAPI() {
         console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me',{fields:'name, picture'}, response => {
+        FB.api('/me/picture?height150&width=150', response => {
             console.log(response);
         });
+        FB.api('/me', res =>{
+            console.log(res.name)
+        })
     }
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
