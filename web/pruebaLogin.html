@@ -72,6 +72,7 @@
              data-auto-logout-link="false" 
              data-use-continue-as="true"
              onlogin="testAPI"
+             v-show="vista"
              ></div>        
         <button v-if="!vista" @click="vista = !vista" key="ver">Ver</button>
         <button v-else @click="vista = !vista" key="noVer">No Ver</button>
