@@ -36,7 +36,7 @@
         FB.init({
             appId: '484795955226627',
             cookie: true,
-            xfbml: true,
+            xfbml: false,
             version: 'v2.12'
         });
         FB.AppEvents.logPageView();
@@ -47,7 +47,7 @@
     };
     function testAPI() {
         console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', response => {
+        FB.api('/me',{fields:'name, picture'}, response => {
             console.log(response);
         });
     }
