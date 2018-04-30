@@ -151,12 +151,12 @@ var app = new Vue({
             }
         },
         videoHandler: function (archivo) {
-            if (archivo[0].type != "video/3gpp" && archivo[0].type != "video/x-ms-wmv" && archivo[0].type != "video/mp4" && archivo[0].type != "video/x-msvideo") {
+            /*if (archivo[0].type != "video/3gpp" && archivo[0].type != "video/x-ms-wmv" && archivo[0].type != "video/mp4" && archivo[0].type != "video/x-msvideo") {
                 alert("Por favor seleccione un video");
                 document.getElementById("video").value = ""
-            } else {
+            } else {*/
                 this.video = archivo[0]
-            }
+            //}
         },
         enviarVideo: function () {
             const config = {
