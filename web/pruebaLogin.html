@@ -50,9 +50,6 @@
         FB.api('/me/picture?height150&width=150', response => {
             console.log(response);
         });
-        FB.api('/me', res =>{
-            console.log(res.name)
-        })
     }
     (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -70,7 +67,6 @@
              data-show-faces="false"
              data-auto-logout-link="false" 
              data-use-continue-as="true"
-             v-show="vista"
              onlogin="testAPI"
              ></div>        
         <button v-if="!vista" @click="vista = !vista" key="ver">Ver</button>
