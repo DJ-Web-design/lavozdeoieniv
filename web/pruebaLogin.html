@@ -57,15 +57,14 @@
            }(document, 'script', 'facebook-jssdk'));
             </script>
     <div id="app">
-        <template v-if="vista">
             <div class="fb-login-button" 
              data-max-rows="1" data-size="large" 
              data-button-type="continue_with" 
              data-show-faces="false"
              data-auto-logout-link="false" 
              data-use-continue-as="true"
+             v-show="vista"
              ></div>        
-        </template>
         <button v-if="!vista" @click="vista = !vista" key="ver">Ver</button>
         <button v-else @click="vista = !vista" key="noVer">No Ver</button>
     </div>
