@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Radio Online|La Voz de OIENIV</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <!--<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>-->
+    <script src="frameworks/vue.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <link rel="stylesheet" href="css/style-radio.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">-->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <script>  var config = {
     apiKey: "AIzaSyC2RvmGHYtaqUa5lEXb3MLl_Mv4ECiLoBE",
@@ -22,7 +21,6 @@
     messagingSenderId: "24315564955"
   };
   firebase.initializeApp(config);
-
         var TablaDeBaseDatos = firebase.database().ref('chat');
         TablaDeBaseDatos.on('value', snapshot => {
             data.chatMessages = []
@@ -37,37 +35,9 @@
         );
     </script>
 </head>
-
-<body id="app">
+<body>
     <div id="fb-root"></div>
         <script>
-            // This is called with the results from from FB.getLoginStatus().
-                function statusChangeCallback(response) {
-                    console.log('statusChangeCallback');
-                    console.log(response);
-                    // The response object is returned with a status field that lets the
-                    // app know the current login status of the person.
-                    // Full docs on the response object can be found in the documentation
-                    // for FB.getLoginStatus().
-                    if (response.status === 'connected') {
-                        // Logged into your app and Facebook.
-                        testAPI();
-                    } else {
-                        // The person is not logged into your app or we are unable to tell.
-                        document.getElementById('status').innerHTML = 'Please log ' +
-                            'into this app.';
-                    }
-                }
-
-                // This function is called when someone finishes with the Login
-                // Button.  See the onlogin handler attached to it in the sample
-                // code below.
-                function checkLoginState() {
-                    FB.getLoginStatus(response => {
-                        statusChangeCallback(response);
-                    });
-                }
-
 
             window.fbAsyncInit = function() {
                 FB.init({
@@ -76,23 +46,16 @@
                     xfbml: true,
                     version: 'v2.12'
                 });
-
             FB.AppEvents.logPageView();
-             FB.getLoginStatus(response => {
-                    statusChangeCallback(response);
-                    
-                });
-
         };
            function testAPI() {
-                console.log('Welcome!  Fetching your information.... ');
                 FB.api('/me',response => {
-                    console.log('Successful login for: ' + response.name);
-                    document.getElementById('status').innerHTML =
-                        'Thanks for logging in, ' + response.name + '!';
+                    app.chat.user = response.name
                 });
+                FB.api('/me/picture?redirect=false', res =>{
+                    app.chat.pic = res.data.url
+                })
             }
-
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
@@ -100,51 +63,93 @@
      js.src = "https://connect.facebook.net/es_LA/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-
-
     </script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <header>
         <script>var data = {
-                show: true, 
+                show: true,
                 showModal: false,
-                isVisible:false,
-                display:"none",
-                opa:0,
-                chat:{
-                    message:"",
-                    user:"",
-                    pic:"",
+                isVisible: false,
+                display:"none", 
+                opacity:0,
+                animation:"",
+                chat: {
+                    message: "",
+                    user: "",
+                    pic: "",
                 },
-                chatMessages:[],
+                chatMessages: [],
+                progItems: [{
+                    id: "tropi",
+                    prog: "Tropicalisima",
+                    hora: "De 5P.M. a 7P.M.",
+                    dia: "Sabados",
+                    locutor: "Bernardo Romero",
+                    des: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero possimus in facilis fugit aspernatur! Tempore, beatae. Quos unde blanditiis officia doloribus! Culpa inventore fugit odit officia eveniet exercitationem! Debitis, harum.",
+                    img: "images/user.jpg"
+                }, {
+                    id: "tropi",
+                    prog: "Tropicalisima",
+                    hora: "De 5P.M. a 7P.M.",
+                    dia: "Sabados",
+                    locutor: "Bernardo Romero",
+                    des: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero possimus in facilis fugit aspernatur! Tempore, beatae. Quos unde blanditiis officia doloribus! Culpa inventore fugit odit officia eveniet exercitationem! Debitis, harum.",
+                    img: "images/user.jpg"
+                }]
+            };
+            var dataProg = {
+                vista: true,
+                preHeight: "340px",
+                style: {
+                    img: {
+                        animation: ""
+                    }
+                },
+                no: {
+                    style: {
+                        des: {
+                            display: "none",
+                            opacity: 0,
+                            transition: ".5s ease"
+                        },
+                        img: {
+                            animation: ""
+                        },
+                        bloqueProg: {},
+                        verMas: {},
+                        verMenos: {
+                            display: "none"
+                        }
+                    }
+                },
+                numbers: []
             }
-
-                ;
             if (!localStorage.getItem("Nombre") && !localStorage.getItem("pic")) {
                 data.chat.user = "";
-                data.chat.pic="";
-            }
-
-            else {
+                data.chat.pic = "";
+            } else {
                 data.chat.user = localStorage.getItem("Nombre");
                 data.chat.pic = localStorage.getItem("pic");
             }
-
         </script>
-        <div id="menu">
-            <script src="js/menu.js"></script>
-            <menu-item index="index.html" radio="" fotos="Galeria/fotos.html" videos="Galeria/videos.html" nosotros="nosotros.html"
-                logo="images/logo.png"></menu-item>
-        </div>
+    <div id="app">
+    <header>
+            <menu-item 
+             index="index.html" 
+             radio="" 
+             fotos="Galeria/fotos.html" 
+             videos="Galeria/videos.html" 
+             nosotros="nosotros.html"
+             logo="images/logo.png"></menu-item>
     </header>
-    <script src="js/plantilla-menu.js"></script>
     <div class="online"></div>
     <div id="modal">
-
-        <div id="modal-shadow" v-bind:style="{ display:display, opacity:opa }"></div>
-            <div class="modal mdl-dialog" v-bind:style=" { display:display, opacity:opa }">
+        <div id="modal-shadow" :style="{animation:animation, display:display, opacity:opacity}"></div>
+            <div class="modal mdl-dialog" :style="{animation:animation, display:display, opacity:opacity}">
                 <div class="dialog-header">
-                    <button type="button" class="mdl-button mdl-color--amber-800 close" @click="display = 'none', opa = 0">Cerrar</button>
+                    <button 
+                    type="button" 
+                    class="mdl-button mdl-color--amber-800 close" 
+                    @click="showModal = false">Cerrar</button>
                 </div>
                 <h4 class="mdl-dialog__title">Ingresa tu nombre</h4>
                 <div class="mdl-dialog__content">
@@ -154,25 +159,43 @@
                         <button type="button" class="mdl-button mdl-color--amber-800" onclick="ingresaNombre()" id="btnNombre">Enviar</button>
                     </div>
                     <h1 class="mdl-dialog__title o">Ó</h1>
-
-                    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
-                    
-                   
+                    <div class="fb-login-button" 
+                    data-max-rows="1" 
+                    data-size="large" 
+                    data-button-type="continue_with" 
+                    data-show-faces="false" 
+                    data-auto-logout-link="false" 
+                    data-use-continue-as="true"></div>
                 </div>
                 <div class="mdl-dialog__actions"></div>
             </div>
-
-        </div>
+    </div>
+        <!--<template>
+            <div id="modal-shadow"></div>
+            <div class="modal mdl-dialog">
+                <div class="dialog-header">
+                    <button type="button" class="mdl-button mdl-color--amber-800 close" @click="display = 'none', opa = 0">Cerrar</button>
+                </div>
+                <h4 class="mdl-dialog__title">Nombre del usuario</h4>
+                <div class="mdl-dialog__content">
+                    <div id="ingresa-nombre" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input v-model="chat.user" class="mdl-textfield__input" type="text" id="ingresaNombre" name="ingresaNombre">
+                        <label class="mdl-textfield__label" for="ingresaNombre">Nombre del usuario</label>
+                        <button type="button" class="mdl-button mdl-color--amber-800" onclick="ingresaNombre()" id="btnNombre">Enviar</button>
+                    </div>
+                    <h1 class="mdl-dialog__title o">Motivo</h1>
+                    
+                </div>
+                <div class="mdl-dialog__actions"></div>
+            </div>
+        </template>-->
     <div class="cuerpo">
         <div class="panel-cabecera">
             <button id="demo-menu-lower-right" class="mdl-color--amber-800 pull-right mdl-button mdl-js-button mdl-button--icon">
                 <span class="icon-menu"></span>
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-                <li class="mdl-menu__item">Some Action</li>
-                <li class="mdl-menu__item">Another Action</li>
-                <li disabled class="mdl-menu__item">Disabled Action</li>
-                <li class="mdl-menu__item">Yet Another Action</li>
+                <li class="mdl-menu__item">Reportar Mensaje</li>
             </ul>
         </div>
         <div class="panel-cuerpo" id="chat">
@@ -182,13 +205,19 @@
                  :pic="iten.pic"
                  :message="iten.message"
                  :date="iten.date"
+                 :key="iten.id"
                 ></chat-template>
             </ul>
         </div>
         <div class="panel-pie" id="panel">
             <template v-if="show">
                 <div class="ingresa">
-                    <button id="boton-nombre" class="mdl-button mdl-js-button mdl-color--amber-800" @click="verModal">Ingresar Nombre</button>
+                    <button 
+                     id="boton-nombre" 
+                     class="mdl-button mdl-js-button mdl-color--amber-800" 
+                     @click="showModal = true"
+                     >Ingresar Nombre
+                    </button>
                 </div>
             </template>
             <template v-else>
@@ -204,7 +233,6 @@
             </template>
         </div>
     </div>
-    <script src="js/modal.js"></script>
     <div class="bloque-der">
         <div class="programas">
             <bloque-prog id="tropi" programa="Tropicalisima" hora="De 5P.M. a 7P.M." dia="Sabados" locutor="Bernardo Romero"
@@ -227,15 +255,36 @@
                 img="images/user.jpg"></bloque-prog>
         </div>
     </div>
-    <script src="js/bloque-programas.js"></script>
     <aside class="lateral"></aside>
     <div class="publicidad pull-left"></div>
-    <div id="pie">
-        <item-footer index="index.html" logo="images/logo.png"></item-footer>
-    </div>
-    <script src="js/plantilla-footer.js"></script>
+    <item-footer index="index.html" logo="images/logo.png"></item-footer>
+
+</div>
+    <script src="js/plantillas.js"></script>
     <script src="js/listen.js"></script>
-    <script>function face() {
+
+    <script>
+    var app = new Vue({
+        el:"#app",
+        data:data,
+        watch:{
+            showModal:function(e){
+                if(e){
+                    this.animation = "fade-in ease 1s";
+                    this.display = "block";
+                    this.opacity = 1;
+                } else {
+                    let that = this;
+                    this.animation = "fade-out ease 1s";
+                    setTimeout(() => {
+                        that.opacity = 0;
+                        that.display = "none";
+                    }, 1000);
+                }
+            }
+        }
+    })
+    function face() {
             window.open("https://www.facebook.com/lavozdeoieniv", "_blank")
         }
 
@@ -285,6 +334,28 @@
         }
     </script>
     <script src="js/mas.js"></script>
+    <style></style>
+    <style>
+    @keyframes fade-in {
+            0%{
+                opacity:0;
+            display:"none"
+            }
+            100%{
+                opacity:1;
+                display:"block";
+            }
+            }
+        @keyframes fade-out {
+            0%{
+                opacity:1;
+            display:"block"
+            }
+            100%{
+                opacity:0;
+                display:"none";
+            }
+            }</style>
 </body>
 
 </html>
