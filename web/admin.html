@@ -26,7 +26,9 @@
         messagingSenderId: "24315564955"
     };
         firebase.initializeApp(config);
-        const database = firebase.database().ref("chat");
+        const databaseImg = firebase.database().ref("imagenes")
+        const databaseChat = firebase.database().ref("chat");
+
         const storage = firebase.storage().ref();
         const storageChild = storage.child("Pruebas");
     </script>
@@ -137,17 +139,17 @@
                 <div id="title-count" style="margin:30px 0 10px 0">Subir Video</div>
                     <div>
                         <label for="title">Titulo:</label>
-                        <input type="text" name="title" id="titulo" v-model="video.tite">
+                        <input type="text" name="title" id="titulo" v-model="videoMeta.title">
                     </div>
                     
                     <div>
                         <label for="des">Descripción:</label>
-                        <input type="text" name="des" id="des" v-model="video.des">
+                        <input type="text" name="des" id="des" v-model="videoMeta.des">
                     </div>
                     
                     <div>
                         <label for="file">Video:</label>
-                        <input type="file" name="archi" id="video" @change="video($event.target.files)">
+                        <input type="file" name="archi" id="video" @change="videoHandler($event.target.files)">
                     </div>
                     <div id="boton">
                         <input type="submit" id="btn-enviar" class="btn-lavoz" value="Subir Video" @click="enviarVideo"></input>
@@ -185,7 +187,7 @@
         if (localStorage.getItem("remember") || sessionStorage.getItem("remember")) {
             app.bloqueo = false
         }
-        database.on('value', snapshot => {
+        databaseChat.on('value', snapshot => {
             app.chatMessages = []
             snapshot.forEach(e => {
                 app.chatMessages.push({value:e.val(), key:e.key})

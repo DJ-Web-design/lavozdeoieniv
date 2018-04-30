@@ -25,14 +25,15 @@ var app = new Vue({
         imageLoad: "",
         progress: 0,
         registrosSeleccionados: [],
-        video:{
+        videoMeta:{
             title:null,
             des:null
-        }
+        },
+        video:null
     },
     methods: {
         imagen: function (file) {
-            if (this.file[0].type != "image/png" && this.file[0].type != "image/jpeg" && this.file[0].type != "image/gif") {
+            if (file[0].type != "image/png" && file[0].type != "image/jpeg" && file[0].type != "image/gif") {
                 alert("Por favor seleccione una imagen");
                 document.getElementById("archi").value = ""
             } else {
@@ -41,25 +42,31 @@ var app = new Vue({
 
         },
         recogerDatos: function () {
-            let inputTitle = document.getElementById("titulo")
-            let inputDescrip = document.getElementById("des")
-            let inputGal = document.getElementById("gal")
+            var fileTitle = document.getElementById("titulo").value;
+            var fileDes = document.getElementById("des").value;
+            var fileGal = document.getElementById("gal").value;
+            var typeImg;
 
-            var fileTitle = inputTitle.value
-            var fileDes = inputDescrip.value
-            var fileGal = inputGal.value
-
-            console.log(fileDes, fileTitle, this.file[0].name, inputGal.value);
+            switch (this.file[0].type) {
+                case "image/png":
+                    typeImg = ".png";
+                    break;
+                case "image/jpeg":
+                    typeImg = ".jpg";
+                    break;
+                case "image/gif":
+                    typeImg = ".gif";
+                    break;
+            }
+            console.log(this.file[0].type, typeImg);
 
             if (fileTitle && fileDes && fileGal && this.file) {
-                let sendFile = this.file[0];
+                let sendFile = this.file[0];                
                 var upload = storageChild.child(sendFile.name).put(sendFile);
-
-                this.imageLoad = sendFile.name
-                this.showLoad = true
+                this.imageLoad = sendFile.name;
+                this.showLoad = true;
                 upload.on("state_changed", snapshot => {
-                    this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-
+                    this.progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                     switch (snapshot.state) {
                         case firebase.storage.TaskState.PAUSED: // or 'paused'
                             console.log('Upload is paused');
@@ -73,7 +80,7 @@ var app = new Vue({
                     console.log(error.code);
                     this.showLoad = false
                 }, () => {
-                    database.push({
+                    databaseImg.child("prueba").push({
                         title: fileTitle,
                         description: fileDes,
                         url: upload.snapshot.downloadURL
@@ -114,7 +121,7 @@ var app = new Vue({
                 user: this.inputUser,
                 pass: this.inputPass
             }
-            axios.get(`login-admin.php?user=${datos.user}&pass=${datos.pass}`)
+            axios.get(`login-admin.php?user=${datos.user}&pass=${user.pass}`)
             .then(res => {
                 if (res.data == "noUser") {
                     that.noUser = "Usuario o contraseña incorrectos"
@@ -140,10 +147,10 @@ var app = new Vue({
         },
         borrarRegistros: function (key) {
             if (confirm("¿Seguro que deseas borrar esos registros?")) {
-                database.child(key).remove()
+                databaseChat.child(key).remove()
             }
         },
-        video: function (archivo) {
+        videoHandler: function (archivo) {
             if (archivo[0].type != "video/3gpp" && archivo[0].type != "video/x-ms-wmv" && archivo[0].type != "video/mp4" && archivo[0].type != "video/x-msvideo") {
                 alert("Por favor seleccione un video");
                 document.getElementById("video").value = ""
@@ -158,10 +165,17 @@ var app = new Vue({
                 }
             }
             var params = new FormData()
-            params.append("video", this.video);
-            params.append("description", this.video.des);
-            params.append("title", this.video.title);
-            axios.post("video.php", params, config)
+            params.append("archivo", this.video);
+            params.append("description", this.videoMeta.des);
+            params.append("title", this.videoMeta.title);
+            axios.post("subida.php", params, config)
+            .then(res=>{
+                console.log(res);
+                
+            }).catch( err =>{
+                console.log(err);
+                
+            })
         }
     }
 })

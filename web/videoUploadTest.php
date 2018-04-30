@@ -1,5 +1,14 @@
 <?php
 
+$title = $_POST["title"];
+$des = $_POST["description"];
+$file = $_FILES["video"];
+$fileSize = $_FILES["video"]["size"];
+$fileTempName = $_FILES["video"]["tmp_name"];
+
+
+if (move_uploaded_file($fileTempName, "upload/".$file["name"])){
+
 // Call set_include_path() as needed to point to your client library.
 require_once "../vendor/autoload.php";
 session_start();
@@ -11,8 +20,8 @@ session_start();
  * <https://developers.google.com/youtube/v3/guides/authentication>
  * Please ensure that you have enabled the YouTube Data API for your project.
  */
-$OAUTH2_CLIENT_ID = '758038360539-qp6c8l2ou9vh0gsmtv3um0b2g0qfd74s.apps.googleusercontent.com';
-$OAUTH2_CLIENT_SECRET = 'r_kCoOpwNR3kwNAkBFrONda8';
+$OAUTH2_CLIENT_ID = '24315564955-nnq0cqp6e64khnq9h2g9p8asmnncei8e.apps.googleusercontent.com';
+$OAUTH2_CLIENT_SECRET = '1FqiPtcmBCxa7aGYBVjYIpT-';
 
 $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);
@@ -43,15 +52,15 @@ if (isset($_SESSION['token'])) {
 if ($client->getAccessToken()) {
   try{
     // REPLACE this value with the path to the file you are uploading.
-    $videoPath = "/path/to/file.mp4";
+    $videoPath = $file["name"];
 
     // Create a snippet with title, description, tags and category ID
     // Create an asset resource and set its snippet metadata and type.
     // This example sets the video's title, description, keyword tags, and
     // video category.
     $snippet = new Google_Service_YouTube_VideoSnippet();
-    $snippet->setTitle("Test title");
-    $snippet->setDescription("Test description");
+    $snippet->setTitle($title);
+    $snippet->setDescription($des);
     $snippet->setTags(array("tag1", "tag2"));
 
     // Numeric video category. See
@@ -61,7 +70,7 @@ if ($client->getAccessToken()) {
     // Set the video's status to "public". Valid statuses are "public",
     // "private" and "unlisted".
     $status = new Google_Service_YouTube_VideoStatus();
-    $status->privacyStatus = "public";
+    $status->privacyStatus = "private";
 
     // Associate the snippet and status objects with a new video resource.
     $video = new Google_Service_YouTube_Video();
@@ -89,7 +98,7 @@ if ($client->getAccessToken()) {
         true,
         $chunkSizeBytes
     );
-    $media->setFileSize(filesize($videoPath));
+    $media->setFileSize(filesize($fileTempName));
 
 
     // Read the media file and upload it chunk by chunk.
@@ -133,6 +142,9 @@ if ($client->getAccessToken()) {
   <h3>Authorization Required</h3>
   <p>You need to <a href="$authUrl">authorize access</a> before proceeding.<p>
 END;
+}
+} else {
+  echo "no se subio el video";
 }
 ?>
 
