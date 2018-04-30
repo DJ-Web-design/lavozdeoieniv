@@ -76,12 +76,14 @@
              ></div>        
         <button v-if="!vista" @click="vista = !vista" key="ver">Ver</button>
         <button v-else @click="vista = !vista" key="noVer">No Ver</button>
+        <img v-if="img" :src="img">
     </div>
     <script>
         var app = new Vue({
             el:"#app",
             data:{
-                vista:false
+                vista:false,
+                img:null
             }
         })
     </script>
