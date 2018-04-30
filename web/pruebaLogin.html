@@ -48,7 +48,7 @@
     function testAPI() {
         console.log('Welcome!  Fetching your information.... ');
         FB.api('me/picture?widht=150&height=150&redirect=false', response => {
-            console.log(response);
+            app.img = response.data.url
         });
         FB.api('/me', res=>{
             console.log(res.name);
