@@ -7,7 +7,7 @@ $fileSize = $_FILES["video"]["size"];
 $fileTempName = $_FILES["video"]["tmp_name"];
 
 
-if (move_uploaded_file($fileTempName, "upload/".$file["name"])){
+if (move_uploaded_file($fileTempName, "upload/$title")){
 
 // Call set_include_path() as needed to point to your client library.
 require_once "../vendor/autoload.php";
@@ -52,7 +52,7 @@ if (isset($_SESSION['token'])) {
 if ($client->getAccessToken()) {
   try{
     // REPLACE this value with the path to the file you are uploading.
-    $videoPath = $file["name"];
+    $videoPath = "upload/$title";
 
     // Create a snippet with title, description, tags and category ID
     // Create an asset resource and set its snippet metadata and type.
@@ -131,6 +131,7 @@ if ($client->getAccessToken()) {
   }
 
   $_SESSION['token'] = $client->getAccessToken();
+  unlink("upload/$title");
 } else {
   // If the user hasn't authorized the app, initiate the OAuth flow
   $state = mt_rand();
