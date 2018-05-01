@@ -168,7 +168,7 @@ var app = new Vue({
             params.append("archivo", this.video);
             params.append("description", this.videoMeta.des);
             params.append("title", this.videoMeta.title);
-            axios.post("subida.php", params, config)
+            axios.post("videoUploadTest.php", params, config)
             .then(res=>{
                 console.log(res);
                 
