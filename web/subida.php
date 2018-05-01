@@ -9,7 +9,7 @@ if (isset($_FILES['archivo'])) {
    $time = time();
    $nombre = "{$_POST['nombre_archivo']}_$time.$extension";
    if (move_uploaded_file($archivo['tmp_name'], "upload/$nombre")) {
-      echo 1;
+      echo "upload/$nombre";
    } else {
       echo 0;
    }
