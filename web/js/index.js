@@ -1,6 +1,16 @@
 var app = new Vue({
     el:"#app",
     data:{
+        sliderNo: 1,
+        maxSlide: {
+            "grid-template-rows": `auto 1fr;`
+        },
+        scroll:null,
+        fraction: {
+            "grid-row": "1 / auto"
+        },
+        fadeNo: 1,
+        document:document,
         styleMenu:{
             left:"-100%"
         },
@@ -13,9 +23,12 @@ var app = new Vue({
         successVote:false,
         errorVote:false,
         againVote:false,
-        response:null,
-        urlShareFace: `https://www.facebook.com/sharer.php?text=Yo vote por: ${this.response}. Entra a www.lavozdeoieniv.com y tu tambien vota por tu canción favorita.`,
-        urlShareTwit: `https://twitter.com/intent/tweet?text=Yo vote por: ${this.response}. Entra a www.lavozdeoieniv.com y tu tambien vota por tu canción favorita.`
+        urlShareFace: "",
+        urlShareTwit: "",
+        posicion1:null,
+        posicion2:null,
+        posicion3:null,
+        posicion4:null,
     },
     methods:{
         openMenu: function(){            
@@ -50,7 +63,8 @@ var app = new Vue({
                 axios.get("form.php", {params:{
                     vota: this.checked
                 }}).then(response => {
-                    this.response = response.data;
+                    this.urlShareFace = `https://www.facebook.com/sharer.php?text=Yo vote por: ${response.data}. Entra a www.lavozdeoieniv.com y tu tambien vota por tu canción favorita.`,
+                        this.urlShareTwit = `https://twitter.com/intent/tweet?text=Yo vote por: ${response.data}. Entra a www.lavozdeoieniv.com y tu tambien vota por tu canción favorita.`,
                     this.successVote = true;
                     /*Cambiar para cambiar el voto
                     localStorage.removeItem("voto 1")
@@ -88,6 +102,15 @@ var app = new Vue({
                 }, 1500);
 
             }
+        }
+    },
+    watch:{
+        scroll:function(e) {
+            let posicion = (e * .15)
+             this.posicion1 = 0 - posicion;
+             this.posicion2 = 160 - posicion;
+             this.posicion3 = 260 - posicion;
+             this.posicion4 = 300 - posicion;    
         }
     }
 })

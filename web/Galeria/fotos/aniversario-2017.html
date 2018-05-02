@@ -5,14 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Aniversario 2017|Fotos</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/v-img@latest/dist/v-img.min.js"></script>
+    <script src="../../js/components/menu-item.js"></script>
+    <script src="../../js/components/item-footer.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style-galerias.css" />
     <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
 </head>
 <body>
+        <div id="fb-root"></div>
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '126968564676905',
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v2.10'
+                });
+                FB.AppEvents.logPageView();
+            };
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=126968564676905';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
 <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
 <script>
   var config = {
@@ -29,11 +50,7 @@ var storage = firebase.storage();
 var storageRef = storage.ref();
 var database = firebase.database().ref("imagenes/prueba");
 </script>
-    <script>
-        var data = {};
-        var n;
-        
-    </script>
+<div id="app">
     <header id="menu">
         <menu-item index="../../index.html" 
          radio="../../radio.html" 
@@ -43,7 +60,6 @@ var database = firebase.database().ref("imagenes/prueba");
          logo="../../images/logo.png">
         </menu-item>
     </header>
-    <script src="../../js/plantilla-menu.js"></script>
     <div class="container">
         <div class="row" id="images-container">
             <modal-template v-if="showModal"></modal-template>
@@ -55,7 +71,7 @@ var database = firebase.database().ref("imagenes/prueba");
                 <template v-for="(iten, index) in uno(images)">
                     <div class="col-md-12">
                         <div>
-                            <img v-img:v="{title: iten.value.title}" :id="iten.id" :src="iten.value.url" alt="">
+                            <img v-img:v="{title: iten.value.title,  src:iten.value.url}" :id="iten.id" :src="iten.value.thumb" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
@@ -65,7 +81,7 @@ var database = firebase.database().ref("imagenes/prueba");
                 <template v-for="(iten, index) in dos(images)">
                     <div class="col-md-12">
                         <div>
-                            <img v-img:v="{title: iten.value.title}" :id="iten.id" :src="iten.value.url" alt="">
+                            <img v-img:v="{title: iten.value.title, src:iten.value.url}" :id="iten.id" :src="iten.value.thumb" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
@@ -75,7 +91,7 @@ var database = firebase.database().ref("imagenes/prueba");
                 <template v-for="(iten, index) in tres(images)">
                     <div class="col-md-12">
                         <div>
-                            <img v-img:v="{title: iten.value.title}" :id="iten.id" :src="iten.value.url" alt="">
+                            <img v-img:v="{title: iten.value.title,  src:iten.value.url}" :id="iten.id" :src="iten.value.thumb" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
@@ -85,7 +101,7 @@ var database = firebase.database().ref("imagenes/prueba");
                 <template v-for="(iten, index) in cuatro(images)">
                     <div class="col-md-12">
                         <div>
-                            <img v-img:v="{title: iten.value.title}" :id="iten.id" :src="iten.value.url" alt="">
+                            <img v-img:v="{title: iten.value.title,  src:iten.value.url}" :id="iten.id" :src="iten.value.thumb" alt="">
                             <h2>{{ iten.value.title }}</h2>
                         </div>
                     </div>
@@ -107,7 +123,8 @@ var database = firebase.database().ref("imagenes/prueba");
     </div>
     <div id="box">
     </div>
-    <script src="../../js/menu-template.js"></script>
+    </div>
+    <script src="../../js/GaleriaFotos.js"></script>
     <script>
         if (window.screen.width >= 480 && window.screen.width <= 767) {
             var clase = document.querySelector(".col-md-3");
@@ -117,9 +134,7 @@ var database = firebase.database().ref("imagenes/prueba");
                 images.images=[];
                 snapshot.forEach(e => { 
                     let url = e.val()
-                    $.post("../../resize_basic.php",url, res => {                        
-                        //images.images.unshift({ id: id, value: `./thumbView.php?image=${e.val()}` })
-                    })
+                        images.images.unshift({ id: id, value: e.val() })
                     id++
                 });
             });

@@ -2,14 +2,13 @@
 
 $title = $_POST["title"];
 $description = $_POST["description"];
-$videoUpload = $_FILES["video"];
+$videoUpload = $_POST["video"]["name"];
 
 // AIzaSyBGr8lrwH_XuNPdzMl-UpDlYjrr2TkizJQ
 
 
 // Llame a set_include_path () según sea necesario para apuntar a su biblioteca de cliente.
-require_once 'Google/Client.php';
-require_once 'Google/Service/YouTube.php';
+require_once '../vendor/autoload.php';
 session_start();
 
 /*
@@ -19,6 +18,7 @@ session_start();
  * <https://developers.google.com/youtube/v3/guides/authentication>
  * Asegúrese de haber habilitado la API de datos de YouTube para su proyecto.
  */
+
 $OAUTH2_CLIENT_ID = '758038360539-qp6c8l2ou9vh0gsmtv3um0b2g0qfd74s.apps.googleusercontent.com';
 $OAUTH2_CLIENT_SECRET = 'r_kCoOpwNR3kwNAkBFrONda8';
 

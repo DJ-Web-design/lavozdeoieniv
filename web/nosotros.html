@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Nosotros|La Voz de OIENIV</title>
-	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-	<script src="frameworks/vue.min.js"></script>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="js/components/menu-item.js"></script>
+	<script src="js/components/item-footer.js"></script>
 	<link rel="stylesheet" href="css/style-nosotros.css"> 
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 
 </head>
 <body>
-		<!--<div id="fb-root"></div>
+		<div id="fb-root"></div>
 		<script>
 			window.fbAsyncInit = function () {
 
@@ -31,20 +32,9 @@
 				js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=126968564676905';
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
-
-
-			// Aqui empieza el facebook analytics Evento onclick
-			function onButtonClick() {
-				// Add this to a button's onclick handler
-				FB.AppEvents.logEvent("sentFriendRequest");
-			}
-		</script>-->
+		</script>
+	<div id="app" style="overflow:hidden">
 	<header>
-	<script>
-		var data = {}
-	</script>
-	<div  id="menu">
-	<script src="js/menu.js"></script>
 	<menu-item
 		index="index.html"
 		radio="radio.html"
@@ -52,51 +42,48 @@
 		videos="Galeria/videos.html"
 		nosotros="#"
 		logo="images/logo.png"
-
 	></menu-item>
-	</div>
 	</header>
-	<script src="js/menu-template.js"></script>
-	<div id="app">
 		<div class="img-container"><img src="images/luces.jpg" alt=""></div>
 		<div id="nav-aside">
-			<ul>
-				<li @click="tab = 1">Historia</li>
-				<li @click="tab = 2">Visión</li>
-				<li @click="tab = 3">Misión</li>
-				<li @click="tab = 4">Equipo</li>
-			</ul>
+					<li v-for="(iten, index) in tabs" 
+					:key="iten" 
+					@click="tab = index+1" 
+					:class="{ 'active-tab': tab === index+1, 'default-tab': tab !== index+1 }">{{iten}}</li>
 		</div>
-		<div class="content">
+		<div class="separador"></div>
+		<div class="content content-aside">
+			<transition-group name="fade">
 			<template v-if="tab === 1">
-				<h2>Historia</h2>
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
+				<h2 key="h2">Historia</h2>
+				<p key="p">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
 					maxime cumque reiciendis totam excepturi ut recusandae, eum optio quis maiores possimus dolorem quod incidunt.
 					<br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, repellendus esse est facere reprehenderit rem vero
 					mollitia numquam vitae accusamus temporibus iste quos, beatae error repellat tempore eveniet ab id!</p>
 			</template>
 			<template v-if="tab === 2">
-				<h2>Visión</h2>
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
+				<h2 key="h2">Visión</h2>
+				<p key="p">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
 					maxime cumque reiciendis totam excepturi ut recusandae, eum optio quis maiores possimus dolorem quod incidunt.
 					<br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, repellendus esse est facere reprehenderit rem vero
 					mollitia numquam vitae accusamus temporibus iste quos, beatae error repellat tempore eveniet ab id!</p>
 			</template>
 			<template v-if="tab === 3">
-				<h2>Misión</h2>
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
+				<h2 key="h2">Misión</h2>
+				<p key="p">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
 					maxime cumque reiciendis totam excepturi ut recusandae, eum optio quis maiores possimus dolorem quod incidunt.
 					<br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, repellendus esse est facere reprehenderit rem vero
 					mollitia numquam vitae accusamus temporibus iste quos, beatae error repellat tempore eveniet ab id!</p>
 			</template>
 			<template v-if="tab === 4">
 				
-				<h2>Equipo</h2>
-				<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
+				<h2 key="h2">Equipo</h2>
+				<p key="p">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo necessitatibus dolorum consequatur sed cupiditate nostrum
 					maxime cumque reiciendis totam excepturi ut recusandae, eum optio quis maiores possimus dolorem quod incidunt.
 					<br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, repellendus esse est facere reprehenderit rem vero
 					mollitia numquam vitae accusamus temporibus iste quos, beatae error repellat tempore eveniet ab id!</p>
 			</template>
+			</transition-group>
 		</div>
 		<div class="content">
 			<h2>Contactanos</h2>
@@ -105,18 +92,17 @@
 			<span></span>vozdeoieniv@gmail.com
 			</p>
 		</div>
-		<div class="content">
+		<div class="content apoyanos">
 			<h2>Apoyanos</h2>
-			<h3>En Oracion</h3> <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, distinctio. Quibusdam voluptatibus, itaque eos odio quis, voluptates similique officia, dicta repellendus temporibus culpa! Amet temporibus id fugiat, beatae voluptatum error. <br>
-			</p><h3>Con Ofrendas</h3> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, reiciendis, repellendus dolorem provident odio eligendi, soluta consequatur reprehenderit sit neque adipisci ex dolores sequi omnis aliquid? Hic impedit libero alias. <br>
-				</p><h3>Forma Parte</h3> <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas distinctio ullam aut illo voluptatibus soluta magni pariatur! Voluptatibus repudiandae, saepe laudantium, error perferendis quam beatae ex accusamus expedita quisquam ipsa?
-			</p>
+				<h3>En Oracion</h3>
+				<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem, distinctio. Quibusdam voluptatibus, itaque eos odio quis, voluptates similique officia, dicta repellendus temporibus culpa! Amet temporibus id fugiat, beatae voluptatum error. <br></p>
+				<h3>Con Ofrendas</h3>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus, reiciendis, repellendus dolorem provident odio eligendi, soluta consequatur reprehenderit sit neque adipisci ex dolores sequi omnis aliquid? Hic impedit libero alias. <br></p>
+				<h3>Forma Parte</h3>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas distinctio ullam aut illo voluptatibus soluta magni pariatur! Voluptatibus repudiandae, saepe laudantium, error perferendis quam beatae ex accusamus expedita quisquam ipsa?</p>
 		</div>
-		<script src="js/about.js"></script>
 	</div>
-	<div id="pie">
 		<item-footer index="index.html" logo="images/logo.png"></item-footer>
-	</div>
-		<script src="js/plantilla-footer.js"></script>
+		<script src="js/about.js"></script>
 </body>
 </html>

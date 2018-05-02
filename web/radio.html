@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Radio Online|La Voz de OIENIV</title>
-    <!--<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-        <script src="https://unpkg.com/vue/dist/vue.min.js"></script>-->
-        <script src="frameworks/vue.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
     <link rel="stylesheet" href="css/style-radio.css">
-    <!--<link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="js/components/menu-item.js"></script>
+    <script src="js/components/chat-template.js"></script>
+    <script src="js/components/item-footer.js"></script>
+    <script src="js/components/boque-prog.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Lobster" rel="stylesheet">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <script>  var config = {
     apiKey: "AIzaSyC2RvmGHYtaqUa5lEXb3MLl_Mv4ECiLoBE",
@@ -185,7 +188,7 @@
                         <button 
                          type="button" 
                          class="mdl-button mdl-color--amber-800" 
-                         onclick="ingresaNombre()" 
+                         @click="ingresaNombre()" 
                          id="btnNombre"
                          >Enviar
                         </button>
@@ -307,11 +310,7 @@
     <aside class="lateral"></aside>
     <div class="publicidad pull-left"></div>
     <item-footer index="index.html" logo="images/logo.png"></item-footer>
-
 </div>
-    <script src="js/plantillas.js"></script>
-    <script src="js/listen.js"></script>
-
     <script>
     var app = new Vue({
         el:"#app",
@@ -327,9 +326,21 @@
                 let Fecha = `${d}/${m}/${y} ${h}:${min}`;
                 if (this.chat.message && this.chat.user) {
                     TablaDeBaseDatos.push({
-                        message: this.chat.message, user: this.chat.user, pic: this.chat.pic, date: Fecha
+                        message: this.chat.message, 
+                        user: this.chat.user, 
+                        pic: this.chat.pic, 
+                        date: Fecha
                     });
                     this.chat.message = "";
+                }
+            },
+            ingresaNombre: function() {
+                this.chat.pic = "http://placehold.it/50/55C1E7/fff&text=U"
+                if (this.chat.user) {
+                    this.show = false;
+                    this.showModal = false;
+                    localStorage.setItem("Nombre", this.chat.user);
+                    localStorage.setItem("pic", this.chat.pic)
                 }
             }
         },
@@ -350,54 +361,6 @@
             }, 
         }
     })
-    function face() {
-            window.open("https://www.facebook.com/lavozdeoieniv", "_blank")
-        }
-
-        function twit() {
-            window.open("https://www.twitter.com/lavozdeoieniv", "_blank")
-        }
-
-        function inst() {
-            window.open("https://www.instagram.com/lavozdeoieniv", "_blank")
-        }
-
-        function yt() {
-            window.open("https://www.youtube.com/channel/UCjqEhezX3BmaWfp6UXgQxvg", "_blank")
-        }
-
-        var openFace = document.querySelector("#icon-face");
-        openFace.addEventListener("click", face, false);
-        var openTwit = document.querySelector("#icon-twit");
-        openTwit.addEventListener("click", twit, false);
-        var openInst = document.querySelector("#icon-inst");
-        openInst.addEventListener("click", inst, false);
-        var openYt = document.querySelector("#icon-yt");
-        openYt.addEventListener("click", yt, false);
-        function carga() {
-            if (localStorage.getItem("Nombre")) {
-                data.show = false;
-                data.showModal = false;
-                Nombre = localStorage.getItem("Nombre");
-            }
-            else {
-                data.show = true;
-            }
-            return data.show,
-                data.showModa;
-        }
-        window.addEventListener("load", carga, false);
-        function ingresaNombre() {
-            let Nombre = document.getElementById("ingresaNombre").value;
-            localStorage.setItem("Nombre", Nombre);
-            let pic = "http://placehold.it/50/55C1E7/fff&text=U"
-            localStorage.setItem("pic", pic)
-            data.chat.pic = pic;
-            if (Nombre != undefined && Nombre != "" && Nombre != null) {
-                data.show = false;
-                data.showModal = false;
-            }
-        }
     </script>
     <script src="js/mas.js"></script>
     <style></style>

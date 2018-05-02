@@ -1,8 +1,6 @@
-Vue.component('modal-template', {
-    template: '<div class="modal"><div class="modal-content"><img v-bind:src="images.images.url" alt=""></div></div>'
-});
+
 var images = new Vue({
-    el: '.row',
+    el: '#app',
     data: {
         showModal: false,
         indexImg: 0,
