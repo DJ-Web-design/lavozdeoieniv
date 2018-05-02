@@ -7,7 +7,6 @@ var app = new Vue({
         noUser: "",
         remember: "",
         page: 1,
-
         chatMessages: [],
         page1: true,
         page2: false,
@@ -29,7 +28,8 @@ var app = new Vue({
             title:null,
             des:null
         },
-        video:null
+        video:null,
+        subida:true
     },
     methods: {
         imagen: function (file) {
@@ -42,11 +42,11 @@ var app = new Vue({
 
         },
         recogerDatos: function () {
+            this.subida = true;
             var fileTitle = document.getElementById("titulo").value;
             var fileDes = document.getElementById("des").value;
             var fileGal = document.getElementById("gal").value;
             var typeImg;
-
             switch (this.file[0].type) {
                 case "image/png":
                     typeImg = ".png";
@@ -58,8 +58,6 @@ var app = new Vue({
                     typeImg = ".gif";
                     break;
             }
-            console.log(this.file[0].type, typeImg);
-
             if (fileTitle && fileDes && fileGal && this.file) {
                 let sendFile = this.file[0];                
                 var upload = storageChild.child(sendFile.name).put(sendFile);
@@ -78,15 +76,33 @@ var app = new Vue({
                 }, error => {
                     alert("Error al subir archivo");
                     console.log(error.code);
-                    this.showLoad = false
+                    this.showLoad = false;
                 }, () => {
-                    databaseImg.child("prueba").push({
-                        title: fileTitle,
-                        description: fileDes,
-                        url: upload.snapshot.downloadURL
+                    this.subida = false;
+                    var data = new FormData();
+                    data.append("url", sendFile);
+                    const config = {
+                        headers: {
+                            'content-type': 'multipart/form-data'
+                        }
+                    }
+                    axios.post("thumbCreate.php", data, config)
+                    .then(res=>{
+                        databaseImg.child("prueba").push({
+                            title: fileTitle,
+                            description: fileDes,
+                            url: upload.snapshot.downloadURL,
+                            thumb:res.data,
+                        })                        
+                        alert("Archivo subido exitosamente")
+                        this.showLoad = false;
+
+                    }).catch(err =>{
+                        console.log(err);
+                        alert("Error al crear miniatura\nVuelva a subir la imagen");
+                        this.showLoad = false;
                     })
-                    alert("Archivo subido exitosamente")
-                    this.showLoad = false
+
                 })
             }
         },
@@ -150,6 +166,9 @@ var app = new Vue({
                 databaseChat.child(key).remove()
             }
         },
+        borrarTodoChat:function(){
+            firebase.database().ref().child("chat").remove()
+        },
         videoHandler: function (archivo) {
             /*if (archivo[0].type != "video/3gpp" && archivo[0].type != "video/x-ms-wmv" && archivo[0].type != "video/mp4" && archivo[0].type != "video/x-msvideo") {
                 alert("Por favor seleccione un video");
@@ -171,10 +190,8 @@ var app = new Vue({
             axios.post("videoUploadTest.php", params, config)
             .then(res=>{
                 console.log(res);
-                
             }).catch( err =>{
                 console.log(err);
-                
             })
         }
     }
