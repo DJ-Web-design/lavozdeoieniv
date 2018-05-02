@@ -2,9 +2,10 @@
 <html lang="es">
 
 <head>
-    <title>La Voz de OIENIV Radio|Emisora Cristiana En Venezuela</title>
+    <title>La Voz de OIENIV Radio | Emisora Cristiana En Venezuela</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="radio cristiana online, radio evangelica online, emisora cristiana evangelica online de venezuela, Radio cristiana de venezuela, emisora cristiana evangelica en linea ">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta property="og:title" content="La Voz de OIENIV" />
     <meta property="og:type" content="website">
@@ -12,16 +13,16 @@
     <meta property="og:url" content="https://lavozdeoieniv.herokuapp.com/index.html" />
     <meta property="og:description" content="La Radio Donde La Protagonista Es La Palabra De Dios">
     <meta property="fb:app_id" content="126968564676905">
-    <script src="frameworks/vue.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"> </head>
 
 <body>
-    <!--<div id="fb-root"></div>
+    <div id="fb-root"></div>
     <script>window.fbAsyncInit = function () { FB.init({ appId: '126968564676905', cookie: true, xfbml: true, version: 'v2.10' }); FB.AppEvents.logPageView(); }; (function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10&appId=126968564676905'; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); function onButtonClick() { FB.AppEvents.logEvent("sentFriendRequest"); }</script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <div id="app">
     <header>
         <div class="menu-cel" @click="openMenu()">
@@ -83,7 +84,7 @@
                         <span>Entra y disfruta de todo lo que te ofrecemos.</span>
                     </div>
                     <div class="content-right" :class="fadeNo === 1? 'fade-right-enter': 'fade-right-leave'">
-                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <img src="images/logo.png" alt="radio cristiana la voz de oieniv">
                         <button id="continue">Continua a la pagina</button>
                     </div>
                 </div>
@@ -97,7 +98,7 @@
                         <span>Entra y disfruta de todo lo que te ofrecemos.</span>
                     </div>
                     <div class="content-right" :class="fadeNo === 2? 'fade-right-enter': 'fade-right-leave'">
-                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <img src="images/logo.png" alt="radio cristiana la voz de oieniv">
                         <button id="continue">Continua a la pagina</button>
                     </div>
                 </div>
@@ -112,7 +113,7 @@
                         <span>Entra y disfruta de todo lo que te ofrecemos.</span>
                     </div>
                     <div class="content-right" :class="fadeNo === 3? 'fade-right-enter': 'fade-right-leave'">
-                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <img src="images/logo.png" alt="radio cristiana la voz de oieniv">
                         <button id="continue">Continua a la pagina</button>
                     </div>
                 </div>
@@ -126,7 +127,7 @@
                         <span>Entra y disfruta de todo lo que te ofrecemos.</span>
                     </div>
                     <div class="content-right" :class="fadeNo === 4? 'fade-right-enter': 'fade-right-leave'">
-                        <img src="web/images/logo.png" alt="radio cristiana la voz de oieniv">
+                        <img src="images/logo.png" alt="radio cristiana la voz de oieniv">
                         <button id="continue">Continua a la pagina</button>
                     </div>
                 </div>
@@ -198,6 +199,7 @@
     </div>
     <div class="vota">
         <h1>Vota por tu Favorita</h1>
+        <form action="">
             <input v-model="checked" class="radio" type="radio" name="vota" id="1" value="Habla Sobre Mi de Daniel calveti" checked>
             <label class="label1" for="1">
                 <article class="vota1">
@@ -223,6 +225,7 @@
                 </article>
             </label>
             <input @click="votar" type="submit" value="Enviar" name="btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        </form>
     </div>
     <div class="separador"></div>
     <div class="imagen-4">
@@ -464,26 +467,12 @@
     <script src="js/index.js"></script>
     <script src="js/js.js"></script>
     <script>
-        function face() {
-            window.open('https://www.facebook.com/lavozdeoieniv', '_blank')
-        }
-        function twit() {
-            window.open('https://www.twitter.com/lavozdeoieniv', '_blank')
-        }
-        function inst() {
-            window.open('https://www.instagram.com/lavozdeoieniv', '_blank')
-        }
-        function yt() {
-            window.open('https://www.youtube.com/channel/UCjqEhezX3BmaWfp6UXgQxvg', '_blank')
-        }
-        var openFace = document.querySelector('#icon-face');
-        openFace.addEventListener('click', face, false);
-        var openTwit = document.querySelector('#icon-twit');
-        openTwit.addEventListener('click', twit, false);
-        var openInst = document.querySelector('#icon-inst');
-        openInst.addEventListener('click', inst, false);
-        var openYt = document.querySelector('#icon-yt');
-        openYt.addEventListener('click', yt, false)
+    setInterval(() => {
+        app.changeSlider("+")
+    }, 6000);
+    document.onscroll = function () {
+        app.scroll = window.scrollY;
+    }
 </script>
 </body>
 
