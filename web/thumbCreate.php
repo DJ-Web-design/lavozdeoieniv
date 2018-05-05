@@ -23,6 +23,8 @@
  * @filesource
  */
 
+    header('Access-Control-Allow-Origin: https://galeria-lavozdeoieniv.firebaseapp.com');
+
 require_once '../ThumbLib.inc.php';
 
 $url = $_FILES['url']["tmp_name"];

@@ -1,5 +1,6 @@
 <?php
     require("../config.php");
+    header('Access-Control-Allow-Origin: https://galeria-lavozdeoieniv.firebaseapp.com');
 
     $datos = isset($_GET["vota"]) ? $_GET["vota"]:$_POST["vota"];
 
