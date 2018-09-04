@@ -1,6 +1,8 @@
 {
-  "name": "La Voz de OIENIV Radio",
-  "description": "La radio donde la protagonista es la palabra de Dios",
+  "name": "La Voz de OIENIV",
+  "description": "",
   "repository": "https://github.com/DJ-Web-design/lavozdeoieniv",
-  "addons": []
+  "logo": "",
+  "keywords": [],
+  "image": ""
 }
