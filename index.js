@@ -4,6 +4,8 @@ const fileUpload = require('express-fileupload');
 
 const fs = require("fs");
 
+const PORT = process.env.PORT || 5000;
+
 const UploadApi = require("./UploadVideo");
 
 require('es6-promise').polyfill()
@@ -141,6 +143,4 @@ ajax
         })
     })
 
-//app.listen(3000, console.log("Escuchando en el puerto 3000"));
-exports.ssrapp = functions.https.onRequest(ssr);
-exports.ajax = functions.https.onRequest(ajax);
+ajax.listen(PORT, () => console.log("Escuchando en el puerto " + PORT));
