@@ -13,11 +13,11 @@ const fetch = require("isomorphic-fetch");
 
 const ajax = express();
 
-const user = "agustin";
-const pass = "oieniv.15";
+const user = process.env.USER;
+const pass = process.env.PASS;
 
-const client_id = "24315564955-nnq0cqp6e64khnq9h2g9p8asmnncei8e.apps.googleusercontent.com"
-const client_secret = "1FqiPtcmBCxa7aGYBVjYIpT-"
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
 
 ajax.use(fileUpload());
 
