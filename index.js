@@ -19,7 +19,12 @@ const pass = process.env.PASS;
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 
-ajax.use(fileUpload());
+ajax.use(fileUpload())
+    .use((req, res, next)=>{
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
 
 ajax
     .get("/json",({query}, res)=>{
@@ -53,7 +58,7 @@ ajax
             }
             let json = JSON.stringify(file);
             fs.writeFileSync(__dirname+"/json/votos.json", json);
-            res.status(200).send(json);
+            res.status(200).json(json);
         } else if (query.access === "2BuljYzbHPKcNMRIcnDNBGmVj9I02qXqw"){
             res.status(200);
             res.sendFile(__dirname+"/json/votos.json");
