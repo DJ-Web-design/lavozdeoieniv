@@ -2,7 +2,7 @@
 const express = require("express");
 const fileUpload = require('express-fileupload');
 
-const fs = require("fs");
+const {writeFileSync, readFileSync, unlinkSync} = require("fs");
 
 const PORT = process.env.PORT || 5000;
 
@@ -57,7 +57,7 @@ ajax
                     break;
             }
             let json = JSON.stringify(file);
-            fs.writeFileSync(__dirname+"/json/votos.json", json);
+            writeFileSync(__dirname+"/json/votos.json", json);
             res.status(200).json(json);
         } else if (query.access === "2BuljYzbHPKcNMRIcnDNBGmVj9I02qXqw"){
             res.status(200);
@@ -137,11 +137,12 @@ ajax
         let file = req.files.url;
         file.mv(__dirname+"/tmp/image", ()=>{
             // read binary data
-            var bitmap = fs.readFileSync(__dirname+"/tmp/image");
+            var bitmap = readFileSync(__dirname+"/tmp/image");
             // convert binary data to base64 encoded string
-            let data = new Buffer(bitmap).toString('base64');
+            let data = Buffer.from(bitmap).toString('base64');
             if (data) {
                 res.status(200).send(data)
+                unlinkSync(__dirname+"/tmp/image");
             } else {
                 res.status(200).send("no-data")
             }
