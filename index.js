@@ -2,7 +2,7 @@
 const express = require("express");
 const fileUpload = require('express-fileupload');
 
-const {writeFileSync, readFileSync, unlinkSync} = require("fs");
+const {writeFileSync, unlinkSync, readFileSync} = require("fs");
 
 const PORT = process.env.PORT || 5000;
 
@@ -135,16 +135,19 @@ ajax
     })
     .post("/thumbCreate", (req, res)=>{
         let file = req.files.url;
-        file.mv(__dirname+"/tmp/image", ()=>{
-            // read binary data
-            var bitmap = readFileSync(__dirname+"/tmp/image");
-            // convert binary data to base64 encoded string
-            let data = Buffer.from(bitmap).toString('base64');
-            if (data) {
+        var path = __dirname+"/tmp/"+file.name;
+        file.mv(path, ()=>{
+            let bit = readFileSync(path);
+            let data = `data:${file.mimetype};base64,${Buffer.from(bit).toString("base64")}`;
+
+            if (data){
+                res.header("Content-Type", "text/plain");
                 res.status(200).send(data)
-                unlinkSync(__dirname+"/tmp/image");
-            } else {
-                res.status(200).send("no-data")
+                unlinkSync(path);
+            }else {
+                res.header("Content-Type", "text/plain")
+                res.status(400).send("no-data");
+                unlinkSync(path);
             }
         })
     })
