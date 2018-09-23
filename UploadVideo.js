@@ -81,14 +81,14 @@ class UploadYoutubeVideo {
                 throw err;
                 return res.status(500).send("upload-error")
             } else {
-                let videoData = data.data
-                console.log(videoData.snippet.thumbnails);
+                let videoData = data.data;
                 videosDatabase.push({
                     id:videoData.id,
                     title:videoData.snippet.title,
                     description:videoData.snippet.description,
                     link:"https://youtu.be/"+videoData.id,
-                    date:videoData.snippet.publishedAt
+                    date:videoData.snippet.publishedAt,
+                    thumbnail:videoData.snippet.thumbnails.high.url
                 }).then(res=>{
                     return res.status(200).send("success")
                 })
