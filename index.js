@@ -80,7 +80,7 @@ ajax
     })
     .get("/youtube-auth", ({query}, res)=>{
         let code = query.code;
-        let dataToSend = `code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fyoutube-auth&grant_type=authorization_code`;
+        let dataToSend = `code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=https%3A%2F%2Flavozdeoieniv.herokuapp.com%2Fyoutube-auth&grant_type=authorization_code`;
         console.log(dataToSend);
         fetch("https://accounts.google.com/o/oauth2/token",{
             method:"POST",
@@ -98,7 +98,7 @@ ajax
                 access_token = undefined;
                 refresh_token = undefined;
             }, data["expires_in"] * 1000);
-            res.redirect(301, `http://localhost:3000/admin?access_token=${access_token}&refresh_token=${refresh_token}&@cc355_1D=@mn1r1s_@1l3th`)
+            res.redirect(301, `https://www.lavozdeoieniv.tk/admin?access_token=${access_token}&refresh_token=${refresh_token}&@cc355_1D=@mn1r1s_@1l3th`)
         }).catch(err=>{
             console.log(`Error = ${JSON.stringify(err)}\n`);
             res.status(err.status).json(err.statusText);
