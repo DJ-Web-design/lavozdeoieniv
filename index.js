@@ -80,7 +80,8 @@ ajax
     })
     .get("/youtube-auth", ({query}, res)=>{
         let code = query.code;
-        let dataToSend = `code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=https://www.lavozdeoieniv.tk/admin&grant_type=authorization_code`;
+        let dataToSend = `code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Fyoutube-auth&grant_type=authorization_code`;
+        console.log(dataToSend);
         fetch("https://accounts.google.com/o/oauth2/token",{
             method:"POST",
             body:dataToSend,
@@ -90,26 +91,25 @@ ajax
         })
         .then(response=>response.json())
         .then(data=>{
-            access_token = data["access_token"]
-            refresh_token = data["refresh_token"]
+            console.log(data);
+            access_token = data["access_token"];
+            refresh_token = data["refresh_token"];
             setTimeout(()=>{
                 access_token = undefined;
                 refresh_token = undefined;
             }, data["expires_in"] * 1000);
-            res.redirect(301, `https://www.lavozdeoieniv.tk/?access_token=${access_token}&refresh_token=${refresh_token}&@cc355_1D=@mn1r1s_@1l3th`)
+            res.redirect(301, `http://localhost:3000/admin?access_token=${access_token}&refresh_token=${refresh_token}&@cc355_1D=@mn1r1s_@1l3th`)
         }).catch(err=>{
-            console.log(`Error = ${JSON.stringify(err)}\n`)
+            console.log(`Error = ${JSON.stringify(err)}\n`);
             res.status(err.status).json(err.statusText);
         })
     })
     .post('/upload-video',(req,res) => {
         let EDFile = req.files.file
-        let title = req.body.title;
-        let description = req.body.description;
-    
+        var title = req.body.title;
+        var description = req.body.description;    
         var access_token = req.body.access_token;
         var refresh_token = req.body.refresh_token;
-    
         let mime;
         switch (EDFile.mimetype) {
             case "video/mp4":
@@ -129,8 +129,7 @@ ajax
         EDFile.mv(__dirname+"/tmp/video"+mime,()=>{
             let API = new UploadApi();
             API.setAccessRefreshToken(access_token, refresh_token);
-            API.uploadVideo(title, description, __dirname+"/tmp/video"+mime);
-            return res.status(200).send("success")
+            return API.uploadVideo(title, description, __dirname+"/tmp/video"+mime); 
         })
     })
     .post("/thumbCreate", (req, res)=>{

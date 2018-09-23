@@ -4,16 +4,36 @@ const {google} = require("googleapis");
 const OAuth2 = google.auth.OAuth2;
 const youtube = google.youtube("v3");
 
+const admin = require("firebase-admin");
+
+var serviceAccount = {
+    "type": "service_account",
+    "project_id": "chat-lavozdeoieniv",
+    "private_key_id": process.env.PRIVATE_KEY_ID,
+    "private_key": "-----BEGIN PRIVATE KEY-----\n"+process.env.PRIVATE_KEY+"\n-----END PRIVATE KEY-----\n",
+    "client_email": process.env.CLIENT_EMAIL,
+    "client_id": process.env.FIREBASE_ADMIN_CLIENT_ID,
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-4cmvz%40chat-lavozdeoieniv.iam.gserviceaccount.com"
+};
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://chat-lavozdeoieniv.firebaseio.com'
+});
+
+const db = admin.database();
+
+const videosDatabase = db.ref("videos");
+
 class UploadYoutubeVideo {
     constructor(){
-        this.client_id = "24315564955-nnq0cqp6e64khnq9h2g9p8asmnncei8e.apps.googleusercontent.com";
-        this.client_secret = "1FqiPtcmBCxa7aGYBVjYIpT-";
-
+        this.client_id = process.env.CLIENT_ID;
+        this.client_secret = process.env.CLIENT_SECRET;
         this.access_token;
         this.refresh_token;
-
         this.oauth2Client;
-
         this.initializeOAuth2();
     }
 
@@ -26,7 +46,6 @@ class UploadYoutubeVideo {
     setAccessRefreshToken(access_token, refresh_token){
         this.access_token = access_token;
         this.refresh_token = refresh_token;
-
         this._setOAuthCredentials();
     }
     _setOAuthCredentials(){
@@ -42,28 +61,40 @@ class UploadYoutubeVideo {
             console.log(err);
         })
     }
-
-    uploadVideo(title, description, videoPath){
-        let options = {
-            resources: {
-                snippet:{
-                    title:title,
-                    description:description
+    uploadVideo(videoTitle, videoDescription, videoPath){
+        youtube.videos.insert({
+            part: 'status,snippet',
+            resource: {
+                snippet: {
+                    title: videoTitle,
+                    description: videoDescription
                 },
-                status:{
-                    privacyStatus:"private"
+                status: { 
+                    privacyStatus: 'private' //if you want the video to be private
                 }
             },
-            part:"snippet,status",
             media: {
-                body:fs.createReadStream(videoPath)
+                body: fs.createReadStream(videoPath)
             }
-        }
-        
-        youtube.videos.insert(options, (err, data) => {
-            if (err) throw err;
-            console.log(data);
-            fs.unlinkSync(__dirname+"/tmp/video"+mime)
+        }, (err, data) => {
+            if (err) {
+                throw err;
+                return res.status(500).send("upload-error")
+            } else {
+                let videoData = data.data
+                console.log(videoData.snippet.thumbnails);
+                videosDatabase.push({
+                    id:videoData.id,
+                    title:videoData.snippet.title,
+                    description:videoData.snippet.description,
+                    link:"https://youtu.be/"+videoData.id,
+                    date:videoData.snippet.publishedAt
+                }).then(res=>{
+                    return res.status(200).send("success")
+                })
+            }
+            fs.unlinkSync(videoPath)
+
         })
     }
 }
