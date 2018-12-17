@@ -1,4 +1,4 @@
-const fs = require("fs");
+const {createReadStream, unlinkSync} = require("fs");
 const {google} = require("googleapis");
 
 const OAuth2 = google.auth.OAuth2;
@@ -62,39 +62,38 @@ class UploadYoutubeVideo {
         })
     }
     uploadVideo(videoTitle, videoDescription, videoPath){
-        youtube.videos.insert({
-            part: 'status,snippet',
-            resource: {
-                snippet: {
-                    title: videoTitle,
-                    description: videoDescription
+        return new Promise((resolve, reject) => {
+            youtube.videos.insert({
+                part: 'status,snippet',
+                resource: {
+                    snippet: {
+                        title: videoTitle,
+                        description: videoDescription
+                    },
+                    status: { 
+                        privacyStatus: 'private' //if you want the video to be private
+                    }
                 },
-                status: { 
-                    privacyStatus: 'private' //if you want the video to be private
+                media: {
+                    body: createReadStream(videoPath)
                 }
-            },
-            media: {
-                body: fs.createReadStream(videoPath)
-            }
-        }, (err, data) => {
-            if (err) {
-                throw err;
-                return res.status(500).send("upload-error")
-            } else {
-                let videoData = data.data
-                console.log(videoData.snippet.thumbnails);
-                videosDatabase.push({
-                    id:videoData.id,
-                    title:videoData.snippet.title,
-                    description:videoData.snippet.description,
-                    link:"https://youtu.be/"+videoData.id,
-                    date:videoData.snippet.publishedAt
-                }).then(res=>{
-                    return res.status(200).send("success")
-                })
-            }
-            fs.unlinkSync(videoPath)
-
+            }, (err, data) => {
+                if (err) reject("upload-error");
+                else {
+                    let videoData = data.data
+                    videosDatabase.push({
+                        id:videoData.id,
+                        title:videoData.snippet.title,
+                        description:videoData.snippet.description,
+                        link:"https://youtu.be/"+videoData.id,
+                        date:videoData.snippet.publishedAt,
+                        thumb:videoData.snippet.thumbnails.normal.url
+                    }).then(res=>{
+                        unlinkSync(videoPath);
+                        resolve("success")
+                    })
+                }
+            })
         })
     }
 }
