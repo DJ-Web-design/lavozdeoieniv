@@ -58,7 +58,6 @@ class UploadYoutubeVideo {
     _setOptions(){
         google.options({auth:this.oauth2Client}, (err, res)=>{
             if (err) throw err;
-            console.log(err);
         })
     }
     uploadVideo(videoTitle, videoDescription, videoPath){
@@ -77,21 +76,25 @@ class UploadYoutubeVideo {
                 media: {
                     body: createReadStream(videoPath)
                 }
-            }, (err, data) => {
+            }, async (err, data) => {
                 if (err) reject("upload-error");
                 else {
-                    let videoData = data.data
-                    videosDatabase.push({
-                        id:videoData.id,
-                        title:videoData.snippet.title,
-                        description:videoData.snippet.description,
-                        link:"https://youtu.be/"+videoData.id,
-                        date:videoData.snippet.publishedAt,
-                        thumb:videoData.snippet.thumbnails.normal.url
-                    }).then(res=>{
+                    let {id, snippet} = data.data
+                    try {
+                        await videosDatabase.push({
+                            id,
+                            title:snippet.title,
+                            description:snippet.description,
+                            link:"https://youtu.be/"+id,
+                            date:snippet.publishedAt,
+                            thumb:snippet.thumbnails.normal.url
+                        });
+
                         unlinkSync(videoPath);
-                        resolve("success")
-                    })
+                        resolve("success");
+                    } catch(err) {
+                        reject("database-error");
+                    }
                 }
             })
         })
