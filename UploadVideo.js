@@ -51,7 +51,7 @@ class UploadYoutubeVideo {
         return new Promise(async (resolve, reject) => {
             try{
                 //Auth URL
-                let dataToSend = `code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=http%3A%2F%2Flocalhost:3000%2FauthSuccess&grant_type=authorization_code`;
+                let dataToSend = `code=${code}&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=https%3A%2F%2Flavozdeoieniv.herokuapp.com%2FauthSuccess&grant_type=authorization_code`;
                 
                 let response = await fetch("https://accounts.google.com/o/oauth2/token",{
                     method:"POST",

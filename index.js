@@ -20,13 +20,14 @@ const UploadVideo = require("./UploadVideo");
 const PORT = process.env.PORT || 3000;
 const serverUser = process.env.USER;
 const serverPass = process.env.PASS;
+const API_Key = process.env.API_KEY;
 
 
 app
 	.use(fileUpload())
 	.use(express.json())
 	.use((req, res, next)=>{
-		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Origin", "https://www.lavozdeoieniv.tk, http://localhost:3000");
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 		next();
 	});
@@ -68,7 +69,7 @@ app
 
 			let access_token = Buffer.from(readFileSync("temp/blogger-token.txt")).toString();
 		
-			let response = await fetch("https://www.googleapis.com/blogger/v3/blogs/8070105920543249955/posts/", {
+			let response = await fetch("https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/", {
 				method:"POST",
 				headers:{
 					"Authorization":access_token,
@@ -98,10 +99,11 @@ app
 		}
 	})
 	.post("/edit-post",async({body}, res)=>{
+		let {content, id} = body;
 		try {
 			let access_token = Buffer.from(readFileSync("temp/blogger-token.txt")).toString();
 		
-			let response = await fetch("https://www.googleapis.com/blogger/v3/blogs/8070105920543249955/posts/3445355871727114160", {
+			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/${id}`, {
 				method:"PATCH",
 				headers:{
 					"Authorization":access_token,
@@ -115,6 +117,18 @@ app
 			res.send("updated");
 		} catch(err) {
 			res.status(500).send("error");
+		}
+	})
+	.get("/posts",async ({query}, res)=>{
+		let {id} = query;
+		if (id === "all") {
+			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
+			let {items} = await response.json();
+			res.json(items.map(e => e.type = "published")); 
+		} else {
+			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/${id}?key=${API_Key}&fields=content,url,title,updated,labels`);
+			let data = await res.json();
+			res.json(data);
 		}
 	})
 	.post('/upload-video', ({files, body},res) => {
