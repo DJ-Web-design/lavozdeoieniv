@@ -149,8 +149,8 @@ app
 			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
 			let {items} = await response.json();
 
-			const client = await pool.connect()
-			const {rows} = await client.query('SELECT * FROM posts');
+			let client = await pool.connect();
+			let {rows} = await client.query('SELECT * FROM posts');
 			rows = rows || [];
 
 			items = items.map(e=>e.type = "published");
@@ -171,6 +171,19 @@ app
 			res.json(data);
 		} catch(err) {
 			res.status(400).send(err);
+		}
+	})
+	.post("/save-post", async ({body}, res) => {
+		try {
+			let {content, labels, title} = body;
+			let client = await pool.connect();
+			await client.query('INSERT INTO posts(content, labels, title) VALUES($1, $2, $3)', [content, labels, title]);
+
+			res.json("ok");
+			client.release();
+		} catch(err) {
+			console.log(err);
+			res.status(500).send("Error: "+err);
 		}
 	})
 	.post('/upload-video', ({files, body},res) => {
