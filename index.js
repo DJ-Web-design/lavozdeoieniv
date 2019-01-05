@@ -134,7 +134,7 @@ app
 					"Authorization":access_token,
 					"Content-Type":"application/json"
 				},
-				body:JSON.stringify(body)
+				body:JSON.stringify(content)
 			});
 
 			await response.json();
@@ -146,7 +146,7 @@ app
 			db.$pool.end();
 		}
 	})
-	.get("/posts/all", ()=>{
+	.get("/posts/all", async(req, res)=>{
 		try {
 			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
 			let {items} = await response.json();
