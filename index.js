@@ -99,8 +99,8 @@ app
 		}
 	})
 	.post("/edit-post",async({body}, res)=>{
-		let {content, id} = body;
 		try {
+			let {content, id} = body;
 			let access_token = Buffer.from(readFileSync("temp/blogger-token.txt")).toString();
 		
 			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/${id}`, {
@@ -120,15 +120,19 @@ app
 		}
 	})
 	.get("/posts",async ({query}, res)=>{
-		let {id} = query;
-		if (id === "all") {
-			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
-			let {items} = await response.json();
-			res.json(items.map(e => e.type = "published")); 
-		} else {
-			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/${id}?key=${API_Key}&fields=content,url,title,updated,labels`);
-			let data = await res.json();
-			res.json(data);
+		try {
+			let {id} = query;
+			if (id === "all") {
+				let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
+				let {items} = await response.json();
+				res.json(items.map(e => e.type = "published")); 
+			} else {
+				let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/${id}?key=${API_Key}&fields=content,url,title,updated,labels`);
+				let data = await res.json();
+				res.json(data);
+			}
+		} catch(err) {
+			res.status(401).send(err)
 		}
 	})
 	.post('/upload-video', ({files, body},res) => {
