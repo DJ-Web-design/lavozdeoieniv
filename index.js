@@ -22,6 +22,17 @@ const serverUser = process.env.USER;
 const serverPass = process.env.PASS;
 const API_Key = process.env.API_KEY;
 
+const pgp = require('pg-promise')();
+
+const pgConf = {
+    host: process.env.DB_HOST, // 'localhost' is the default;
+    port: 5432, // 5432 is the default;
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
+};
+
+const DB = pgp();
 
 app
 	.use(fileUpload())
@@ -33,6 +44,20 @@ app
 	});
 
 app
+	.get("/create-table",async (req, res)=>{
+		try {
+			let data = await DB.one("CREATE TABLE posts(content VARCHAR(1000000) not null, title VARCHAR(200) not null, labels VARCHAR(500) not null)")
+			res.json(data);
+		}catch(err) {
+			res.status(500).json(err);
+		}
+	})
+	.get("/api-logged",(req, res)=>{
+		res.json({
+			youtube:existsSync("temp/youtube-token.txt"),
+			blogger:existsSync("temp/blogger-token.txt")
+		});
+	})
 	.get("/login-admin",({query}, res) => {
 		let {user, pass} = query;
 
@@ -117,22 +142,33 @@ app
 			res.send("updated");
 		} catch(err) {
 			res.status(500).send("error");
+		} finally {
+			db.$pool.end();
 		}
 	})
-	.get("/posts",async ({query}, res)=>{
+	.get("/posts/all", ()=>{
 		try {
-			let {id} = query;
-			if (id === "all") {
-				let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
-				let {items} = await response.json();
-				res.json(items.map(e => e.type = "published")); 
-			} else {
-				let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/${id}?key=${API_Key}&fields=content,url,title,updated,labels`);
-				let data = await res.json();
-				res.json(data);
-			}
+			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
+			let {items} = await response.json();
+
+			let data = await DB.one('SELECT * FROM posts');
+			items = items.map(e=>e.type = "published");
+			items = items.concat(data.value);
+
+			res.json(items);
 		} catch(err) {
-			res.status(401).send(err)
+			res.status(500).send("error");
+		}
+	})
+	.get("/posts/:id", async ({params}, res)=>{
+		try {
+			let {id} = params;
+
+			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/${id}?key=${API_Key}&fields=content,url,title,updated,labels`);
+			let data = await response.json();
+			res.json(data);
+		} catch(err) {
+			res.status(400).send(err);
 		}
 	})
 	.post('/upload-video', ({files, body},res) => {
