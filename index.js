@@ -22,10 +22,12 @@ const serverUser = process.env.USER;
 const serverPass = process.env.PASS;
 const API_Key = process.env.API_KEY;
 
-const pgp = require('pg-promise')();
+const { Pool } = require('pg');
 
-
-const DB = pgp(process.env.DATABASE_URL);
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
 
 app
 	.use(fileUpload())
@@ -37,12 +39,15 @@ app
 	});
 
 app
-	.get("/create-table",async (req, res)=>{
+	.get("/create-table", async (req, res) => {
 		try {
-			let data = await DB.one("CREATE TABLE posts(content VARCHAR(1000000) not null, title VARCHAR(200) not null, labels VARCHAR(500) not null)")
-			res.json(data);
-		}catch(err) {
-			res.status(500).json(err);
+			let client = await pool.connect();
+			let result = await client.query('CREATE TABLE posts(content VARCHAR(1000000) not null, title VARCHAR(200) not null, labels VARCHAR(500) not null)');
+
+			res.json(result);
+			client.release();
+		} catch(err) {
+			res.status(500).send("Error: "+err);
 		}
 	})
 	.get("/api-logged",(req, res)=>{
@@ -144,13 +149,17 @@ app
 			let response = await fetch(`https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts?key=${API_Key}&fields=items(id,url,title,labels)`);
 			let {items} = await response.json();
 
-			let data = await DB.one('SELECT * FROM posts');
+			const client = await pool.connect()
+			const {rows} = await client.query('SELECT * FROM posts');
+			rows = rows || [];
+
 			items = items.map(e=>e.type = "published");
-			items = items.concat(data.value);
+			items = items.concat(rows);
 
 			res.json(items);
+			client.release();
 		} catch(err) {
-			res.status(500).send("error");
+			res.status(500).send("Error: "+err);
 		}
 	})
 	.get("/posts/:id", async ({params}, res)=>{
