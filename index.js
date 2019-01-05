@@ -24,15 +24,8 @@ const API_Key = process.env.API_KEY;
 
 const pgp = require('pg-promise')();
 
-const pgConf = {
-    host: process.env.DB_HOST, // 'localhost' is the default;
-    port: 5432, // 5432 is the default;
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
-};
 
-const DB = pgp();
+const DB = pgp(process.env.DATABASE_URL);
 
 app
 	.use(fileUpload())
