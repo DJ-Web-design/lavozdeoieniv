@@ -33,9 +33,14 @@ app
 	.use(fileUpload())
 	.use(express.json())
 	.use((req, res, next)=>{
-		res.header("Access-Control-Allow-Origin", "https://www.lavozdeoieniv.tk, http://localhost:3000");
+		let whiteList = ["https://www.lavozdeoieniv.tk", "http://localhost:3000"];
+		let origin = req.headers.origin;
+
+		if (whiteList.indexOf(origin) > -1) {
+			res.header("Access-Control-Allow-Origin", origin);
+		}
 		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-		next();
+		return next();
 	});
 
 app
@@ -95,7 +100,7 @@ app
 			let response = await fetch("https://www.googleapis.com/blogger/v3/blogs/5719105395357704371/posts/", {
 				method:"POST",
 				headers:{
-					"Authorization":access_token,
+					"Authorization":"Bearer "+ access_token,
 					"Content-Type":"application/json"
 				},
 				body:JSON.stringify({

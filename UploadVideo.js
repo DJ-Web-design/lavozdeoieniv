@@ -5,7 +5,6 @@ const {
     mkdirSync
 } = require("fs");
 
-
 require('es6-promise').polyfill();
 const fetch = require("isomorphic-fetch");
 
